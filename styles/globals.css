@@ -44,3 +44,19 @@ span {
   color: black;
   border-radius: 3px;
 }
+
+.divider{
+    border-top: 1px dashed gray;
+}
+
+.dot {
+  height: 13px;
+  width: 13px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.fs-7{
+  font-size: 13.5px;
+}

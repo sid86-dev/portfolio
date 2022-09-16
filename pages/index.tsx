@@ -3,6 +3,7 @@ import Head from "next/head";
 import Script from "next/script";
 import Main from "../components/Main";
 import Navbar from "../components/Navbar";
+import { Projects } from "../components/Projects";
 
 const Home: NextPage = () => {
   return (
@@ -17,8 +18,13 @@ const Home: NextPage = () => {
         crossOrigin="anonymous"
       ></Script>
       <Navbar />
-      <div className="container d-flex justify-content-center m-lg-5">
+      <div className="container d-flex justify-content-center m-lg-5 py-5">
         <Main />
+      </div>
+      <hr className="divider" />
+      <div className="container justify-content-center py-3">
+        <h2 className="text-center">Projects</h2>
+        <Projects />
       </div>
     </div>
   );
