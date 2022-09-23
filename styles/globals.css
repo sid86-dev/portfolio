@@ -1,8 +1,8 @@
 :root {
   --blue: #1e90ff;
   --white: #ffffff;
-  --orange: rgb(250,126,68);
-  --pink:rgb(255,68,132);
+  --orange: rgb(250, 126, 68);
+  --pink: rgb(255, 68, 132);
 }
 
 @font-face {
@@ -15,32 +15,102 @@
   src: url("/fonts/sofiapro/sofiapro-light.otf");
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Cubano", sans-serif;
 }
 
-.highlight {
+.highlight-text {
   font-family: "Cubano", sans-serif;
   -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    background-image: linear-gradient(90deg,var(--orange),var(--pink));
-    color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(90deg, var(--orange), var(--pink));
+  color: transparent;
+}
+.highlight-box {
+  font-family: "Cubano", sans-serif;
+  -webkit-text-fill-color: black;
+  background-image: linear-gradient(90deg, var(--orange), var(--pink));
+  color: transparent;
 }
 
 span {
   font-family: sofia-pro;
 }
 
-.btn-dark{
+.btn-dark {
   background-color: black;
   color: white;
   border-radius: 3px;
 }
 
-.btn-light{
+.btn-light {
   border: 0.8px solid black;
-  background-color:  white;
+  background-color: white;
   color: black;
   border-radius: 3px;
+}
+
+.divider {
+  border-top: 2px dashed gray;
+}
+
+.dot {
+  height: 13px;
+  width: 13px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.fs-7 {
+  font-size: 13.5px;
+}
+
+.bg-mid-dark {
+  background-color: #2a2e34 !important;
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
+}
+
+.bg-light {
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
+}
+
+.bg-gray {
+  background-color: #dbe1e7 !important;
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
+}
+
+.bg-dark {
+  background-color: #12181b !important;
+  -webkit-transition: background-color 250ms linear;
+  -ms-transition: background-color 250ms linear;
+  transition: background-color 250ms linear;
+}
+
+.text-light {
+  color: #b1becd !important;
+}
+
+.text-light:hover {
+  color: white !important;
+}
+
+.text-mid-dark {
+  color: #454e56 !important;
+}
+
+.text-mid-dark:hover {
+  color: black !important;
 }

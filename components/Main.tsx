@@ -1,72 +1,44 @@
 import Image from "next/image";
 import React from "react";
-import { RoughNotation, RoughNotationGroup } from "react-rough-notation";
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 function Main() {
   return (
     <div className="mx-lg-3 row  w-100 ">
       <div className="col-md-7">
         <div className="d-flex flex-column">
-          <RoughNotationGroup show={true}>
-            {/* heading */}
-            <h2>
-              Hello! I am Siddharth, a{" "}
-              <span className="highlight">developer</span> based in India.
-            </h2>
+          {/* heading */}
+          <h2>
+            Hello! I am Siddharth, a{" "}
+            <span className="highlight-text">developer</span> based in India.
+          </h2>
 
-            {/* body */}
-            <span className="fw-bolder fs-4 my-4">
-              I am an{" "}
-              <RoughNotation
-                type="highlight"
-                color="#fce880"
-                padding={[3, 0]}
-                animationDuration={1500}
-                order={1}
-              >
-                enthusiastic programmer
-              </RoughNotation>{" "}
-              eager to contribute to team success through hard work, attention
-              to detail and excellent{" "}
-              <RoughNotation
-                order={2}
-                type="circle"
-                color="#e5d1fd"
-                padding={0}
-                animationDuration={1500}
-              >
-                organizational
-              </RoughNotation>{" "}
-              skills.
-            </span>
-            <span className="fw-bolder fs-4 my-4">
-              I love building tools that are{" "}
-              <RoughNotation
-                type="highlight"
-                color="#fcc4c0"
-                padding={[3, 0]}
-                animationDuration={1500}
-                order={3}
-              >
-                user-friendly, simple
-              </RoughNotation>{" "}
-              user-friendly, simple and delightful.
-            </span>
-          </RoughNotationGroup>
+          {/* body */}
+          <span className="fw-bolder fs-4 my-4">
+            I am an enthusiastic programmer eager to contribute to team success
+            through hard work, attention to detail and excellent{" "}
+            <span className="highlight-box px-1">organizational
+            skills.</span>
+          </span>
+          <span className="fw-bolder fs-4 my-4">
+            I love building tools that are user-friendly, simple user-friendly,
+            simple and delightful.
+          </span>
 
           {/* Link buttons */}
-          <div>
-            <button type="button" className="btn btn-light px-4">
+          <div className="d-flex mx-auto mx-md-0">
+            <button type="button" className="btn btn-light px-md-4">
               View Linkedin
             </button>
-            <button type="button" className="btn btn-dark mx-4 px-4">
-              View Github
+            <button type="button" className="btn btn-dark mx-4 px-md-4">
+              Download CV <FileDownloadOutlinedIcon />
             </button>
           </div>
         </div>
       </div>
+
       {/* Image section right side */}
-      <div className="col-md-5">
+      <div className="col-md-5 d-none d-md-block">
         <Image
           className="rounded shadow-lg"
           src="/images/portrait.jpg"
