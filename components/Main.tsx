@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 function Main() {
   return (
@@ -10,35 +10,35 @@ function Main() {
           {/* heading */}
           <h2>
             Hello! I am Siddharth, a{" "}
-            <span className="highlight">developer</span> based in India.
+            <span className="highlight-text">developer</span> based in India.
           </h2>
 
           {/* body */}
           <span className="fw-bolder fs-4 my-4">
             I am an enthusiastic programmer eager to contribute to team success
-            through hard work, attention to detail and excellent organizational
-            skills.
+            through hard work, attention to detail and excellent{" "}
+            <span className="highlight-box px-1">organizational
+            skills.</span>
           </span>
-          <span
-           className="fw-bolder fs-4 my-4">
+          <span className="fw-bolder fs-4 my-4">
             I love building tools that are user-friendly, simple user-friendly,
             simple and delightful.
           </span>
 
           {/* Link buttons */}
-          <div className="d-flex ">
-            <button type="button" className="btn btn-light px-4">
+          <div className="d-flex mx-auto mx-md-0">
+            <button type="button" className="btn btn-light px-md-4">
               View Linkedin
             </button>
-            <button type="button" className="btn btn-dark mx-4 px-4">
-              Download CV <FileDownloadOutlinedIcon/>
+            <button type="button" className="btn btn-dark mx-4 px-md-4">
+              Download CV <FileDownloadOutlinedIcon />
             </button>
           </div>
         </div>
       </div>
 
       {/* Image section right side */}
-      <div className="col-md-5">
+      <div className="col-md-5 d-none d-md-block">
         <Image
           className="rounded shadow-lg"
           src="/images/portrait.jpg"
