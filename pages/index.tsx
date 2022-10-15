@@ -6,17 +6,16 @@ import Navbar from "../components/Navbar";
 import { Projects } from "../components/Projects";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Footer } from "../components/Footer";
-import useStore from "../store";
+import { useThemeStore } from "../store";
 
 const Home: NextPage = () => {
-
-  const {isDark } = useStore();
+  const { isDark } = useThemeStore();
 
   // Create a client
   const queryClient = new QueryClient();
 
   const style = {
-    body: isDark ? "bg-dark text-white" : "bg-gray text-dark"
+    body: isDark ? "bg-dark text-white" : "bg-gray text-dark",
   };
 
   return (
@@ -54,7 +53,6 @@ const Home: NextPage = () => {
       <hr className="divider" />
 
       <Footer />
-
     </div>
   );
 };

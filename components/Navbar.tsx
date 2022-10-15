@@ -4,18 +4,17 @@ import WorkIcon from "@mui/icons-material/Work";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
-import useStore from "../store";
+import { useThemeStore } from "../store";
 
 function Navbar() {
-
-  const { setTheme, isDark } = useStore();
+  const { setTheme, isDark } = useThemeStore();
 
   const style = {
-    navbar: `navbar navbar-expand-lg py-3 ${isDark ? "bg-mid-dark" : "bg-light"}`,
+    navbar: `navbar navbar-expand-lg py-3 ${
+      isDark ? "bg-mid-dark" : "bg-light"
+    }`,
     navLinks: `nav-link active ${!isDark ? "text-mid-dark" : "text-light"}`,
   };
-
-  console.log(isDark);
 
   return (
     <nav className={style.navbar}>

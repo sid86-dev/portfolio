@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import Tilt from "react-parallax-tilt";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 function Main() {
@@ -17,8 +18,7 @@ function Main() {
           <span className="fw-bolder fs-4 my-4">
             I am an enthusiastic programmer eager to contribute to team success
             through hard work, attention to detail and excellent{" "}
-            <span className="highlight-box px-1">organizational
-            skills.</span>
+            <span className="highlight-box px-1">organizational skills.</span>
           </span>
           <span className="fw-bolder fs-4 my-4">
             I love building tools that are user-friendly, simple user-friendly,
@@ -39,13 +39,15 @@ function Main() {
 
       {/* Image section right side */}
       <div className="col-md-5 d-none d-md-block">
-        <Image
-          className="rounded shadow-lg"
-          src="/images/portrait.jpg"
-          alt="portrait"
-          height="400px"
-          width="385px"
-        />
+        <Tilt >
+          <Image
+            className="rounded shadow-lg"
+            src="/images/character.png"
+            alt="portrait"
+            height="400px"
+            width="385px"
+          />
+        </Tilt>
       </div>
     </div>
   );

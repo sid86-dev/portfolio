@@ -1,30 +1,20 @@
-import { QueryKey, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { getProjects } from "../lib/requestFunc";
-import { Project } from "../types";
+import { useProjectsStore } from "../store";
 import IsAvailable from "./Project/IsAvailable";
 import { Loader } from "./Project/Loader";
 
 export const Projects = () => {
-  const [allowRefetch, setAllowRefetch] = useState(true);
-
-  // Queries
-  const { data, status } = useQuery<Project[], Error>(
-    ["projects"] as QueryKey,
-    getProjects,
-    { enabled: allowRefetch }
-  );
+  const projectsData = useProjectsStore((state) => state.data);
+  const pending = useProjectsStore((state) => state.pending);
 
   useEffect(() => {
-    if (data) setAllowRefetch(false);
-  }, [data]);
-
-  const projectsData = data ?? [];
+    useProjectsStore.getState().loadProjectData();
+  }, []);
 
   return (
     <div className="container py-2">
       <div className="row">
-        {status == "success" ? (
+        {!pending ? (
           <IsAvailable data={projectsData} />
         ) : (
           <>
