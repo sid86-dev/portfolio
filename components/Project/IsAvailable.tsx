@@ -1,21 +1,21 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import OpenInNewSharpIcon from "@mui/icons-material/OpenInNewSharp";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Project } from "../../types";
+import { AppStoreContext, Project } from "../../types";
 import { ProjectCard } from "../ProjectCard";
-import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import useStore from "../../store";
+import { Context } from "../../context/store";
+import Link from "next/link";
 
 interface IProps {
   data: Project[];
 }
 
 const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
-  const { isDark } = useStore();
+  const [state, setState] = useContext<AppStoreContext>(Context);
 
   const style = {
-    icons: `mx-5 ${isDark ? "bg-dark text-white" : "bg-gray text-dark"}`,
+    icons: `mx-5 ${state.isDark ? "bg-dark text-white" : "bg-gray text-dark"}`,
   };
 
   return data.map((item, index) => (
@@ -28,7 +28,7 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
           <input
             type="text"
             className="border-0 form-control w-75 py-0 mx-lg-4 mx-2 text-muted text-center"
-            value={item.link}
+            value={item.link.replace("https://", "")}
             disabled
           />
           <ArrowForwardIcon className="text-dark" />
@@ -36,12 +36,14 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
       </div>
       <div className="card-body">
         <Link href={`/view/${item._id}`}>
-          <img
-            src={item.image}
-            className="card-img-top rounded-0 rounded-bottom shadow mb-3"
-            alt="..."
-            height="100%"
-          />
+          <a>
+            <img
+              src={item.image}
+              className="card-img-top rounded-0 rounded-bottom shadow mb-3"
+              alt="..."
+              height="100%"
+            />
+          </a>
         </Link>
 
         <div className="d-flex align-items-center">
@@ -49,8 +51,8 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
           <a
             href={item.link}
             target="_blank"
-            className="text-dark"
             rel="noreferrer"
+            className="text-dark"
           >
             <OpenInNewSharpIcon
               fontSize="inherit"
