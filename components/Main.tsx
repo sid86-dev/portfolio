@@ -4,6 +4,21 @@ import Tilt from "react-parallax-tilt";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 
 function Main() {
+  const downloadCV = () => {
+    // using Java Script method to get PDF file
+    fetch("Siddhartha_Roy.pdf").then((response) => {
+      response.blob().then((blob) => {
+        // Creating new object of PDF file
+        const fileURL = window.URL.createObjectURL(blob);
+        // Setting various property values
+        let alink = document.createElement("a");
+        alink.href = fileURL;
+        alink.download = "Siddhartha_Roy.pdf";
+        alink.click();
+      });
+    });
+  };
+
   return (
     <div className="mx-lg-3 row  w-100 ">
       <div className="col-md-7">
@@ -27,10 +42,21 @@ function Main() {
 
           {/* Link buttons */}
           <div className="d-flex mx-auto mx-md-0">
-            <button type="button" className="btn btn-light px-md-4">
-              View Linkedin
-            </button>
-            <button type="button" className="btn btn-dark mx-4 px-md-4">
+            <a
+              href="https://www.linkedin.com/in/sid86-dev/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {" "}
+              <button type="button" className="btn btn-light px-md-4">
+                View Linkedin
+              </button>
+            </a>
+            <button
+              onClick={() => downloadCV()}
+              type="button"
+              className="btn btn-dark mx-4 px-md-4"
+            >
               Download CV <FileDownloadOutlinedIcon />
             </button>
           </div>
@@ -39,7 +65,7 @@ function Main() {
 
       {/* Image section right side */}
       <div className="col-md-5 d-none d-md-block">
-        <Tilt >
+        <Tilt>
           <Image
             className="rounded shadow-lg"
             src="/images/character.png"

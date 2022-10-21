@@ -1,21 +1,21 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import OpenInNewSharpIcon from "@mui/icons-material/OpenInNewSharp";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Project } from "../../types";
+import { AppStoreContext, Project } from "../../types";
 import { ProjectCard } from "../ProjectCard";
-import Link from "next/link";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { useThemeStore } from "../../store";
+import { Context } from "../../context/store";
+import Link from "next/link";
 
 interface IProps {
   data: Project[];
 }
 
 const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
-  const { isDark } = useThemeStore();
+  const [state, setState] = useContext<AppStoreContext>(Context);
 
   const style = {
-    icons: `mx-5 ${isDark ? "bg-dark text-white" : "bg-gray text-dark"}`,
+    icons: `mx-5 ${state.isDark ? "bg-dark text-white" : "bg-gray text-dark"}`,
   };
 
   return data.map((item, index) => (
@@ -35,22 +35,24 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
         </div>
       </div>
       <div className="card-body">
-        <a target="_blank" rel="noreferrer" href={item.link}>
-          <img
-            src={item.image}
-            className="card-img-top rounded-0 rounded-bottom shadow mb-3"
-            alt="..."
-            height="100%"
-          />
-        </a>
+        <Link href={`/view/${item._id}`}>
+          <a>
+            <img
+              src={item.image}
+              className="card-img-top rounded-0 rounded-bottom shadow mb-3"
+              alt="..."
+              height="100%"
+            />
+          </a>
+        </Link>
 
         <div className="d-flex align-items-center">
           <h5 className="card-title">{item.title}</h5>
           <a
             href={item.link}
             target="_blank"
-            className="text-dark"
             rel="noreferrer"
+            className="text-dark"
           >
             <OpenInNewSharpIcon
               fontSize="inherit"

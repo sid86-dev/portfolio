@@ -1,21 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useProjectsStore } from "../store";
+import React, { useContext, useEffect } from "react";
+import { Context } from "../context/store";
+import { fetchProject } from "../lib/requestFunc";
+import { AppStoreContext, Project } from "../types";
 import IsAvailable from "./Project/IsAvailable";
 import { Loader } from "./Project/Loader";
 
+interface ApiProps {
+  projects: Project[];
+}
+
 export const Projects = () => {
-  const projectsData = useProjectsStore((state) => state.data);
-  const pending = useProjectsStore((state) => state.pending);
+  const [state, setState] = useContext<AppStoreContext>(Context);
 
   useEffect(() => {
-    useProjectsStore.getState().loadProjectData();
-  }, []);
+    const setProjects = async () => {
+      var data = await fetchProject();
+      console.log(data);
+      // @ts-ignore
+      setState((prev) => ({
+        ...prev,
+        ["projects"]: data,
+      }));
+    };
+    if (!state.projects?.length) {
+      setProjects();
+    }
+  },[]);
 
   return (
     <div className="container py-2">
       <div className="row">
-        {!pending ? (
-          <IsAvailable data={projectsData} />
+        {state.projects ? (
+          <IsAvailable data={state.projects} />
         ) : (
           <>
             <Loader />

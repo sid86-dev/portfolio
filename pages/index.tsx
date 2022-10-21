@@ -6,16 +6,19 @@ import Navbar from "../components/Navbar";
 import { Projects } from "../components/Projects";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Footer } from "../components/Footer";
-import { useThemeStore } from "../store";
+import { useContext } from "react";
+import { AppStoreContext } from "../types";
+import { Context } from "../context/store";
 
 const Home: NextPage = () => {
-  const { isDark } = useThemeStore();
+
+  const [state, setState] = useContext<AppStoreContext>(Context);
 
   // Create a client
   const queryClient = new QueryClient();
 
   const style = {
-    body: isDark ? "bg-dark text-white" : "bg-gray text-dark",
+    body: state.isDark ? "bg-dark text-white" : "bg-gray text-dark",
   };
 
   return (
