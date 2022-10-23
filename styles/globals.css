@@ -7,12 +7,12 @@
 
 @font-face {
   font-family: Cubano;
-  src: url("/fonts/Cubano/Cubano.ttf");
+  src: url("/fonts/Cubano.ttf");
 }
 
 @font-face {
   font-family: sofia-pro;
-  src: url("/fonts/Sofiapro/Sofiapro-light.otf");
+  src: url("/fonts/Sofiapro-light.otf");
 }
 
 h1,
@@ -27,7 +27,7 @@ h6 {
 span,
 p,
 small {
-  font-family: sofia-pro;
+  font-family: "sofia-pro";
   font-weight: normal;
   font-style: normal;
 }
