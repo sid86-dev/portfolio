@@ -30,7 +30,9 @@ function Main() {
           </h2>
 
           {/* body */}
-          <span className="fw-bolder fs-4 my-4">
+          <span
+            className="fw-bolder fs-4 my-4"
+          >
             I am an enthusiastic programmer eager to contribute to team success
             through hard work, attention to detail and excellent{" "}
             <span className="highlight-box px-1">organizational skills.</span>

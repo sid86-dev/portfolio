@@ -1,13 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { Context } from "../context/store";
-import { fetchProject } from "../lib/requestFunc";
-import { AppStoreContext, Project } from "../types";
-import IsAvailable from "./Project/IsAvailable";
-import { Loader } from "./Project/Loader";
-
-interface ApiProps {
-  projects: Project[];
-}
+import { Context } from "../../context/store";
+import { fetchProject } from "../../lib/requestFunc";
+import { AppStoreContext, Project } from "../../types";
+import IsAvailable from "./IsAvailable";
+import { Loader } from "./Loader";
 
 export const Projects = () => {
   const [state, setState] = useContext<AppStoreContext>(Context);
@@ -25,7 +21,7 @@ export const Projects = () => {
     if (!state.projects?.length) {
       setProjects();
     }
-  },[]);
+  },[state.projects?.length, setState]);
 
   return (
     <div className="container py-2">
