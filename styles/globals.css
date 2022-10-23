@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: sofia-pro;
-  src: url("/fonts/sofiapro/sofiapro-regular.ttf");
+  src: url("/fonts/sofiapro/sofiapro-regular.ttf") format("truetype");
 }
 
 h1,
@@ -22,6 +22,12 @@ h4,
 h5,
 h6 {
   font-family: "Cubano", sans-serif;
+}
+
+span,
+p,
+small {
+  font-family: sofia-pro;
 }
 
 .highlight-text {
