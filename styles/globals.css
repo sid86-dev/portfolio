@@ -12,7 +12,11 @@
 
 @font-face {
   font-family: sofia-pro;
-  src: url("/fonts/sofiapro/sofiapro-regular.ttf") format("truetype");
+  src: url("/fonts/Sofiapro/SofiaPro-Regular.woff2") format("woff2"),
+    url("/fonts/Sofiapro/SofiaPro-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 h1,
@@ -28,6 +32,8 @@ span,
 p,
 small {
   font-family: sofia-pro;
+  font-weight: normal;
+  font-style: normal;
 }
 
 .highlight-text {
