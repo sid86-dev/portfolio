@@ -19,7 +19,7 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
   };
 
   return data.map((item, index) => (
-    <div className="col-md-6 my-3 px-lg-4" key={index}>
+    <div className="col-md-6 col-xl-5 my-3 px-lg-4" key={index}>
       <div className="card border-0 mt-3 rounded-0 rounded-top">
         <div className="card-header d-flex align-items-center border-0">
           <span className="dot mx-1"></span>
@@ -36,7 +36,7 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
       </div>
       <div className="card-body w-100">
         <motion.div
-          whileHover={{ scale: 1.02 }}
+          whileHover={{ scale: 1.01 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <Link href={`/view/${item._id}`}>

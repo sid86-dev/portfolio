@@ -25,7 +25,7 @@ export const Projects = () => {
 
   return (
     <div className="container py-2">
-      <div className="row">
+      <div className="row justify-content-center">
         {state.projects ? (
           <IsAvailable data={state.projects} />
         ) : (
