@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: sofia-pro;
-  src: url("/fonts/sofiapro/sofiapro-light.otf");
+  src: url("/fonts/sofiapro/sofiapro-regular.ttf");
 }
 
 h1,
@@ -40,6 +40,10 @@ h6 {
 }
 
 span {
+  font-family: sofia-pro;
+}
+
+.base {
   font-family: sofia-pro;
 }
 
@@ -103,14 +107,13 @@ span {
   color: #b1becd !important;
 }
 
-.text-light:hover {
-  color: white !important;
-}
-
 .text-mid-dark {
   color: #454e56 !important;
 }
 
-.text-mid-dark:hover {
+.nav-link-dark:hover {
   color: black !important;
+}
+.nav-link-light:hover {
+  color: white !important;
 }

@@ -28,3 +28,5 @@ export type AppStoreContext = [
   state: AppStore,
   setState: (state: AppStore) => void
 ];
+
+export type ISkillCard = { id: number; title: string; description: string };

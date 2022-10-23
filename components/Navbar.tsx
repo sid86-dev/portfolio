@@ -15,7 +15,7 @@ function Navbar() {
       state.isDark ? "bg-mid-dark" : "bg-light"
     }`,
     navLinks: `nav-link active ${
-      !state.isDark ? "text-mid-dark" : "text-light"
+      !state.isDark ? "text-mid-dark nav-link-dark" : "nav-link-light text-light"
     }`,
   };
 
@@ -23,7 +23,7 @@ function Navbar() {
     <nav className={style.navbar}>
       <div className="container-fluid px-5">
         <a className="navbar-brand" href="#">
-          Sid86
+          <img alt="" src="/images/logo/dark.png" height={50} className="bg-light rounded-5 p-1"></img>
         </a>
         <button
           className="navbar-toggler"

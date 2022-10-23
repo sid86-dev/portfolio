@@ -2,24 +2,24 @@ import React, { ReactNode, useContext } from "react";
 import OpenInNewSharpIcon from "@mui/icons-material/OpenInNewSharp";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { AppStoreContext, Project } from "../../types";
-import { ProjectCard } from "../ProjectCard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Context } from "../../context/store";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface IProps {
   data: Project[];
 }
 
 const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
-  const [state, setState] = useContext<AppStoreContext>(Context);
+  const [state] = useContext<AppStoreContext>(Context);
 
   const style = {
     icons: `mx-5 ${state.isDark ? "bg-dark text-white" : "bg-gray text-dark"}`,
   };
 
   return data.map((item, index) => (
-    <ProjectCard key={index}>
+    <div className="col-md-6 my-3 px-lg-4" key={index}>
       <div className="card border-0 mt-3 rounded-0 rounded-top">
         <div className="card-header d-flex align-items-center border-0">
           <span className="dot mx-1"></span>
@@ -34,17 +34,22 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
           <ArrowForwardIcon className="text-dark" />
         </div>
       </div>
-      <div className="card-body">
-        <Link href={`/view/${item._id}`}>
-          <a>
-            <img
-              src={item.image}
-              className="card-img-top rounded-0 rounded-bottom shadow mb-3"
-              alt="..."
-              height="100%"
-            />
-          </a>
-        </Link>
+      <div className="card-body w-100">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <Link href={`/view/${item._id}`}>
+            <a>
+              <img
+                src={item.image}
+                className="card-img-top rounded-0 rounded-bottom shadow mb-3"
+                alt="..."
+                height="100%"
+              />
+            </a>
+          </Link>
+        </motion.div>
 
         <div className="d-flex align-items-center">
           <h5 className="card-title">{item.title}</h5>
@@ -70,9 +75,9 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
           </a>
         </div>
 
-        <p className="card-text my-3 text-muted">{item.description}</p>
+        <p className="card-text my-3">{item.description}</p>
       </div>
-    </ProjectCard>
+    </div>
   ));
 };
 

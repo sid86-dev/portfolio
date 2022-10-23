@@ -1,10 +1,9 @@
 import React from "react";
-import { ProjectCard } from "../ProjectCard";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 export const Loader = () => {
   return (
-    <ProjectCard>
+    <div className="col-md-6 my-3 px-lg-4">
       <div className="card border-0 mt-3 rounded-0">
         <div className="card-header d-flex align-items-center border-0 rounded-0 rounded-top">
           <span className="dot mx-1"></span>
@@ -33,6 +32,6 @@ export const Loader = () => {
           <span className="placeholder col-12"></span>
         </p>
       </div>
-    </ProjectCard>
+    </div>
   );
 };
