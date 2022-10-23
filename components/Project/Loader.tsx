@@ -1,9 +1,10 @@
 import React from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Image from "next/image";
 
 export const Loader = () => {
   return (
-    <div className="col-md-6 my-3 px-lg-4">
+    <div className="col-md-6 col-xl-5 my-3 px-lg-4">
       <div className="card border-0 mt-3 rounded-0">
         <div className="card-header d-flex align-items-center border-0 rounded-0 rounded-top">
           <span className="dot mx-1"></span>
@@ -19,11 +20,13 @@ export const Loader = () => {
         </div>
       </div>
       <div className="card-body">
-        <img
+        <Image
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLWQvWzJha6lGk4qxCdRFc-9zOA2L_ZMLKcA&usqp=CAU"
           className="card-img-top rounded-0 rounded-bottom shadow mb-3"
           alt="..."
-          height="100%"
+          height="500px"
+          width="900px"
+          priority
         />
 
         <p className="card-text placeholder-glow">

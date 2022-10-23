@@ -4,7 +4,6 @@ import Script from "next/script";
 import Main from "../components/Main";
 import Navbar from "../components/Navbar";
 import { Projects } from "../components/Project/ProjectSection";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Footer } from "../components/Footer";
 import { useContext } from "react";
 import { AppStoreContext } from "../types";
@@ -12,10 +11,7 @@ import { Context } from "../context/store";
 import SkillSection from "../components/Skills/SkillSection";
 
 const Home: NextPage = () => {
-  const [state, setState] = useContext<AppStoreContext>(Context);
-
-  // Create a client
-  const queryClient = new QueryClient();
+  const [state] = useContext<AppStoreContext>(Context);
 
   const style = {
     body: state.isDark ? "bg-dark text-light" : "bg-gray text-mid-dark",
@@ -45,7 +41,6 @@ const Home: NextPage = () => {
       <hr className="divider" />
 
       {/* TechStack section */}
-
       <div className="container justify-content-center py-3">
         <h2 className="text-center">Tech Stack</h2>
         <SkillSection />
@@ -54,12 +49,9 @@ const Home: NextPage = () => {
       <hr className="divider" />
 
       {/* Project showcase section */}
-
       <div className="container justify-content-center py-3">
         <h2 className="text-center">Projects</h2>
-        <QueryClientProvider client={queryClient}>
-          <Projects />
-        </QueryClientProvider>
+        <Projects />
       </div>
 
       <hr className="divider" />

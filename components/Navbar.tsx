@@ -6,25 +6,33 @@ import TerminalIcon from "@mui/icons-material/Terminal";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import { Context } from "../context/store";
 import { AppStoreContext } from "../types";
+import Link from "next/link";
 
 function Navbar() {
   const [state, setState] = useContext<AppStoreContext>(Context);
 
   const style = {
     navbar: `navbar navbar-expand-lg py-3 ${
-      state.isDark ? "bg-mid-dark" : "bg-light"
+      state.isDark ? "bg-dark-sm" : "bg-light"
     }`,
     navLinks: `nav-link active ${
-      !state.isDark ? "text-mid-dark nav-link-dark" : "nav-link-light text-light"
+      !state.isDark
+        ? "text-mid-dark nav-link-dark"
+        : "nav-link-light text-light"
     }`,
   };
 
   return (
     <nav className={style.navbar}>
       <div className="container-fluid px-5">
-        <a className="navbar-brand" href="#">
-          <img alt="" src="/images/logo/dark.png" height={50} className="bg-light rounded-5 p-1"></img>
-        </a>
+        <Link className="navbar-brand bg-animate" href="/">
+          <img
+            alt=""
+            src="/images/logo/dark.png"
+            height={50}
+            className="bg-light bg-animate rounded-5 p-1"
+          ></img>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

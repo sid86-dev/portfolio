@@ -5,6 +5,11 @@
   --pink: rgb(255, 68, 132);
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 @font-face {
   font-family: Cubano;
   src: url("/fonts/Cubano.ttf");
@@ -22,6 +27,10 @@ h4,
 h5,
 h6 {
   font-family: "Cubano", sans-serif;
+}
+
+.fs-8 {
+  font-size: 14px;
 }
 
 span,
@@ -53,6 +62,9 @@ span {
 
 .base {
   font-family: sofia-pro;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
 }
 
 .btn-dark {
@@ -81,11 +93,11 @@ span {
 }
 
 .fs-7 {
-  font-size: 13.5px;
+  font-size: 13px;
 }
 
-.bg-mid-dark {
-  background-color: #2a2e34 !important;
+.bg-dark-sm {
+  background-color: rgb(42, 46, 52) !important;
   -webkit-transition: background-color 250ms linear;
   -ms-transition: background-color 250ms linear;
   transition: background-color 250ms linear;
@@ -105,10 +117,18 @@ span {
 }
 
 .bg-dark {
-  background-color: #12181b !important;
+  background-color: rgb(18, 24, 27) !important;
   -webkit-transition: background-color 250ms linear;
   -ms-transition: background-color 250ms linear;
   transition: background-color 250ms linear;
+}
+
+.bg-light {
+  background-color: rgb(240, 255, 255, 0.4) !important;
+}
+
+.bg-dark-xs {
+  background-color: rgb(42, 46, 52, 0.4) !important;
 }
 
 .text-light {
@@ -124,4 +144,70 @@ span {
 }
 .nav-link-light:hover {
   color: white !important;
+}
+
+.bg-blue-500 {
+  background-color: #1e90ff !important;
+}
+
+.bg-black {
+  background-color: black !important;
+  color: white !important;
+  border: white 0.5px solid !important;
+}
+.bg-gray-500 {
+  background-color: #b1becd !important;
+}
+
+.bg-blue-300 {
+  background-color: rgb(100, 181, 246) !important;
+}
+
+.bg-blue-400 {
+  background-color: rgb(0, 121, 191) !important;
+}
+
+.bg-light-200 {
+  background-color: rgb(240, 255, 255) !important;
+  color: #1e90ff !important;
+}
+.bg-yellow {
+  background-color: #f6e05e !important;
+}
+
+.bg-animate {
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    -45deg,
+    #3bade3 0%,
+    #576fe6 25%,
+    var(--orange) 51%,
+    var(--pink) 100%
+  );
+  -webkit-animation: AnimateBG 5s ease infinite;
+  animation: AnimateBG 5s ease infinite;
+}
+
+@-webkit-keyframes AnimateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes AnimateBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

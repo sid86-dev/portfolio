@@ -47,7 +47,7 @@ export const Footer = () => {
           <TypescriptLogo />
         </span>
       </p>
-      <p>Copyright © 2022 sid86-dev</p>
+      <p>Copyright © 2022 sid86</p>
     </div>
   );
 };
