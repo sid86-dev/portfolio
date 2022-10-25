@@ -24,16 +24,18 @@ interface IProps {
 
 export const SkillCard = ({ display }: IProps) => {
   return (
-    <div className="card-body ">
-           <Sparkles
-              color="red"
-              count={15}
-              minSize={6}
-              maxSize={10}
-              overflowPx={80}
-              fadeOutSpeed={8}
-              flicker={true}
-            />
+    <div className="card-body">
+      <div className="d-none d-md-block">
+        <Sparkles
+          color="red"
+          count={20}
+          minSize={7}
+          maxSize={10}
+          overflowPx={80}
+          fadeOutSpeed={8}
+          flicker={true}
+        />
+      </div>
       <h5 className="card-title text-dark">{display.title}</h5>
       <p className="card-text text-mid-dark">{display.description} </p>
       <p className="card-text fs-3">

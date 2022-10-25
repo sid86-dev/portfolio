@@ -2,6 +2,7 @@ import React from "react";
 import { SkillCard } from "./SkillCard";
 import { ISkillCard } from "../../types";
 import { motion } from "framer-motion";
+import Sparkles from "react-sparkle";
 
 export default function App() {
   const cardVarient: ISkillCard[] = [
@@ -37,10 +38,11 @@ export default function App() {
             key={index}
             className={`card border-5 ${
               index != 1 ? "border-success" : "border-danger"
-            } mx-3 rounded`}
+            } mx-md-2 mx-xl-3 rounded`}
           >
-            {" "}
-            <SkillCard display={card} />
+            <div>
+              <SkillCard display={card} />
+            </div>{" "}
           </motion.div>
         ))}
       </div>

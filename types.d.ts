@@ -5,6 +5,7 @@ export interface Project {
   github: string;
   link: string;
   description: string;
+  tags: string[];
 }
 
 export type ProjectContextType = {
@@ -30,3 +31,7 @@ export type AppStoreContext = [
 ];
 
 export type ISkillCard = { id: number; title: string; description: string };
+export interface ITagColors {
+  tag: string;
+  class: string;
+}

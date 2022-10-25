@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../../context/store";
-import { fetchProject } from "../../lib/requestFunc";
+import { fetchProject } from "../../lib/helpers";
 import { AppStoreContext, Project } from "../../types";
 import IsAvailable from "./IsAvailable";
 import { Loader } from "./Loader";
@@ -25,7 +25,7 @@ export const Projects = () => {
 
   return (
     <div className="container py-2">
-      <div className="row">
+      <div className="row justify-content-center">
         {state.projects ? (
           <IsAvailable data={state.projects} />
         ) : (
