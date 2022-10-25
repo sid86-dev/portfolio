@@ -5,20 +5,12 @@ import Main from "../components/Main";
 import Navbar from "../components/Navbar";
 import { Projects } from "../components/Project/ProjectSection";
 import { Footer } from "../components/Footer";
-import { useContext } from "react";
-import { AppStoreContext } from "../types";
-import { Context } from "../context/store";
 import SkillSection from "../components/Skills/SkillSection";
+import { Wrapper } from "../components/Wrapper";
 
 const Home: NextPage = () => {
-  const [state] = useContext<AppStoreContext>(Context);
-
-  const style = {
-    body: state.isDark ? "bg-dark text-light" : "bg-gray text-mid-dark",
-  };
-
   return (
-    <div className={style.body}>
+    <Wrapper>
       <Head>
         <title>Sid86</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -54,10 +46,10 @@ const Home: NextPage = () => {
         <Projects />
       </div>
 
-      <hr className="divider" />
+      <hr className="divider mt-5" />
 
       <Footer />
-    </div>
+    </Wrapper>
   );
 };
 

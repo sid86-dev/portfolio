@@ -67,6 +67,12 @@ span {
   width: 100%;
 }
 
+input,
+textarea,
+button {
+  box-shadow: none !important;
+}
+
 .btn-dark {
   background-color: black;
   color: white;
@@ -173,6 +179,14 @@ span {
 }
 .bg-yellow {
   background-color: #f6e05e !important;
+}
+
+.bg-blue-100 {
+  background-color: rgb(229, 242, 255) !important;
+}
+
+.bg-purple-500 {
+  background-color: #805ad5 !important;
 }
 
 .bg-animate {

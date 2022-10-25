@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../../context/store";
-import { fetchProject } from "../../lib/requestFunc";
+import { fetchProject } from "../../lib/helpers";
 import { AppStoreContext, Project } from "../../types";
 import IsAvailable from "./IsAvailable";
 import { Loader } from "./Loader";

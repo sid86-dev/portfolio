@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
-import Brightness5Icon from "@mui/icons-material/Brightness5";
+import React, { useContext, useState } from "react";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
 import WorkIcon from "@mui/icons-material/Work";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TerminalIcon from "@mui/icons-material/Terminal";
@@ -7,9 +8,11 @@ import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import { Context } from "../context/store";
 import { AppStoreContext } from "../types";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 function Navbar() {
   const [state, setState] = useContext<AppStoreContext>(Context);
+  const [isActive, setIsActive] = useState(false);
 
   const style = {
     navbar: `navbar navbar-expand-lg py-3 ${
@@ -25,7 +28,7 @@ function Navbar() {
   return (
     <nav className={style.navbar}>
       <div className="container-fluid px-5">
-        <Link className="navbar-brand bg-animate" href="/">
+        <Link className="navbar-brand" href="/">
           <img
             alt=""
             src="/images/logo/dark.png"
@@ -72,15 +75,26 @@ function Navbar() {
             <button
               className="btn btn-dark mx-lg-3"
               type="submit"
-              onClick={() =>
+              onClick={() => {
                 // @ts-ignore
                 setState((prev) => ({
                   ...prev,
                   ["isDark"]: !state.isDark,
-                }))
-              }
+                }));
+                setIsActive(!isActive);
+              }}
             >
-              <Brightness5Icon />
+              <motion.div
+                animate={{
+                  rotate: isActive ? 180 : 0,
+                }}
+              >
+                {state.isDark ? (
+                  <Brightness7Icon className="mb-1" />
+                ) : (
+                  <Brightness4Icon />
+                )}
+              </motion.div>
             </button>
             <button className="btn btn-dark mx-2" type="submit">
               <TerminalIcon />

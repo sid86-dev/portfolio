@@ -31,3 +31,7 @@ export type AppStoreContext = [
 ];
 
 export type ISkillCard = { id: number; title: string; description: string };
+export interface ITagColors {
+  tag: string;
+  class: string;
+}
