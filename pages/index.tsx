@@ -10,8 +10,6 @@ import { Wrapper } from "../components/Wrapper";
 import { Project } from "../types";
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
-
 interface IProps {
   projects: Project[] | null;
 }
@@ -58,6 +56,7 @@ const Home: NextPage<IProps> = ({ projects }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
+  const prisma = new PrismaClient();
   const data = await prisma.projects.findMany();
   return {
     props: {
