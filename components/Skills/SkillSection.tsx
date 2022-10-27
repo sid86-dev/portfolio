@@ -1,36 +1,15 @@
 import React from "react";
 import { SkillCard } from "./SkillCard";
-import { ISkillCard } from "../../types";
 import { motion } from "framer-motion";
-import Sparkles from "react-sparkle";
+import { cardVarient } from "../../lib/helpers";
 
 export default function App() {
-  const cardVarient: ISkillCard[] = [
-    {
-      id: 1,
-      title: "Software Development",
-      description:
-        "Experienced in both functional and OOP: Python, JavaScript, Typescript, Solidity. MongoDB, GraphQL, SQL.",
-    },
-    {
-      id: 2,
-      title: "Frontenv Dev",
-      description:
-        "Over three years of frontend development experience in React, Next.js framework. Bootstrap, Tailwind CSS, Firebase, HTML5.",
-    },
-
-    {
-      id: 3,
-      title: "Mobile Dev",
-      description:
-        "Skilled in developing hybrid mobile apps and cross-platform solutions using React Native framework.",
-    },
-  ];
-
   return (
-    <>
-      {/* display cards */}
+    <div className="container justify-content-center py-3">
+      {/* header */}
+      <h2 className="text-center">Tech Stack</h2>
 
+      {/* display cards */}
       <div className="card-group my-5 py-4">
         {cardVarient.map((card, index) => (
           <motion.div
@@ -46,6 +25,6 @@ export default function App() {
           </motion.div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

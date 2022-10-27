@@ -4,9 +4,6 @@ import { Wrapper } from "../../components/Wrapper";
 
 const View = () => {
   const router = useRouter();
-  const { id } = router.query;
-
-  console.log(id);
 
   return (
     <Wrapper>

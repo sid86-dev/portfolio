@@ -1,14 +1,20 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Script from "next/script";
 import Main from "../components/Main";
 import Navbar from "../components/Navbar";
-import { Projects } from "../components/Project/ProjectSection";
+import { ProjectSection } from "../components/Project/ProjectSection";
 import { Footer } from "../components/Footer";
 import SkillSection from "../components/Skills/SkillSection";
 import { Wrapper } from "../components/Wrapper";
+import { Project } from "../types";
+import { PrismaClient } from "@prisma/client";
 
-const Home: NextPage = () => {
+interface IProps {
+  projects: Project[] | null;
+}
+
+const Home: NextPage<IProps> = ({ projects }) => {
   return (
     <Wrapper>
       <Head>
@@ -33,18 +39,12 @@ const Home: NextPage = () => {
       <hr className="divider" />
 
       {/* TechStack section */}
-      <div className="container justify-content-center py-3">
-        <h2 className="text-center">Tech Stack</h2>
-        <SkillSection />
-      </div>
+      <SkillSection />
 
       <hr className="divider" />
 
       {/* Project showcase section */}
-      <div className="container justify-content-center py-3">
-        <h2 className="text-center">Projects</h2>
-        <Projects />
-      </div>
+      <ProjectSection projects={projects} />
 
       <hr className="divider mt-5" />
 
@@ -54,3 +54,13 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prisma = new PrismaClient();
+  const data = await prisma.projects.findMany();
+  return {
+    props: {
+      projects: data,
+    },
+  };
+};

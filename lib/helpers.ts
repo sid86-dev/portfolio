@@ -1,10 +1,38 @@
 import axios from "axios";
-import { ITagColors, Project } from "../types";
+import { ISkillCard, ITagColors, Project } from "../types";
 
-const fetchProject = async () => {
+export const fetchAllProject = async () => {
   const res = await axios.get<Project[]>("/api/getProjects");
+  const data = JSON.stringify(res);
+  return data;
+};
+
+export const fetchProject = async (id: string | string[] | undefined) => {
+  const res = await axios.get<Project>(`/api/project/${id}`);
   return res.data;
 };
+
+export const cardVarient: ISkillCard[] = [
+  {
+    id: 1,
+    title: "Software Development",
+    description:
+      "Experienced in both functional and OOP: Python, JavaScript, Typescript, Solidity. MongoDB, GraphQL, SQL.",
+  },
+  {
+    id: 2,
+    title: "Frontenv Dev",
+    description:
+      "Over three years of frontend development experience in React, Next.js framework. Bootstrap, Tailwind CSS, Firebase, HTML5.",
+  },
+
+  {
+    id: 3,
+    title: "Mobile Dev",
+    description:
+      "Skilled in developing hybrid mobile apps and cross-platform solutions using React Native framework.",
+  },
+];
 
 export const tagColors: ITagColors[] = [
   { tag: "react", class: "bg-light-200" },
@@ -29,5 +57,3 @@ export const tagColors: ITagColors[] = [
   { tag: "bootstrap", class: "bg-purple-500" },
   { tag: "material-ui", class: "bg-blue-100" },
 ];
-
-export { fetchProject };
