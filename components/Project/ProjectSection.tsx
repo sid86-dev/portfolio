@@ -1,41 +1,19 @@
-import React, { useContext, useEffect } from "react";
-import { Context } from "../../context/store";
-import { fetchProject } from "../../lib/helpers";
-import { AppStoreContext, Project } from "../../types";
-import IsAvailable from "./IsAvailable";
-import { Loader } from "./Loader";
+import React, { FC } from "react";
+import { Project } from "../../types";
+import ProjectCard from "./ProjectCard";
 
-export const Projects = () => {
-  const [state, setState] = useContext<AppStoreContext>(Context);
+interface IProps {
+  projects: Project[] | null;
+}
 
-  useEffect(() => {
-    const setProjects = async () => {
-      var data = await fetchProject();
-      console.log(data);
-      // @ts-ignore
-      setState((prev) => ({
-        ...prev,
-        ["projects"]: data,
-      }));
-    };
-    if (!state.projects?.length) {
-      setProjects();
-    }
-  },[state.projects?.length, setState]);
-
+export const ProjectSection: FC<IProps> = ({ projects }) => {
   return (
-    <div className="container py-2">
-      <div className="row justify-content-center">
-        {state.projects ? (
-          <IsAvailable data={state.projects} />
-        ) : (
-          <>
-            <Loader />
-            <Loader />
-            <Loader />
-            <Loader />
-          </>
-        )}
+    <div className="container justify-content-center py-3">
+      <h2 className="text-center">Projects</h2>
+      <div className="container py-2">
+        <div className="row justify-content-center">
+          {projects && <ProjectCard data={projects} />}
+        </div>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ interface IProps {
   data: Project[];
 }
 
-const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
+const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
   const [state] = useContext<AppStoreContext>(Context);
 
   const style = {
@@ -123,4 +123,4 @@ const IsAvailable: Function = ({ data }: IProps): ReactNode[] => {
   ));
 };
 
-export default IsAvailable;
+export default ProjectCard;
