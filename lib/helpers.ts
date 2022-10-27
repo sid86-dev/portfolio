@@ -1,16 +1,4 @@
-import axios from "axios";
 import { ISkillCard, ITagColors, Project } from "../types";
-
-export const fetchAllProject = async () => {
-  const res = await axios.get<Project[]>("/api/getProjects");
-  const data = JSON.stringify(res);
-  return data;
-};
-
-export const fetchProject = async (id: string | string[] | undefined) => {
-  const res = await axios.get<Project>(`/api/project/${id}`);
-  return res.data;
-};
 
 export const cardVarient: ISkillCard[] = [
   {

@@ -48,7 +48,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
           whileHover={{ scale: 1.005 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          <Link href={`/view/${item._id}`}>
+          <Link href={`/view/${item.id}`}>
             <a className="h-100 w-100">
               <Image
                 src={item.image}

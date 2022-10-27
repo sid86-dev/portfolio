@@ -1,5 +1,5 @@
 export interface Project {
-  _id: string;
+  id: string;
   title: string;
   image: string;
   github: string;

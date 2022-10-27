@@ -1,0 +1,11 @@
+{
+    "env": {
+        "DATABASE_URL": "mongodb+srv://sid86:Siddharth8604@cluster0.ykjkp.mongodb.net/portfolio?retryWrites=true&w=majority"
+    },
+    "build": {
+        "env": {
+            "DATABASE_URL": "mongodb+srv://sid86:Siddharth8604@cluster0.ykjkp.mongodb.net/portfolio?retryWrites=true&w=majority"
+        }
+    },
+    "framework": "nextjs"
+}

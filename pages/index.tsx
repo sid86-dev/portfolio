@@ -8,7 +8,8 @@ import { Footer } from "../components/Footer";
 import SkillSection from "../components/Skills/SkillSection";
 import { Wrapper } from "../components/Wrapper";
 import { Project } from "../types";
-import { PrismaClient } from "@prisma/client";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../lib/firebase-config";
 
 interface IProps {
   projects: Project[] | null;
@@ -56,11 +57,12 @@ const Home: NextPage<IProps> = ({ projects }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prisma = new PrismaClient();
-  const data = await prisma.projects.findMany();
+  const projectCollectionRef = collection(db, "projects");
+  const data = await getDocs(projectCollectionRef);
+  const projects = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
   return {
     props: {
-      projects: data,
+      projects,
     },
   };
 };
