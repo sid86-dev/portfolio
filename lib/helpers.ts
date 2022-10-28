@@ -1,4 +1,6 @@
+import { collection, getDocs } from "firebase/firestore";
 import { ISkillCard, ITagColors, Project } from "../types";
+import { db } from "./firebase-config";
 
 export const cardVarient: ISkillCard[] = [
   {
@@ -45,3 +47,13 @@ export const tagColors: ITagColors[] = [
   { tag: "bootstrap", class: "bg-purple-500" },
   { tag: "material-ui", class: "bg-blue-100" },
 ];
+
+export const getdbData = new Promise<Project[]>(async (resolve) => {
+  const projectCollectionRef = collection(db, "projects");
+  const dbData = await getDocs(projectCollectionRef);
+  const data = dbData.docs.map((doc) => ({
+    ...(doc.data() as Project),
+    id: doc.id,
+  }));
+  if (data) resolve(data);
+});

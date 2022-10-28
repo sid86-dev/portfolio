@@ -10,6 +10,7 @@ import { Wrapper } from "../components/Wrapper";
 import { Project } from "../types";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../lib/firebase-config";
+import { getdbData } from "../lib/helpers";
 
 interface IProps {
   projects: Project[] | null;
@@ -57,9 +58,7 @@ const Home: NextPage<IProps> = ({ projects }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projectCollectionRef = collection(db, "projects");
-  const data = await getDocs(projectCollectionRef);
-  const projects = data.docs.map((doc) => ({...doc.data(), id: doc.id}));
+  const projects = await getdbData;
   return {
     props: {
       projects,
