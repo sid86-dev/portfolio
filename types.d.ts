@@ -2,10 +2,10 @@ export interface Project {
   id: string;
   title: string;
   image: string;
-  github: string;
+  github: ?string;
   link: string;
   description: string;
-  tags: string[];
+  tags: ?string[];
 }
 
 export type ProjectContextType = {

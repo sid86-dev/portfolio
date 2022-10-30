@@ -48,7 +48,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
           whileHover={{ scale: 1.005 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
-          <Link href={`/view/${item.id}`}>
+          <Link href={`/project/${item.id}`}>
             <a className="h-100 w-100">
               <Image
                 src={item.image}
@@ -85,15 +85,17 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
               </a>
 
               {/* github link */}
-              <a
-                href={item.github}
-                className="col-6 text-end"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {" "}
-                <GitHubIcon className={`${style.icons}`} />
-              </a>
+              {item.github && (
+                <a
+                  href={item.github}
+                  className="col-6 text-end"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {" "}
+                  <GitHubIcon className={`${style.icons}`} />
+                </a>
+              )}
             </div>
           </div>
 
@@ -107,15 +109,15 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
       <div className="col-12 mb-3 card-footer">
         <div className="d-flex justify-content-start">
           {item.tags?.map((tag, index) => (
-            <button
+            <span
               key={index}
-              className={`btn btn-sm my-2 px-1 py-0 fs-7 text-dark border-dark border-0 rounded-3
+              className={`badge py-1 fs-7 text-dark border-dark border-0
                   ${index % 2 != 0 && "mx-2"} ${
                 tagColors.find((data) => data.tag === tag)?.class
               }`}
             >
               #{tag}
-            </button>
+            </span>
           ))}
         </div>
       </div>
