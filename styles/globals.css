@@ -73,6 +73,20 @@ button {
   box-shadow: none !important;
 }
 
+@media only screen and (min-width: 1025px) {
+  .container-table {
+    padding-left: 25%;
+    padding-right: 25%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .container-table {
+    padding-left: 20%;
+    padding-right: 20%;
+  }
+}
+
 .btn-dark {
   background-color: black;
   color: white;
@@ -96,6 +110,10 @@ button {
   background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
+}
+
+.pointer {
+  cursor: pointer !important;
 }
 
 .fs-7 {

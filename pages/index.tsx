@@ -8,8 +8,6 @@ import { Footer } from "../components/Footer";
 import SkillSection from "../components/Skills/SkillSection";
 import { Wrapper } from "../components/Wrapper";
 import { Project } from "../types";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../lib/firebase-config";
 import { getdbData } from "../lib/helpers";
 
 interface IProps {

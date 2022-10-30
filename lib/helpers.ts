@@ -24,6 +24,11 @@ export const cardVarient: ISkillCard[] = [
   },
 ];
 
+export const stackIcons = [
+  { tag: "react", class: "fa-react" },
+  { tag: "bootstrap", class: "fa-bootstrap" },
+];
+
 export const tagColors: ITagColors[] = [
   { tag: "react", class: "bg-light-200" },
   { tag: "nextjs", class: "bg-black" },

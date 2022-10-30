@@ -9,6 +9,7 @@ import { Context } from "../context/store";
 import { AppStoreContext } from "../types";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 function Navbar() {
   const [state, setState] = useContext<AppStoreContext>(Context);
@@ -29,12 +30,14 @@ function Navbar() {
     <nav className={style.navbar}>
       <div className="container-fluid px-5">
         <Link className="navbar-brand" href="/">
-          <img
+          <Image
+            priority
             alt=""
             src="/images/logo/dark.png"
             height={50}
-            className="bg-light bg-animate rounded-5 p-1"
-          ></img>
+            width={50}
+            className="bg-light bg-animate rounded-5 p-1 pointer"
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -57,7 +60,11 @@ function Navbar() {
               </a>
             </li>
             <li className="nav-item mx-lg-3">
-              <a className={style.navLinks} href="#">
+              <a className={style.navLinks}
+                  href={'https://github.com/sid86-dev'}
+                  target="_blank"
+                  rel="noreferrer"
+                > 
                 <h6 className="fs-6">
                   <GitHubIcon /> Github
                 </h6>
