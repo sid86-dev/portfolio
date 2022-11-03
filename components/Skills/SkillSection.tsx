@@ -5,7 +5,7 @@ import { cardVarient } from "../../lib/helpers";
 
 export default function App() {
   return (
-    <div className="container justify-content-center py-3">
+    <div className="container justify-content-center py-4">
       {/* header */}
       <h2 className="text-center">Tech Stack</h2>
 

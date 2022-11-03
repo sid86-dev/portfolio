@@ -5,7 +5,9 @@ export interface Project {
   github: ?string;
   link: string;
   description: string;
+  longDescription: string;
   tags: ?string[];
+  topics: ?string[];
 }
 
 export type ProjectContextType = {

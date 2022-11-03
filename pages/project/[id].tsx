@@ -1,9 +1,10 @@
 import { doc, getDoc } from "@firebase/firestore";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Script from "next/script";
 import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Info/Header";
+import { Main } from "../../components/Info/Main";
 import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../components/Wrapper";
 import { db } from "../../lib/firebase-config";
@@ -19,7 +20,7 @@ const ProjectView = ({ project, id }: IProps) => {
   return (
     <Wrapper>
       <Head>
-        <title>Sid86 | {project?.title}</title>
+        <title>Sid86 | {project.title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
@@ -34,40 +35,12 @@ const ProjectView = ({ project, id }: IProps) => {
       ></Script> */}
       <Navbar />
       <div className="container-fluid py-5">
-        <div className="container text-center">
-          <div className="col-12">
-            <h1 className="fs-1">{project.title}</h1>
-            <p>{project.description}</p>
-          </div>
-        </div>
-        <hr className="divider my-5" />
-        <div className="container-table py-3">
-          <div className="mb-5 shadow">
-            <Image
-              src={project?.image}
-              height="450px"
-              width={"800px"}
-              layout="responsive"
-              className="w-50 rounded"
-              alt={project.title}
-            />
-          </div>
-          <p>{project.description}</p>
+        <Header project={project} />
 
-          <h2 className="mt-5 mb-3">Stack</h2>
-          <div className="container">
-            <ul className="list-group text-start list-group-flush bg-none">
-              {project.tags &&
-                project?.tags.map((tag, index) => (
-                  <li key={index} className="bg-none fs-6">
-                    <span className="">
-                      <span className="mx-2">{tag}</span>
-                    </span>
-                  </li>
-                ))}
-            </ul>
-          </div>
-        </div>
+        <hr className="divider my-5" />
+
+        {/* render main info */}
+        <Main project={project} />
       </div>
       <hr className="divider mt-5" />
       <Footer />
