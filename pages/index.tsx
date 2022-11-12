@@ -32,7 +32,7 @@ const Home: NextPage<IProps> = ({ projects }) => {
 
       {/* landing intro section */}
 
-      <div className="container d-flex justify-content-center m-lg-5 py-5 px-lg-4">
+      <div className="container d-flex justify-content-center m-lg-5 py-4 px-lg-4">
         <Main />
       </div>
 

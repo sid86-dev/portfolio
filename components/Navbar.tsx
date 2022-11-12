@@ -60,21 +60,24 @@ function Navbar() {
               </a>
             </li>
             <li className="nav-item mx-lg-3">
-              <a className={style.navLinks}
-                  href={'https://github.com/sid86-dev'}
-                  target="_blank"
-                  rel="noreferrer"
-                > 
+              <a
+                className={style.navLinks}
+                href={"https://github.com/sid86-dev"}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <h6 className="fs-6">
                   <GitHubIcon /> Github
                 </h6>
               </a>
             </li>
             <li className="nav-item mx-lg-3">
-              <a className={style.navLinks} href="#">
-                <h6 className="fs-6">
-                  <MeetingRoomIcon /> Meet
-                </h6>
+              <a className={style.navLinks} >
+                <Link href={"/meet"}>
+                  <h6 className="fs-6 pointer">
+                    <MeetingRoomIcon /> Meet
+                  </h6>
+                </Link>
               </a>
             </li>
           </ul>
