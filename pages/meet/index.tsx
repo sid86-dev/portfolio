@@ -61,9 +61,7 @@ const Meet: FC<IProps> = ({ token }) => {
               {isSuccess && <AlertDialog />}
               <h3 className="mt-md-5">Set up a video meeeting</h3>
               {/* zoom redirect button */}
-              <a
-                href={`https://zoom.us/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_ZOOM_CLIENT_ID}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fmeet`}
-              >
+              <a href={process.env.ZOOM_PUBLISH_URL}>
                 <div className="my-5">
                   <button className="btn btn-primary rounded-5 px-4 py-2">
                     <svg
