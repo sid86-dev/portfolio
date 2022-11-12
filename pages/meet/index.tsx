@@ -52,6 +52,7 @@ const Meet: FC<IProps> = ({ token }) => {
       <Navbar />
       <div className="container py-5 px-md-5">
         <h1>Let&apos;s Connect !</h1>
+        {token}
         {/* zoom meeting */}
         <div className="row my-5">
           <div className="col-md-5">
