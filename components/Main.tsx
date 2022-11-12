@@ -37,13 +37,10 @@ function Main() {
             through hard work, attention to detail and excellent{" "}
             <span className="highlight-box px-1">organizational skills.</span>
           </span>
-          <span className="fw-bolder fs-4 my-4">
-            I love building tools that are user-friendly, simple user-friendly,
-            simple and delightful.
-          </span>
+    
 
           {/* Link buttons */}
-          <div className="d-flex mx-auto mx-md-0">
+          <div className="d-flex my-3 my-md-5 mx-auto mx-md-0">
             <a
               href="https://www.linkedin.com/in/sid86-dev/"
               target="_blank"

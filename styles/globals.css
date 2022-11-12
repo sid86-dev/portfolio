@@ -73,6 +73,7 @@ button {
   box-shadow: none !important;
 }
 
+
 @media only screen and (min-width: 1025px) {
   .container-table {
     padding-left: 25%;
@@ -104,7 +105,7 @@ button {
   border-top: 2px dashed gray;
 }
 
-.border-dashed{
+.border-dashed {
   border: 2px dashed gray !important;
 }
 
