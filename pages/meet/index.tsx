@@ -161,6 +161,9 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
     ":" +
     process.env.ZOOM_CLIENT_SECRET;
 
+  console.log(authorization);
+  console.log(code);
+
   let buff = new Buffer(authorization);
   let base64data = buff.toString("base64");
 
@@ -183,12 +186,14 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
   try {
     const response = await axios(config);
     const { access_token } = response.data;
+    console.log(access_token);
     return {
       props: {
         token: access_token as string,
       },
     };
   } catch (err) {
+    console.log(err);
     return {
       props: {
         token: null,
