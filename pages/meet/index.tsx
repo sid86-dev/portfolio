@@ -170,7 +170,7 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
   var data = {
     code: code,
     grant_type: "authorization_code",
-    redirect_uri: "http://localhost:3000/meet",
+    redirect_uri: process.env.NODE_ENV === 'development' ? "http://localhost:3000/meet" : 'https://portfolio-six-jade-50.vercel.app/meet',
   };
 
   var config = {
