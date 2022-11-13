@@ -12,6 +12,7 @@ import axios from "axios";
 import { GetServerSideProps } from "next";
 import { ModalForm } from "../../components/Meet/Modal";
 import AlertDialog from "../../components/Meet/AlertDialog";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 interface IProps {
   token: string | null;
@@ -21,9 +22,12 @@ const Meet: FC<IProps> = ({ token }) => {
   const form = useRef<HTMLFormElement>(null);
   const [state] = useContext<AppStoreContext>(Context);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [IsLoading, setIsLoading] = useState<boolean>(false);
+  const [formData, setFormData] = useState({ from_email: "", message: "" });
 
   const sendEmail = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     emailjs
       .sendForm(
@@ -35,12 +39,20 @@ const Meet: FC<IProps> = ({ token }) => {
       )
       .then(
         (result) => {
+          setIsLoading(false);
+          setFormData({ from_email: "", message: "" });
           console.log(result.text);
         },
         (error) => {
           console.log(error.text);
         }
       );
+  };
+
+  const handleFormData = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   return (
@@ -50,21 +62,31 @@ const Meet: FC<IProps> = ({ token }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Navbar />
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={IsLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="container py-5 px-md-5">
         <h1>Let&apos;s Connect !</h1>
-        {token}
         {/* zoom meeting */}
         <div className="row my-5">
           <div className="col-md-5">
             <div className="container h-100 text-center border-dashed p-3 rounded">
               {/* Modal */}
-              <ModalForm setIsSuccess={setIsSuccess} token={token} />
+              <ModalForm
+                setIsLoading={setIsLoading}
+                IsLoading={IsLoading}
+                setIsSuccess={setIsSuccess}
+                token={token}
+              />
               {isSuccess && <AlertDialog />}
               <h3 className="mt-md-5">Set up a video meeeting</h3>
-              {/* zoom redirect button */}
+              {/* Zoom redirect button */}
               <div className="my-5">
                 <a
-                  href={process.env.ZOOM_PUBLISH_URL}
+                  href={process.env.NEXT_PUBLIC_ZOOM_PUBLISH_URL}
                   className="btn btn-primary rounded-5 px-4 py-2"
                 >
                   <svg
@@ -109,10 +131,14 @@ const Meet: FC<IProps> = ({ token }) => {
                     Email
                   </label>
                   <input
+                    value={formData.from_email}
                     name="from_email"
                     type="email"
                     className="form-control"
                     id="exampleFormControlInput1"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleFormData(e)
+                    }
                   />
                 </div>
 
@@ -124,10 +150,14 @@ const Meet: FC<IProps> = ({ token }) => {
                     Message
                   </label>
                   <textarea
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      handleFormData(e)
+                    }
                     className="form-control"
                     id="exampleFormControlTextarea1"
                     rows={3}
                     name="message"
+                    value={formData.message}
                   ></textarea>
 
                   <button
@@ -146,7 +176,6 @@ const Meet: FC<IProps> = ({ token }) => {
         </div>
       </div>
       <hr className="divider" />
-
       <Footer />
     </Wrapper>
   );

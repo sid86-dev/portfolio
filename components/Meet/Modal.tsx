@@ -6,8 +6,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import TextField from "@mui/material/TextField";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import {
-  Backdrop,
-  CircularProgress,
   FormControl,
   FormHelperText,
   IconButton,
@@ -27,9 +25,16 @@ import { IZoomPayload, TMeetingForm, TUser } from "../../types";
 interface IProps {
   token: string | null;
   setIsSuccess: Dispatch<SetStateAction<boolean>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  IsLoading: boolean;
 }
 
-export const ModalForm: FC<IProps> = ({ token, setIsSuccess }) => {
+export const ModalForm: FC<IProps> = ({
+  token,
+  setIsSuccess,
+  setIsLoading,
+  IsLoading,
+}) => {
   const [open, setOpen] = useState<boolean>(token ? true : false);
   const [duration, setDuration] = useState("");
   const [value, setValue] = useState<Dayjs | null>(
@@ -40,12 +45,12 @@ export const ModalForm: FC<IProps> = ({ token, setIsSuccess }) => {
     topic: "",
     showPassword: false,
   });
-  const [IsLoading, setIsLoading] = useState<boolean>(false);
 
   const handleClose = () => setOpen(false);
 
   const handleFormSubmit = async () => {
-    setIsLoading(!IsLoading);
+    setIsLoading(true);
+    setOpen(false);
 
     let res = await axios.post("/api/zoom/user", { token: token });
     let user: TUser = res.data.users[0];
@@ -103,7 +108,6 @@ export const ModalForm: FC<IProps> = ({ token, setIsSuccess }) => {
       .then((res) => {
         console.log(res);
         setIsLoading(false);
-        setOpen(false);
         setIsSuccess(true);
       })
       .catch((err) => console.log(err));
@@ -260,13 +264,6 @@ export const ModalForm: FC<IProps> = ({ token, setIsSuccess }) => {
             </div>
           </div>
         </div>
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={IsLoading}
-          onClick={handleClose}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
       </div>
     </Modal>
   );
