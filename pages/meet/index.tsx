@@ -62,27 +62,28 @@ const Meet: FC<IProps> = ({ token }) => {
               {isSuccess && <AlertDialog />}
               <h3 className="mt-md-5">Set up a video meeeting</h3>
               {/* zoom redirect button */}
-              <a href={process.env.ZOOM_PUBLISH_URL}>
-                <div className="my-5">
-                  <button className="btn btn-primary rounded-5 px-4 py-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 48 48"
-                      width="60px"
-                      height="60px"
-                      className=""
-                    >
-                      <circle cx="24" cy="24" r="20" fill="#2196f3" />
-                      <path
-                        fill="#fff"
-                        d="M29,31H14c-1.657,0-3-1.343-3-3V17h15c1.657,0,3,1.343,3,3V31z"
-                      />
-                      <polygon fill="#fff" points="37,31 31,27 31,21 37,17" />
-                    </svg>{" "}
-                    Continue with Zoom
-                  </button>
-                </div>
-              </a>
+              <div className="my-5">
+                <a
+                  href={process.env.ZOOM_PUBLISH_URL}
+                  className="btn btn-primary rounded-5 px-4 py-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 48 48"
+                    width="60px"
+                    height="60px"
+                    className=""
+                  >
+                    <circle cx="24" cy="24" r="20" fill="#2196f3" />
+                    <path
+                      fill="#fff"
+                      d="M29,31H14c-1.657,0-3-1.343-3-3V17h15c1.657,0,3,1.343,3,3V31z"
+                    />
+                    <polygon fill="#fff" points="37,31 31,27 31,21 37,17" />
+                  </svg>{" "}
+                  Continue with Zoom
+                </a>
+              </div>
             </div>
           </div>
           <div className="col-md-1 d-flex justify-content-center align-items-center">
@@ -162,16 +163,16 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
     ":" +
     process.env.ZOOM_CLIENT_SECRET;
 
-  console.log(authorization);
-  console.log(code);
-
   let buff = new Buffer(authorization);
   let base64data = buff.toString("base64");
 
   var data = {
     code: code,
     grant_type: "authorization_code",
-    redirect_uri: process.env.NODE_ENV === 'development' ? "http://localhost:3000/meet" : 'https://portfolio-six-jade-50.vercel.app/meet',
+    redirect_uri:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000/meet"
+        : "https://portfolio-six-jade-50.vercel.app/meet",
   };
 
   var config = {
@@ -187,14 +188,12 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
   try {
     const response = await axios(config);
     const { access_token } = response.data;
-    console.log(access_token);
     return {
       props: {
         token: access_token as string,
       },
     };
   } catch (err) {
-    console.log(err);
     return {
       props: {
         token: null,

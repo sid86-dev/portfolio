@@ -22,7 +22,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 
   return data.map((item, index) => (
     <div
-      className={`col-md-5 my-4 px-lg-4 pt-lg-4 ${
+      className={`col-md-4 my-4 px-lg-3 pt-lg-4 ${
         state.isDark ? "bg-dark-xs" : "bg-light"
       } mx-3 rounded-3`}
       key={index}
