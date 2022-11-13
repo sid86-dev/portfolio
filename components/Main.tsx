@@ -20,6 +20,8 @@ function Main() {
   };
 
   return (
+    <div className="container d-flex justify-content-center m-lg-5 pt-5 pt-md-2 px-lg-4">
+
     <div className="mx-lg-3 row  w-100 ">
       <div className="col-md-7">
         <div className="d-flex flex-column">
@@ -74,6 +76,7 @@ function Main() {
           />
         </Tilt>
       </div>
+    </div>
     </div>
   );
 }

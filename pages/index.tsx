@@ -31,10 +31,7 @@ const Home: NextPage<IProps> = ({ projects }) => {
       <Navbar />
 
       {/* landing intro section */}
-
-      <div className="container d-flex justify-content-center m-lg-5 py-4 px-lg-4">
-        <Main />
-      </div>
+      <Main />
 
       <hr className="divider" />
 

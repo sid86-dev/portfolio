@@ -22,7 +22,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 
   return data.map((item, index) => (
     <div
-      className={`col-md-5 my-4 px-lg-4 pt-lg-4 ${
+      className={`col-md-4 my-4 px-lg-3 pt-lg-4 ${
         state.isDark ? "bg-dark-xs" : "bg-light"
       } mx-3 rounded-3`}
       key={index}
@@ -52,7 +52,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
             <a className="h-100 w-100">
               <Image
                 src={item.image}
-                className="card-img-top rounded-0 rounded-bottom shadow"
+                className="card-img-top pointer rounded-0 rounded-bottom shadow"
                 alt="..."
                 height="500px"
                 width="900px"
