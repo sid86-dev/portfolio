@@ -52,7 +52,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
             <a className="h-100 w-100">
               <Image
                 src={item.image}
-                className="card-img-top rounded-0 rounded-bottom shadow"
+                className="card-img-top pointer rounded-0 rounded-bottom shadow"
                 alt="..."
                 height="500px"
                 width="900px"

@@ -73,7 +73,6 @@ button {
   box-shadow: none !important;
 }
 
-
 @media only screen and (min-width: 1025px) {
   .container-table {
     padding-left: 25%;
@@ -255,4 +254,9 @@ button {
   100% {
     background-position: 0% 50%;
   }
+}
+
+#nprogress .bar {
+  background: linear-gradient(90deg, var(--orange), var(--blue), var(--pink)) !important;
+  padding-top: 3px;
 }
