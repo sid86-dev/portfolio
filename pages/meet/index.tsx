@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { FC, useContext, useRef, useState } from "react";
+import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { Footer } from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { Wrapper } from "../../components/Wrapper";
@@ -24,30 +24,38 @@ const Meet: FC<IProps> = ({ token }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [IsLoading, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState({ from_email: "", message: "" });
+  const [IsDisabled, setIsDisabled] = useState(true);
 
   const sendEmail = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
+    if (!IsDisabled) {
+      e.preventDefault();
+      setIsLoading(true);
 
-    emailjs
-      .sendForm(
-        process.env.NEXT_PUBLIC_SERVICE_ID as string,
-        "template_reubxa5",
-        // @ts-ignore
-        form.current,
-        "pbo5LNVpK8MRMNHMh"
-      )
-      .then(
-        (result) => {
-          setIsLoading(false);
-          setFormData({ from_email: "", message: "" });
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+      emailjs
+        .sendForm(
+          process.env.NEXT_PUBLIC_SERVICE_ID as string,
+          "template_reubxa5",
+          // @ts-ignore
+          form.current,
+          "pbo5LNVpK8MRMNHMh"
+        )
+        .then(
+          (result) => {
+            setIsLoading(false);
+            setFormData({ from_email: "", message: "" });
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    }
   };
+
+  useEffect(() => {
+    if (formData.from_email && formData.message) setIsDisabled(false);
+    else setIsDisabled(true);
+  }, [formData]);
 
   const handleFormData = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -166,6 +174,7 @@ const Meet: FC<IProps> = ({ token }) => {
                     } mt-4 px-5`}
                     type="submit"
                     onClick={() => sendEmail}
+                    disabled={IsDisabled}
                   >
                     Send <SendIcon fontSize="small" className="mb-1" />
                   </button>
