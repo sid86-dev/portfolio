@@ -196,6 +196,12 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
   context
 ) => {
   const { code } = context.query as { code: string };
+  if (code === undefined)
+            return {
+      props: {
+        token: null,
+      },
+    };
   const authorization =
     process.env.NEXT_PUBLIC_ZOOM_CLIENT_ID +
     ":" +
