@@ -1,4 +1,10 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -39,6 +45,7 @@ export const ModalForm: FC<IProps> = ({
   const [value, setValue] = useState<Dayjs | null>(
     dayjs("2014-08-18T21:11:54")
   );
+  const [IsDisabled, setIsDisabled] = useState(true);
   const [formData, setFormData] = useState<TMeetingForm>({
     password: "",
     topic: "",
@@ -47,69 +54,76 @@ export const ModalForm: FC<IProps> = ({
 
   const handleClose = () => setOpen(false);
 
+  useEffect(() => {
+    if (formData.topic && formData.password) setIsDisabled(false);
+    else setIsDisabled(true);
+  }, [formData]);
+
   const handleFormSubmit = async () => {
-    setIsLoading(true);
-    setOpen(false);
+    if (!IsDisabled) {
+      setIsLoading(true);
+      setOpen(false);
 
-    let res = await axios.post("/api/zoom/user", { token: token });
-    let user: TUser = res.data.users[0];
+      let res = await axios.post("/api/zoom/user", { token: token });
+      let user: TUser = res.data.users[0];
 
-    let zoomPayload: IZoomPayload = {
-      agenda: formData.topic,
-      default_password: false,
-      duration: duration || 30,
-      password: formData.password,
-      pre_schedule: false,
-      schedule_for: user.email,
-      settings: {
-        allow_multiple_devices: true,
-        alternative_hosts_email_notification: true,
-        close_registration: false,
-        contact_email: "sid86harth@gmail.com",
-        contact_name: user.first_name + " " + user.last_name,
-        email_notification: true,
-        encryption_type: "enhanced_encryption",
-        host_video: true,
-        join_before_host: false,
-        meeting_authentication: true,
-        meeting_invitees: [
-          {
-            email: "sid86harth@gmail.com",
-          },
-        ],
-        mute_upon_entry: false,
-        participant_video: false,
-        private_meeting: true,
-        registrants_confirmation_email: true,
-        registrants_email_notification: true,
-        registration_type: 1,
-        show_share_button: true,
-        use_pmi: false,
-        waiting_room: false,
-        watermark: false,
-        host_save_video_order: true,
-        alternative_host_update_polls: true,
-      },
-      start_time: value?.format("YYYY-MM-DDTHH:mm:ss.000") + "Z",
-      template_id: "Dv4YdINdTk+Z5RToadh5ug==",
-      timezone: user.timezone,
-      topic: formData.topic,
-    };
+      let zoomPayload: IZoomPayload = {
+        agenda: formData.topic,
+        default_password: false,
+        duration: duration || 30,
+        password: formData.password,
+        pre_schedule: false,
+        schedule_for: user.email,
+        settings: {
+          allow_multiple_devices: true,
+          alternative_hosts_email_notification: true,
+          close_registration: false,
+          contact_email: "sid86harth@gmail.com",
+          contact_name: user.first_name + " " + user.last_name,
+          email_notification: true,
+          encryption_type: "enhanced_encryption",
+          host_video: true,
+          join_before_host: false,
+          meeting_authentication: true,
+          meeting_invitees: [
+            {
+              email: "sid86harth@gmail.com",
+            },
+          ],
+          mute_upon_entry: false,
+          participant_video: false,
+          private_meeting: true,
+          registrants_confirmation_email: true,
+          registrants_email_notification: true,
+          registration_type: 1,
+          show_share_button: true,
+          use_pmi: false,
+          waiting_room: false,
+          watermark: false,
+          host_save_video_order: true,
+          alternative_host_update_polls: true,
+        },
+        start_time: value?.format("YYYY-MM-DDTHH:mm:ss.000") + "Z",
+        template_id: "Dv4YdINdTk+Z5RToadh5ug==",
+        timezone: user.timezone,
+        topic: formData.topic,
+      };
 
-    let payload = {
-      meeting: zoomPayload,
-      user: user,
-      token: token,
-    };
+      let payload = {
+        meeting: zoomPayload,
+        user: user,
+        token: token,
+      };
 
-    axios
-      .post("/api/zoom/new", payload)
-      .then(async (res) => {
-        axios.post("/api/mail/send-meeting-confirmation", res.data);
-        setIsLoading(false);
-        setIsSuccess(true);
-      })
-      .catch((err) => console.log(err));
+      axios
+        .post("/api/zoom/new", payload)
+        .then(async (res) => {
+          axios.post("/api/mail/send-meeting-confirmation", res.data);
+          setIsLoading(false);
+          setIsSuccess(true);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleChange = (newValue: Dayjs | null) => {
@@ -257,6 +271,7 @@ export const ModalForm: FC<IProps> = ({
                 type="button"
                 className="btn btn-lg btn-primary w-100 mx-0 mb-4 align-items-center d-flex justify-content-center"
                 onClick={handleFormSubmit}
+                disabled={IsDisabled}
               >
                 Set Meeting
               </button>
