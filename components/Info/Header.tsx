@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import { Project } from "../../types";
 
 interface IProps {
-    project: Project;
+  project: Project;
 }
 
-export const Header: FC<IProps> = ({project}) => {
+export const Header: FC<IProps> = ({ project }) => {
   return (
     <div className="container text-center">
       <div className="col-12">

@@ -72,7 +72,7 @@ function Navbar() {
               </a>
             </li>
             <li className="nav-item mx-lg-3">
-              <a className={style.navLinks} >
+              <a className={style.navLinks}>
                 <Link href={"/meet"}>
                   <h6 className="fs-6 pointer">
                     <MeetingRoomIcon /> Meet

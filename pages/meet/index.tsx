@@ -197,7 +197,7 @@ export const getServerSideProps: GetServerSideProps<IProps> = async (
 ) => {
   const { code } = context.query as { code: string };
   if (code === undefined)
-            return {
+    return {
       props: {
         token: null,
       },

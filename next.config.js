@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['encrypted-tbn0.gstatic.com', 'i.ibb.co'],
+    domains: ["encrypted-tbn0.gstatic.com", "i.ibb.co"],
   },
   webpack5: true,
   webpack: (config) => {
@@ -11,6 +11,6 @@ const nextConfig = {
 
     return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
