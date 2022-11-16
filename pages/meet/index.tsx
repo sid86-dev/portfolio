@@ -31,7 +31,7 @@ const Meet: FC<IProps> = ({ token }) => {
 
     emailjs
       .sendForm(
-        "service_rysvt0k",
+        process.env.NEXT_PUBLIC_SERVICE_ID as string,
         "template_reubxa5",
         // @ts-ignore
         form.current,

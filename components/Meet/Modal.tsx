@@ -33,7 +33,6 @@ export const ModalForm: FC<IProps> = ({
   token,
   setIsSuccess,
   setIsLoading,
-  IsLoading,
 }) => {
   const [open, setOpen] = useState<boolean>(token ? true : false);
   const [duration, setDuration] = useState("");
@@ -105,8 +104,8 @@ export const ModalForm: FC<IProps> = ({
 
     axios
       .post("/api/zoom/new", payload)
-      .then((res) => {
-        console.log(res);
+      .then(async (res) => {
+        axios.post("/api/mail/send-meeting-confirmation", res.data);
         setIsLoading(false);
         setIsSuccess(true);
       })
