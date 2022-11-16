@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emailjs/browser": "^3.9.0",
@@ -54,7 +55,6 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css,json}": [
-      "next build",
       "prettier --single-quote --write",
       "git add"
     ]
