@@ -20,10 +20,15 @@ interface IProps {
 const Meet: FC<IProps> = ({ token }) => {
 	const form = useRef<HTMLFormElement>(null);
 	const { theme } = useTheme();
+	const [renderTheme, setRenderTheme] = useState<string | undefined>('dark');
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [IsLoading, setIsLoading] = useState<boolean>(false);
 	const [formData, setFormData] = useState({ from_email: '', message: '' });
 	const [IsDisabled, setIsDisabled] = useState(true);
+
+	useEffect(() => {
+		setRenderTheme(theme);
+	}, [theme]);
 
 	const sendEmail = (e: React.ChangeEvent<HTMLFormElement>) => {
 		if (!IsDisabled) {
@@ -169,7 +174,7 @@ const Meet: FC<IProps> = ({ token }) => {
 
 									<button
 										className={`btn ${
-											theme === 'dark'
+											renderTheme === 'dark'
 												? 'btn-outline-light'
 												: 'btn-outline-dark'
 										} mt-4 px-5`}
