@@ -1,23 +1,78 @@
 :root {
-  --blue: #1e90ff;
-  --white: #ffffff;
-  --orange: rgb(250, 126, 68);
-  --pink: rgb(255, 68, 132);
+	--blue: #1e90ff;
+	--white: #ffffff;
+	--orange: rgb(250, 126, 68);
+	--pink: rgb(255, 68, 132);
+	--navbar-bg: rgb(240, 255, 255, 0.4);
+	--navlink-text: #454e56;
+	--foreground: black;
+	--background: #dbe1e7;
+	--text-color: #454e56;
+	--card-bg: rgb(240, 255, 255, 0.4);
 }
 
 * {
-  box-sizing: border-box;
-  margin: 0;
+	box-sizing: border-box;
+	margin: 0;
 }
 
 @font-face {
-  font-family: Cubano;
-  src: url("/fonts/Cubano.ttf");
+	font-family: Cubano;
+	src: url('/fonts/Cubano.ttf');
 }
 
 @font-face {
-  font-family: sofia-pro;
-  src: url("/fonts/Sofiapro.ttf");
+	font-family: sofia-pro;
+	src: url('/fonts/Sofiapro.ttf');
+}
+
+.text-default {
+	color: var(--foreground);
+}
+
+[data-theme='dark'] {
+	--navbar-bg: rgb(42, 46, 52);
+	--navlink-text: #b1becd;
+	--foreground: white;
+	--background: rgb(18, 24, 27);
+	--text-color: #b1becd;
+	--card-bg: rgb(42, 46, 52, 0.4);
+}
+
+.wrapper {
+	color: var(--text-color);
+	background-color: var(--background);
+	-webkit-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
+}
+
+.card-wrapper {
+	background-color: var(--card-bg);
+	-webkit-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
+}
+
+.card-icons {
+	color: var(--text-color);
+	-webkit-transition: color 250ms linear;
+	-ms-transition: color 250ms linear;
+	transition: color 250ms linear;
+}
+
+.navbar {
+	background-color: var(--navbar-bg);
+	-webkit-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
+}
+
+.nav-link {
+	color: var(--navlink-text) !important;
+}
+.nav-link:hover {
+	color: var(--foreground) !important;
 }
 
 h1,
@@ -26,246 +81,239 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Cubano", sans-serif;
+	font-family: 'Cubano', sans-serif;
 }
 
 .fs-8 {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 span,
 p,
 small {
-  font-family: "sofia-pro";
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'sofia-pro';
+	font-weight: normal;
+	font-style: normal;
 }
 
 .highlight-text {
-  font-family: "Cubano", sans-serif;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-image: linear-gradient(90deg, var(--orange), var(--pink));
-  color: transparent;
+	font-family: 'Cubano', sans-serif;
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	background-image: linear-gradient(90deg, var(--orange), var(--pink));
+	color: transparent;
 }
 .highlight-box {
-  font-family: "Cubano", sans-serif;
-  -webkit-text-fill-color: black;
-  background-image: linear-gradient(90deg, var(--orange), var(--pink));
-  color: transparent;
+	font-family: 'Cubano', sans-serif;
+	-webkit-text-fill-color: black;
+	background-image: linear-gradient(90deg, var(--orange), var(--pink));
+	color: transparent;
 }
 
 span {
-  font-family: sofia-pro;
+	font-family: sofia-pro;
 }
 
 .base {
-  font-family: sofia-pro;
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
+	font-family: sofia-pro;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
 }
 
 input,
 textarea,
 button {
-  box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 button:disabled {
-  opacity: 0.75 !important;
+	opacity: 0.75 !important;
 }
 
 @media only screen and (min-width: 1025px) {
-  .container-table {
-    padding-left: 25%;
-    padding-right: 25%;
-  }
+	.container-table {
+		padding-left: 25%;
+		padding-right: 25%;
+	}
 }
 
 @media screen and (min-width: 700px) {
-  .container-table {
-    padding-left: 15%;
-    padding-right: 15%;
-  }
+	.container-table {
+		padding-left: 15%;
+		padding-right: 15%;
+	}
 }
 
 .btn-dark {
-  background-color: black;
-  color: white;
-  border-radius: 3px;
+	background-color: black;
+	color: white;
+	border-radius: 3px;
 }
 
 .btn-light {
-  border: 0.8px solid black;
-  background-color: white;
-  color: black;
-  border-radius: 3px;
+	border: 0.8px solid black;
+	background-color: white;
+	color: black;
+	border-radius: 3px;
 }
 
 .divider {
-  border-top: 2px dashed gray;
+	border-top: 2px dashed gray;
 }
 
 .border-dashed {
-  border: 2px dashed gray !important;
+	border: 2px dashed gray !important;
 }
 
 .dot {
-  height: 13px;
-  width: 13px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
+	height: 13px;
+	width: 13px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
 }
 
 .pointer {
-  cursor: pointer !important;
+	cursor: pointer !important;
 }
 
 .fs-7 {
-  font-size: 13px;
+	font-size: 13px;
 }
 
 .fs-5 {
-  font-size: 17.5px !important;
+	font-size: 17.5px !important;
 }
 
 .bg-dark-sm {
-  background-color: rgb(42, 46, 52) !important;
-  -webkit-transition: background-color 250ms linear;
-  -ms-transition: background-color 250ms linear;
-  transition: background-color 250ms linear;
+	background-color: rgb(42, 46, 52) !important;
+	-webkit-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
 }
 
 .bg-light {
-  -webkit-transition: background-color 250ms linear;
-  -ms-transition: background-color 250ms linear;
-  transition: background-color 250ms linear;
+	-webkit-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
 }
 
 .bg-gray {
-  background-color: #dbe1e7 !important;
-  -webkit-transition: background-color 250ms linear;
-  -ms-transition: background-color 250ms linear;
-  transition: background-color 250ms linear;
+	background-color: #dbe1e7 !important;
+	-webkit-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
 }
 
 .bg-dark {
-  background-color: rgb(18, 24, 27) !important;
-  -webkit-transition: background-color 250ms linear;
-  -ms-transition: background-color 250ms linear;
-  transition: background-color 250ms linear;
+	background-color: rgb(18, 24, 27) !important;
+	-webkit-transition: background-color 250ms linear;
+	-ms-transition: background-color 250ms linear;
+	transition: background-color 250ms linear;
 }
 
 .bg-light {
-  background-color: rgb(240, 255, 255, 0.4) !important;
+	background-color: rgb(240, 255, 255, 0.4) !important;
 }
 
 .bg-dark-xs {
-  background-color: rgb(42, 46, 52, 0.4) !important;
+	background-color: rgb(42, 46, 52, 0.4) !important;
 }
 
 .text-light {
-  color: #b1becd !important;
+	color: #b1becd !important;
 }
 
 .text-mid-dark {
-  color: #454e56 !important;
-}
-
-.nav-link-dark:hover {
-  color: black !important;
-}
-.nav-link-light:hover {
-  color: white !important;
+	color: #454e56 !important;
 }
 
 .bg-blue-500 {
-  background-color: #1e90ff !important;
+	background-color: #1e90ff !important;
 }
 
 .bg-black {
-  background-color: black !important;
-  color: white !important;
+	background-color: black !important;
+	color: white !important;
 }
 
 .bg-green-300 {
-  background-color: #68d391 !important;
+	background-color: #68d391 !important;
 }
 
 .bg-gray-500 {
-  background-color: #b1becd !important;
+	background-color: #b1becd !important;
 }
 
 .bg-blue-300 {
-  background-color: rgb(100, 181, 246) !important;
+	background-color: rgb(100, 181, 246) !important;
 }
 
 .bg-blue-400 {
-  background-color: rgb(0, 121, 191) !important;
+	background-color: rgb(0, 121, 191) !important;
 }
 
 .bg-light-200 {
-  background-color: rgb(240, 255, 255) !important;
-  color: #1e90ff !important;
+	background-color: rgb(240, 255, 255) !important;
+	color: #1e90ff !important;
 }
 .bg-yellow {
-  background-color: #f6e05e !important;
+	background-color: #f6e05e !important;
 }
 
 .bg-blue-100 {
-  background-color: rgb(229, 242, 255) !important;
+	background-color: rgb(229, 242, 255) !important;
 }
 
 .bg-purple-500 {
-  background-color: #805ad5 !important;
+	background-color: #805ad5 !important;
 }
 
 .bg-animate {
-  background-size: 300% 300%;
-  background-image: linear-gradient(
-    -45deg,
-    #3bade3 0%,
-    #576fe6 25%,
-    var(--orange) 51%,
-    var(--pink) 100%
-  );
-  -webkit-animation: AnimateBG 5s ease infinite;
-  animation: AnimateBG 5s ease infinite;
+	background-size: 300% 300%;
+	background-image: linear-gradient(
+		-45deg,
+		#3bade3 0%,
+		#576fe6 25%,
+		var(--orange) 51%,
+		var(--pink) 100%
+	);
+	-webkit-animation: AnimateBG 5s ease infinite;
+	animation: AnimateBG 5s ease infinite;
 }
 
 @-webkit-keyframes AnimateBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 @keyframes AnimateBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 #nprogress .bar {
-  background: linear-gradient(
-    90deg,
-    var(--orange),
-    var(--blue),
-    var(--pink)
-  ) !important;
-  padding-top: 3px;
+	background: linear-gradient(
+		90deg,
+		var(--orange),
+		var(--blue),
+		var(--pink)
+	) !important;
+	padding-top: 3px;
 }
