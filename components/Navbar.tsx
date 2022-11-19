@@ -97,7 +97,9 @@ function Navbar() {
 									<Brightness7Icon className='mb-1' />
 								) : renderTheme === 'light' ? (
 									<Brightness4Icon />
-								) : null}
+								) : (
+									<Brightness7Icon className='mb-1' />
+								)}
 							</motion.div>
 						</button>
 						<button className='btn btn-dark mx-2' type='submit'>
