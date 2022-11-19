@@ -1,8 +1,4 @@
 {
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
 	"extends": [
 		"eslint:recommended",
 		"plugin:react/recommended",
@@ -18,8 +14,8 @@
 	"plugins": ["react"],
 	"rules": {
 		"no-unused-vars": "off",
-		"indent": ["warn", "tab"],
-		"quotes": ["error", "single"],
+		"indent": ["off"],
+		"quotes": ["off"],
 		"semi": "off"
 	},
 	"overrides": [
