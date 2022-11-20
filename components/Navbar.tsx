@@ -52,9 +52,11 @@ function Navbar() {
 					<ul className='navbar-nav me-auto mx-auto mb-2 mb-lg-0'>
 						<li className='nav-item mx-lg-3'>
 							<a className={style.navLinks} aria-current='page' href='#'>
-								<h6 className='fs-6'>
-									<WorkIcon className='navicon' /> Projects
-								</h6>
+								<Link href={'/search'}>
+									<h6 className='fs-6'>
+										<WorkIcon className='navicon' /> Projects
+									</h6>
+								</Link>
 							</a>
 						</li>
 						<li className='nav-item mx-lg-3'>

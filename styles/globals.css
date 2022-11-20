@@ -115,6 +115,16 @@ span {
 	font-family: sofia-pro;
 }
 
+.search {
+	background-color: var(--navbar-bg) !important;
+	color: var(--foreground) !important;
+}
+
+.search-icon {
+	background-color: var(--card-bg);
+	color: var(--foreground) !important;
+}
+
 .base {
 	font-family: sofia-pro;
 	margin: 0px;
@@ -126,6 +136,7 @@ input,
 textarea,
 button {
 	box-shadow: none !important;
+	outline: none;
 }
 
 button:disabled {
