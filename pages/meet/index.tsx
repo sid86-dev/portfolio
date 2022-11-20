@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { Footer } from '../../components/Footer';
 import Navbar from '../../components/Navbar';
@@ -12,6 +11,8 @@ import { ModalForm } from '../../components/Meet/Modal';
 import AlertDialog from '../../components/Meet/AlertDialog';
 import { Backdrop, CircularProgress } from '@mui/material';
 import { useTheme } from 'next-themes';
+import { NextSeo } from 'next-seo';
+import { MeetSEO } from '../../next-seo.config';
 
 interface IProps {
 	token: string | null;
@@ -20,10 +21,15 @@ interface IProps {
 const Meet: FC<IProps> = ({ token }) => {
 	const form = useRef<HTMLFormElement>(null);
 	const { theme } = useTheme();
+	const [renderTheme, setRenderTheme] = useState<string | undefined>('dark');
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [IsLoading, setIsLoading] = useState<boolean>(false);
 	const [formData, setFormData] = useState({ from_email: '', message: '' });
 	const [IsDisabled, setIsDisabled] = useState(true);
+
+	useEffect(() => {
+		setRenderTheme(theme);
+	}, [theme]);
 
 	const sendEmail = (e: React.ChangeEvent<HTMLFormElement>) => {
 		if (!IsDisabled) {
@@ -64,10 +70,7 @@ const Meet: FC<IProps> = ({ token }) => {
 
 	return (
 		<Wrapper>
-			<Head>
-				<title>Sid86 | Meet</title>
-				<meta name='viewport' content='width=device-width, initial-scale=1' />
-			</Head>
+			<NextSeo {...MeetSEO} />
 			<Navbar />
 			<Backdrop
 				sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -169,7 +172,7 @@ const Meet: FC<IProps> = ({ token }) => {
 
 									<button
 										className={`btn ${
-											theme === 'dark'
+											renderTheme === 'dark'
 												? 'btn-outline-light'
 												: 'btn-outline-dark'
 										} mt-4 px-5`}

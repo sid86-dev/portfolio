@@ -5,6 +5,8 @@ import Store from '../context/store';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import { ThemeProvider } from 'next-themes';
+import { DefaultSeo } from 'next-seo';
+import { SEO } from '../next-seo.config';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	NProgress.configure({ showSpinner: false });
@@ -15,11 +17,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 		NProgress.done();
 	});
 	return (
-		<ThemeProvider>
-			<Store>
-				<Component {...pageProps} />
-			</Store>
-		</ThemeProvider>
+		<>
+			<DefaultSeo {...SEO} />
+			<ThemeProvider>
+				<Store>
+					<Component {...pageProps} />
+				</Store>
+			</ThemeProvider>
+		</>
 	);
 }
 
