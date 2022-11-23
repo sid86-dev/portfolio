@@ -51,9 +51,9 @@ function Navbar() {
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 					<ul className='navbar-nav me-auto mx-auto mb-2 mb-lg-0'>
 						<li className='nav-item mx-lg-3'>
-							<a className={style.navLinks} aria-current='page' href='#'>
+							<a className={style.navLinks}>
 								<Link href={'/search'}>
-									<h6 className='fs-6'>
+									<h6 className='fs-6 pointer'>
 										<WorkIcon className='navicon' /> Projects
 									</h6>
 								</Link>
