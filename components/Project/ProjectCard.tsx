@@ -19,7 +19,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 
 	return data.map((item, index) => (
 		<div
-			className='col-md-4 my-4 px-lg-3 pt-lg-4 card-wrapper mx-3 rounded-3'
+			className='col-md-5 col-xl-4 my-4 px-lg-3 pt-lg-4 card-wrapper mx-3 rounded-3'
 			key={index}
 		>
 			<div className='card border-0 rounded-0 rounded-top'>
@@ -102,14 +102,14 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 			</div>
 			{/* Project tags */}
 			<div className='col-12 mb-3 card-footer'>
-				<div className='d-flex justify-content-start'>
+				<div className='justify-content-start'>
 					{item.tags?.map((tag, index) => (
 						<span
 							key={index}
-							className={`badge py-1 fs-7 text-dark border-dark border-0
-                  ${index % 2 != 0 && 'mx-2'} ${
-							tagColors.find((data) => data.tag === tag)?.class
-						}`}
+							style={{ marginRight: '5px' }}
+							className={`badge py-1 fs-7 text-dark border-dark border-0 ${
+								tagColors.find((data) => data.tag === tag)?.class
+							}`}
 						>
 							#{tag}
 						</span>
