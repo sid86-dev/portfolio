@@ -24,7 +24,7 @@ function Navbar() {
 			<Offcanvas style={style} />
 
 			{/* Desktop Navbar */}
-			<div className='container-fluid px-md-5'>
+			<div className='container-fluid px-lg-5'>
 				<Link className='navbar-brand' href='/'>
 					<Image
 						priority
@@ -36,7 +36,7 @@ function Navbar() {
 					/>
 				</Link>
 				<a
-					className='btn btn-dark d-md-none'
+					className='btn btn-dark d-lg-none'
 					data-bs-toggle='offcanvas'
 					href='#offcanvasExample'
 					role='button'
@@ -134,7 +134,7 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 export const Offcanvas: FC<{ style: StyleProps }> = ({ style }) => {
 	return (
 		<div
-			className='offcanvas offcanvas-start d-md-none w-75'
+			className='offcanvas offcanvas-start d-lg-none w-75'
 			tabIndex={-1}
 			id='offcanvasExample'
 			aria-labelledby='offcanvasExampleLabel'
