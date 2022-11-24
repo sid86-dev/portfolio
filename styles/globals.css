@@ -9,6 +9,7 @@
 	--background: #dbe1e7;
 	--text-color: #454e56;
 	--card-bg: rgb(240, 255, 255, 0.4);
+	--offcanvas-bg: rgb(240, 255, 255);
 }
 
 * {
@@ -37,6 +38,7 @@
 	--background: rgb(18, 24, 27);
 	--text-color: #b1becd;
 	--card-bg: rgb(42, 46, 52, 0.4);
+	--offcanvas-bg: rgb(42, 46, 52);
 }
 
 .wrapper {
@@ -52,6 +54,10 @@
 	-webkit-transition: background-color 250ms linear;
 	-ms-transition: background-color 250ms linear;
 	transition: background-color 250ms linear;
+}
+
+.offcanvas {
+	background-color: var(--offcanvas-bg);
 }
 
 .card-icons {
@@ -94,6 +100,12 @@ small {
 	font-family: 'sofia-pro';
 	font-weight: normal;
 	font-style: normal;
+}
+
+button:focus,
+button:active {
+	box-shadow: none !important;
+	outline: none !important;
 }
 
 .highlight-text {
