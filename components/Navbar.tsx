@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 function Navbar() {
 	const style = {
@@ -18,10 +19,44 @@ function Navbar() {
 		navLinks: 'nav-link active',
 	};
 
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
+	const OffCanvasRender = () => (
+		<Offcanvas className='w-75' show={show} onHide={handleClose}>
+			<Offcanvas.Header>
+				<Link className='navbar-brand' href='/'>
+					<Image
+						priority
+						alt=''
+						src='/images/logo/dark.png'
+						height={50}
+						width={50}
+						className='bg-light bg-animate rounded-5 p-1 pointer'
+					/>
+				</Link>
+				<button
+					onClick={handleClose}
+					type='button'
+					className='btn p-0 px-1 wrapper text-default'
+					data-bs-dismiss='offcanvas'
+					aria-label='Close'
+				>
+					<CloseIcon fontSize='large' />
+				</button>
+			</Offcanvas.Header>
+			<Offcanvas.Body>
+				<MenuItems style={style} />
+			</Offcanvas.Body>
+		</Offcanvas>
+	);
+
 	return (
 		<nav className={style.navbar}>
 			{/* Mobile Offcanvas */}
-			<Offcanvas style={style} />
+			<OffCanvasRender />
 
 			{/* Desktop Navbar */}
 			<div className='container-fluid px-lg-5'>
@@ -35,15 +70,9 @@ function Navbar() {
 						className='bg-light bg-animate rounded-5 p-1 pointer'
 					/>
 				</Link>
-				<a
-					className='btn btn-dark d-lg-none'
-					data-bs-toggle='offcanvas'
-					href='#offcanvasExample'
-					role='button'
-					aria-controls='offcanvasExample'
-				>
+				<button className='btn btn-dark d-lg-none' onClick={handleShow}>
 					<MenuIcon />
-				</a>
+				</button>
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 					{/* Menu Items */}
 					<MenuItems style={style} />
@@ -128,41 +157,6 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 				</button>
 			</div>
 		</>
-	);
-};
-
-export const Offcanvas: FC<{ style: StyleProps }> = ({ style }) => {
-	return (
-		<div
-			className='offcanvas offcanvas-start d-lg-none w-75'
-			tabIndex={-1}
-			id='offcanvasExample'
-			aria-labelledby='offcanvasExampleLabel'
-		>
-			<div className='offcanvas-header'>
-				<Link className='navbar-brand' href='/'>
-					<Image
-						priority
-						alt=''
-						src='/images/logo/dark.png'
-						height={50}
-						width={50}
-						className='bg-light bg-animate rounded-5 p-1 pointer'
-					/>
-				</Link>
-				<button
-					type='button'
-					className='btn p-0 px-1 wrapper text-default'
-					data-bs-dismiss='offcanvas'
-					aria-label='Close'
-				>
-					<CloseIcon fontSize='large' />
-				</button>
-			</div>
-			<div className='offcanvas-body'>
-				<MenuItems style={style} />
-			</div>
-		</div>
 	);
 };
 

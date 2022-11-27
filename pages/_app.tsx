@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-import Store from '../context/store';
+import Store from '../contexts/store';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import { ThemeProvider } from 'next-themes';
