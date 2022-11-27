@@ -7,11 +7,11 @@ import { ProjectSection } from '../components/Project/ProjectSection';
 import { Footer } from '../components/Footer';
 import SkillSection from '../components/Skills/SkillSection';
 import { Wrapper } from '../components/Wrapper';
-import { Project } from '../types';
-import { getdbData } from '../lib/helpers';
+import { ProjectMeta } from '../types';
+import { getAllProjects } from '../lib/helpers';
 
 interface IProps {
-	projects: Project[] | null;
+	projects: ProjectMeta[];
 }
 
 const Home: NextPage<IProps> = ({ projects }) => {
@@ -32,17 +32,17 @@ const Home: NextPage<IProps> = ({ projects }) => {
 			{/* landing intro section */}
 			<Main />
 
-			<hr className='divider' />
+			<hr className='' />
 
 			{/* TechStack section */}
 			<SkillSection />
 
-			<hr className='divider' />
+			<hr className='' />
 
 			{/* Project showcase section */}
 			<ProjectSection projects={projects} />
 
-			<hr className='divider mt-5' />
+			<hr className=' mt-5' />
 
 			<Footer />
 		</Wrapper>
@@ -52,10 +52,6 @@ const Home: NextPage<IProps> = ({ projects }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-	const projects = await getdbData;
-	return {
-		props: {
-			projects,
-		},
-	};
+	const posts = (await getAllProjects()).map((post) => post.meta);
+	return { props: { projects: posts } };
 };

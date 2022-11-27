@@ -188,7 +188,7 @@ const Meet: FC<IProps> = ({ token }) => {
 					</div>
 				</div>
 			</div>
-			<hr className='divider' />
+			<hr className='' />
 			<Footer />
 		</Wrapper>
 	);

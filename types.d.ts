@@ -95,3 +95,19 @@ export type TMeetingForm = {
 	showPassword: boolean;
 	topic: string;
 };
+
+export interface Post {
+	content: string;
+	meta: ProjectMeta;
+}
+
+export interface ProjectMeta {
+	title: string;
+	excerpt: string;
+	slug: string;
+	date: string;
+	tags: string[];
+	link: string;
+	githubUrl: string;
+	image: string;
+}

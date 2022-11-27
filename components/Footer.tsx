@@ -31,7 +31,7 @@ export const Footer = () => {
 			</p>
 			{'  '}
 			<div className='d-flex justify-content-center'>
-				<hr className='divider w-25' />
+				<hr className=' w-25' />
 			</div>
 			<p>
 				Need help? Email{' '}

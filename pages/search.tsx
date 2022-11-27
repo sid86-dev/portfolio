@@ -102,13 +102,13 @@ const Search: NextPage = () => {
 					{/* Search Results */}
 				</div>
 
-				<hr className='divider' />
+				<hr className='' />
 
 				{/* Search Results */}
 				<SearchResults projects={projects} />
 			</div>
 
-			<hr className='divider' />
+			<hr className='' />
 			<Footer />
 		</Wrapper>
 	);
