@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { Project } from '../../types';
+import { ProjectMeta } from '../../types';
 import ProjectCard from '../Project/ProjectCard';
 import { Skeleton } from '@mui/material';
 import { Box } from '@mui/system';
 
 interface ISearchResultsProps {
-	projects: Project[];
+	projects: ProjectMeta[];
 }
 
 export const ProjectSkeleton: FC = () => {

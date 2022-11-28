@@ -1,68 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+	ChangeEvent,
+	useContext,
+	useEffect,
+	useState,
+	startTransition,
+} from 'react';
 import { Footer } from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { Wrapper } from '../components/Wrapper';
-import { getdbData, projectCollectionRef } from '../lib/helpers';
-import { Project } from '../types';
+import { IProjectApiResponse, ProjectMeta } from '../types';
 import SearchIcon from '@mui/icons-material/Search';
-import { query, where, getDocs } from 'firebase/firestore';
 import { TagBar } from '../components/Search/TagBar';
 import { SearchResults } from '../components/Search/SearchResults';
 import { NextPage } from 'next';
+import { Context } from '../contexts/store';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { checkString, checkTag } from '../utils/searchHandlers';
 
 const Search: NextPage = () => {
-	const [projects, setprojects] = useState<Project[]>([]);
-	const [keyword, setKeyword] = useState('');
-	const [isSearching, setisSearching] = useState(false);
+	const [filteredProjects, setFilteredprojects] = useState<ProjectMeta[]>([]);
+	const [projects, setprojects] = useState<ProjectMeta[]>([]);
+	const [state, setState] = useContext(Context);
 
-	useEffect(() => {
-		const getProjects = async () => {
-			const projects = await getdbData;
-			setprojects(projects);
-		};
-		if (projects.length === 0 && !isSearching) getProjects();
-	}, [projects, isSearching]);
+	const router = useRouter();
 
-	const handleSearchByKeyword = async (
-		e: React.FormEvent<HTMLFormElement | HTMLSpanElement>
-	) => {
-		e.preventDefault();
-		setisSearching(true);
-		setprojects([]);
-		const q = query(
-			projectCollectionRef,
-			where(
-				'keywords',
-				'array-contains',
-				keyword.toLowerCase().replaceAll(' ', '')
-			)
-		);
-		const querySnapshot = await getDocs(q);
-		querySnapshot.forEach((doc) => {
-			let data = doc.data();
-			const newData = { ...data, id: doc.id };
-			setprojects((prev) => [...prev, newData as Project]);
-		});
+	const getProjects = async () => {
+		const data: IProjectApiResponse = (await axios.get('/api/projects')).data;
+		setprojects(data.projects);
+		setFilteredprojects(data.projects);
 	};
 
-	const handleSearchByTag = async (tag: string) => {
-		setisSearching(true);
-		setprojects([]);
-		const q = query(
-			projectCollectionRef,
-			where('keywords', 'array-contains', tag)
+	useEffect(() => {
+		if (projects.length === 0) {
+			getProjects();
+		}
+	}, [projects, state, setState, filteredProjects]);
+
+	const filterProjects = (keyword: string) => {
+		if (keyword === '') setFilteredprojects(projects);
+		const filtered = projects.filter((project: ProjectMeta) =>
+			checkString(keyword, project)
 		);
-		const querySnapshot = await getDocs(q);
-		querySnapshot.forEach((doc) => {
-			let data = doc.data();
-			const newData = { ...data, id: doc.id };
-			setprojects((prev) => [...prev, newData as Project]);
-		});
+		setFilteredprojects(filtered);
 	};
 
 	const handleResetData = () => {
-		setisSearching(false);
-		setprojects([]);
+		setFilteredprojects(projects);
+	};
+
+	const tagFilterHandler = async (tag: string) => {
+		const filtered = projects.filter((project: ProjectMeta) =>
+			checkTag(tag, project)
+		);
+		setFilteredprojects(filtered);
+	};
+
+	const stringFilterHandler = (e: ChangeEvent<HTMLInputElement>) => {
+		startTransition(() => {
+			router.push(`/search?q=${e.target.value}`);
+			filterProjects(e.target.value);
+		});
 	};
 
 	return (
@@ -72,28 +70,20 @@ const Search: NextPage = () => {
 				{/* Search Tags */}
 				<TagBar
 					handleResetData={handleResetData}
-					handleSearchByTag={handleSearchByTag}
+					handleSearchByTag={tagFilterHandler}
 				/>
 				{/* Search Box */}
 				<div className='col-md-7 mx-auto mt-3 pt-2'>
-					<form
-						className='d-flex'
-						onSubmit={(e) => handleSearchByKeyword(e)}
-						role='search'
-					>
-						<div className='input-group shadow-sm mb-3'>
+					<form className='d-flex' role='search'>
+						<div className='input-group mb-3'>
 							<input
 								className='form-control mx-0 search border-0 fs-5 py-2'
 								type='search'
 								placeholder='Search'
 								aria-label='Search'
-								onChange={(e) => setKeyword(e.target.value)}
-								value={keyword}
+								onChange={(e) => stringFilterHandler(e)}
 							/>
-							<span
-								onClick={handleSearchByKeyword}
-								className='input-group-text px-4 search-icon border-0 pointer'
-							>
+							<span className='input-group-text px-4 search-icon border-0 pointer'>
 								<SearchIcon />
 							</span>
 						</div>
@@ -102,13 +92,13 @@ const Search: NextPage = () => {
 					{/* Search Results */}
 				</div>
 
-				<hr className='divider' />
+				<hr className='' />
 
 				{/* Search Results */}
-				<SearchResults projects={projects} />
+				{projects && <SearchResults projects={filteredProjects} />}
 			</div>
 
-			<hr className='divider' />
+			<hr className='' />
 			<Footer />
 		</Wrapper>
 	);

@@ -21,8 +21,9 @@
 		"**/*.tsx",
 		"Context/dataStore.jts",
 		"components/AnimatedText.jsx",
-		"utils/mail/index.ts",
-		"next-seo.config.js"
+		"lib/mail/index.ts",
+		"next-seo.config.js",
+		"components/Search/Hits.jsx"
 	],
 	"exclude": ["node_modules"]
 }

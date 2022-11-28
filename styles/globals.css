@@ -4,6 +4,7 @@
 	--orange: rgb(250, 126, 68);
 	--pink: rgb(255, 68, 132);
 	--navbar-bg: rgb(240, 255, 255, 0.4);
+	--search-bg: rgb(255, 255, 255, 0.8);
 	--navlink-text: #454e56;
 	--foreground: black;
 	--background: #dbe1e7;
@@ -39,6 +40,7 @@
 	--text-color: #b1becd;
 	--card-bg: rgb(42, 46, 52, 0.4);
 	--offcanvas-bg: rgb(42, 46, 52);
+	--search-bg: rgb(42, 46, 52);
 }
 
 .wrapper {
@@ -94,6 +96,11 @@ h6 {
 	font-size: 14px;
 }
 
+.circle {
+	border-radius: 50%;
+	font-size: x-small !important;
+}
+
 span,
 p,
 small {
@@ -106,6 +113,31 @@ button:focus,
 button:active {
 	box-shadow: none !important;
 	outline: none !important;
+}
+
+blockquote {
+	background: rgb(249, 249, 249, 0.2);
+	border-left: 5px solid #3b81f6;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
+	quotes: '\201C''\201D''\2018''\2019';
+	border-radius: 0px 8px 8px 0px;
+	color: var(--foreground);
+}
+blockquote:before {
+	color: white;
+	font-size: 4em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+}
+blockquote p {
+	display: inline;
+}
+
+.search-highlight {
+	background-color: yellow;
+	padding: 0.1em 0.2em;
 }
 
 .highlight-text {
@@ -128,7 +160,7 @@ span {
 }
 
 .search {
-	background-color: var(--navbar-bg) !important;
+	background-color: var(--search-bg) !important;
 	color: var(--foreground) !important;
 }
 
@@ -172,6 +204,20 @@ button:disabled {
 	border-radius: 3px;
 }
 
+.btn-green {
+	background-color: #21c55d;
+	color: white;
+	border: 0px;
+	border-radius: 0px;
+	font-weight: bolder;
+}
+
+.btn-green:hover {
+	background-color: #20b456;
+	color: white;
+	border: 0px;
+}
+
 .btn-light {
 	border: 0.8px solid black;
 	background-color: white;
@@ -179,7 +225,7 @@ button:disabled {
 	border-radius: 3px;
 }
 
-.divider {
+hr {
 	border-top: 2px dashed gray;
 }
 
@@ -193,6 +239,20 @@ button:disabled {
 	background-color: #bbb;
 	border-radius: 50%;
 	display: inline-block;
+}
+
+.mdx-content h2 {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.mdx-content p {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.mdx-content li {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .pointer {
@@ -244,6 +304,14 @@ button:disabled {
 
 .text-light {
 	color: #b1becd !important;
+}
+
+.text-danger {
+	color: #ff5b5b !important;
+}
+
+.text-success {
+	color: #21c55d !important;
 }
 
 .text-mid-dark {

@@ -80,6 +80,7 @@ function Main() {
 							alt='portrait'
 							height='400px'
 							width='385px'
+							priority
 						/>
 					</Tilt>
 				</div>

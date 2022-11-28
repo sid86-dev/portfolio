@@ -48,7 +48,6 @@ const Meet: FC<IProps> = ({ token }) => {
 					(result) => {
 						setIsLoading(false);
 						setFormData({ from_email: '', message: '' });
-						console.log(result.text);
 					},
 					(error) => {
 						console.log(error.text);
@@ -188,7 +187,7 @@ const Meet: FC<IProps> = ({ token }) => {
 					</div>
 				</div>
 			</div>
-			<hr className='divider' />
+			<hr className='' />
 			<Footer />
 		</Wrapper>
 	);

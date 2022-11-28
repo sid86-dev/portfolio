@@ -1,6 +1,10 @@
 import { collection, getDocs } from 'firebase/firestore';
-import { ISkillCard, ITagColors, Project } from '../types';
+import path from 'path';
+import { ISkillCard, ITagColors, Post, Project } from '../types';
 import { db } from './firebase-config';
+import { sync } from 'glob';
+import matter from 'gray-matter';
+import fs from 'fs';
 
 export const cardVarient: ISkillCard[] = [
 	{
@@ -63,3 +67,48 @@ export const getdbData = new Promise<Project[]>((resolve) => {
 		})
 		.catch((err) => console.log(err));
 });
+
+const POSTS_PATH = path.join(process.cwd(), 'Projects');
+
+export const getAllProjects = async () => {
+	const posts = getSlugs()
+		.map((slug) => getPostsFromSlug(slug))
+		.sort((a, b) => {
+			if (a.meta.date > b.meta.date) {
+				return 1;
+			}
+			if (a.meta.date < b.meta.date) {
+				return -1;
+			}
+			return 0;
+		})
+		.reverse();
+	return posts;
+};
+
+export const getPostsFromSlug = (slug: string): Post => {
+	const postPath = path.join(POSTS_PATH, `${slug}.mdx`);
+	const source = fs.readFileSync(postPath);
+	const { content, data } = matter(source);
+
+	return {
+		content,
+		meta: {
+			slug,
+			excerpt: data.excerpt ?? '',
+			title: data.title ?? slug,
+			tags: (data.tags ?? []).sort(),
+			date: (data.date ?? new Date()).toString(),
+			link: data.link ?? '',
+			image: data.image ?? '',
+			githubUrl: data.githubUrl ?? '',
+		},
+	};
+};
+
+export const getSlugs = (): string[] => {
+	const paths = sync(`${POSTS_PATH}/*.mdx`);
+	return paths.map((path) =>
+		path.replace(`${POSTS_PATH}/`, '').replace('.mdx', '')
+	);
+};
