@@ -70,7 +70,13 @@ function Navbar() {
 						className='bg-light bg-animate rounded-5 p-1 pointer'
 					/>
 				</Link>
-				<button className='btn btn-dark d-lg-none' onClick={handleShow}>
+				<button
+					aria-label='menuButton'
+					role='button'
+					name='menuButton'
+					className='btn btn-dark d-lg-none'
+					onClick={handleShow}
+				>
 					<MenuIcon />
 				</button>
 				<div className='collapse navbar-collapse' id='navbarSupportedContent'>
@@ -99,7 +105,7 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 		<>
 			<ul className='navbar-nav me-auto mx-auto mb-2 mb-lg-0'>
 				<li className='nav-item mx-lg-3'>
-					<a className={style.navLinks}>
+					<a className={style.navLinks} href={'/search'}>
 						<Link href={'/search'}>
 							<h6 className='fs-6 pointer'>
 								<WorkIcon className='navicon' /> Projects
@@ -120,7 +126,7 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 					</a>
 				</li>
 				<li className='nav-item mx-lg-3'>
-					<a className={style.navLinks}>
+					<a className={style.navLinks} href={'/meet'}>
 						<Link href={'/meet'}>
 							<h6 className='fs-6 pointer'>
 								<MeetingRoomIcon /> Meet

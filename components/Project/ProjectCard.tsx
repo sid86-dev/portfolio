@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { tagColors } from '../../utils/helpers';
-import CircleIcon from '@mui/icons-material/Circle';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from 'next/router';
 import { BsCircleFill } from 'react-icons/bs';
@@ -31,10 +30,13 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 					<BsCircleFill className='circle text-success' size={10} />
 					<input
 						type='text'
+						name={item.slug}
+						id={item.slug}
 						className='border-0 fs-7 form-control w-75 py-0 mx-lg-4 mx-2 text-muted text-center'
 						value={item.link.replace('https://', '').slice(0, -1)}
 						disabled
 					/>
+					<label htmlFor={item.slug}></label>
 				</div>
 			</div>
 			<div className='card-body w-100'>
