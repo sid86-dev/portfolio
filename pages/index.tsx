@@ -8,7 +8,7 @@ import { Footer } from '../components/Footer';
 import SkillSection from '../components/Skills/SkillSection';
 import { Wrapper } from '../components/Wrapper';
 import { ProjectMeta } from '../types';
-import { getAllProjects } from '../lib/helpers';
+import { getAllProjects } from '../utils/helpers';
 
 interface IProps {
 	projects: ProjectMeta[];

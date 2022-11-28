@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { tagColors } from '../../lib/helpers';
+import { tagColors } from '../../utils/helpers';
 
 interface ITagBarProps {
 	handleResetData: () => void;

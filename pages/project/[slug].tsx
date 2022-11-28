@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { Footer } from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import { Wrapper } from '../../components/Wrapper';
-import { getPostsFromSlug, getSlugs } from '../../lib/helpers';
+import { getPostsFromSlug, getSlugs } from '../../utils/helpers';
 import { ProjectMeta } from '../../types';
 import { NextSeo } from 'next-seo';
 import { serialize } from 'next-mdx-remote/serialize';

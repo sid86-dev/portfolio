@@ -4,6 +4,7 @@
 	--orange: rgb(250, 126, 68);
 	--pink: rgb(255, 68, 132);
 	--navbar-bg: rgb(240, 255, 255, 0.4);
+	--search-bg: rgb(255, 255, 255, 0.8);
 	--navlink-text: #454e56;
 	--foreground: black;
 	--background: #dbe1e7;
@@ -39,6 +40,7 @@
 	--text-color: #b1becd;
 	--card-bg: rgb(42, 46, 52, 0.4);
 	--offcanvas-bg: rgb(42, 46, 52);
+	--search-bg: rgb(42, 46, 52);
 }
 
 .wrapper {
@@ -128,6 +130,11 @@ blockquote p {
 	display: inline;
 }
 
+.search-highlight {
+	background-color: yellow;
+	padding: 0.1em 0.2em;
+}
+
 .highlight-text {
 	font-family: 'Cubano', sans-serif;
 	-webkit-text-fill-color: transparent;
@@ -148,7 +155,7 @@ span {
 }
 
 .search {
-	background-color: var(--navbar-bg) !important;
+	background-color: var(--search-bg) !important;
 	color: var(--foreground) !important;
 }
 

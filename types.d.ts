@@ -111,3 +111,7 @@ export interface ProjectMeta {
 	githubUrl: string;
 	image: string;
 }
+
+export interface IProjectApiResponse {
+	projects: ProjectMeta[];
+}

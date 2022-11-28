@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
-import { tagColors } from '../../lib/helpers';
+import { tagColors } from '../../utils/helpers';
 import { ProjectMeta } from '../../types';
 import Header from './Header';
 
