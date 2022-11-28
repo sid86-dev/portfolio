@@ -25,9 +25,9 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 			<div className='card border-0 rounded-0 rounded-top'>
 				{/* card navbar */}
 				<div className='card-header d-flex align-items-center border-0'>
-					<CircleIcon className='fs-8 text-danger' />
-					<CircleIcon className='fs-8 mx-1 text-warning' />
-					<CircleIcon className='fs-8 text-success' />
+					<CircleIcon className='circle text-danger' fontSize='small' />
+					<CircleIcon className='circle mx-1 text-warning' fontSize='small' />
+					<CircleIcon className='circle text-success' fontSize='small' />
 					<input
 						type='text'
 						className='border-0 fs-7 form-control w-75 py-0 mx-lg-4 mx-2 text-muted text-center'

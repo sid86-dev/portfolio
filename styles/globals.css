@@ -96,6 +96,11 @@ h6 {
 	font-size: 14px;
 }
 
+.circle {
+	border-radius: 50%;
+	font-size: small;
+}
+
 span,
 p,
 small {
