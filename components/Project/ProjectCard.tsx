@@ -7,6 +7,7 @@ import { tagColors } from '../../utils/helpers';
 import CircleIcon from '@mui/icons-material/Circle';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from 'next/router';
+import { BsCircleFill } from 'react-icons/bs';
 
 interface IProps {
 	data: ProjectMeta[];
@@ -25,9 +26,9 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 			<div className='card border-0 rounded-0 rounded-top'>
 				{/* card navbar */}
 				<div className='card-header d-flex align-items-center border-0'>
-					<CircleIcon className='circle text-danger' fontSize='small' />
-					<CircleIcon className='circle mx-1 text-warning' fontSize='small' />
-					<CircleIcon className='circle text-success' fontSize='small' />
+					<BsCircleFill className='circle text-danger' size={10} />
+					<BsCircleFill className='circle text-warning mx-1' size={10} />
+					<BsCircleFill className='circle text-success' size={10} />
 					<input
 						type='text'
 						className='border-0 fs-7 form-control w-75 py-0 mx-lg-4 mx-2 text-muted text-center'
