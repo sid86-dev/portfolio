@@ -126,63 +126,65 @@ const Meet: FC<IProps> = ({ token }) => {
 							<h3 className='py-2'>
 								Send a message <MailOutlineIcon fontSize='large' />{' '}
 							</h3>
-							<form
-								ref={form}
-								onSubmit={(e: React.ChangeEvent<HTMLFormElement>) =>
-									sendEmail(e)
-								}
-							>
-								<div className='mb-3'>
-									<label
-										htmlFor='exampleFormControlInput1'
-										className='form-label'
-									>
-										Email
-									</label>
-									<input
-										value={formData.from_email}
-										name='from_email'
-										type='email'
-										className='form-control'
-										id='exampleFormControlInput1'
-										onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-											handleFormData(e)
-										}
-									/>
-								</div>
+							<>
+								<form
+									ref={form}
+									onSubmit={(e: React.ChangeEvent<HTMLFormElement>) =>
+										sendEmail(e)
+									}
+								>
+									<div className='mb-3'>
+										<label
+											htmlFor='exampleFormControlInput1'
+											className='form-label'
+										>
+											Email
+										</label>
+										<input
+											value={formData.from_email}
+											name='from_email'
+											type='email'
+											className='form-control'
+											id='exampleFormControlInput1'
+											onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+												handleFormData(e)
+											}
+										/>
+									</div>
 
-								<div className='mb-3'>
-									<label
-										htmlFor='exampleFormControlTextarea1'
-										className='form-label'
-									>
-										Message
-									</label>
-									<textarea
-										onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-											handleFormData(e)
-										}
-										className='form-control'
-										id='exampleFormControlTextarea1'
-										rows={3}
-										name='message'
-										value={formData.message}
-									></textarea>
+									<div className='mb-3'>
+										<label
+											htmlFor='exampleFormControlTextarea1'
+											className='form-label'
+										>
+											Message
+										</label>
+										<textarea
+											onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+												handleFormData(e)
+											}
+											className='form-control'
+											id='exampleFormControlTextarea1'
+											rows={3}
+											name='message'
+											value={formData.message}
+										></textarea>
 
-									<button
-										className={`btn ${
-											renderTheme === 'dark'
-												? 'btn-outline-light'
-												: 'btn-outline-dark'
-										} mt-4 px-5`}
-										type='submit'
-										onClick={() => sendEmail}
-										disabled={IsDisabled}
-									>
-										Send <SendIcon fontSize='small' className='mb-1' />
-									</button>
-								</div>
-							</form>
+										<button
+											className={`btn ${
+												renderTheme === 'dark'
+													? 'btn-outline-light'
+													: 'btn-outline-dark'
+											} mt-4 px-5`}
+											type='submit'
+											onClick={() => sendEmail}
+											disabled={IsDisabled}
+										>
+											Send <SendIcon fontSize='small' className='mb-1' />
+										</button>
+									</div>
+								</form>
+							</>
 						</div>
 					</div>
 				</div>

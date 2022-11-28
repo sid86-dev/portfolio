@@ -21,11 +21,13 @@
 @font-face {
 	font-family: Cubano;
 	src: url('/fonts/Cubano.ttf');
+	font-display: swap;
 }
 
 @font-face {
 	font-family: sofia-pro;
 	src: url('/fonts/Sofiapro.ttf');
+	font-display: swap;
 }
 
 .text-default {
