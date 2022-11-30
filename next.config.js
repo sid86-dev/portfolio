@@ -3,7 +3,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: ['encrypted-tbn0.gstatic.com', 'i.ibb.co'],
+		domains: ['sid86-dashboard.s3-ap-south-1.amazonaws.com'],
 	},
 	webpack5: true,
 	webpack: (config) => {
