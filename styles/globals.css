@@ -378,6 +378,9 @@ hr {
 .bg-green-500 {
 	background-color: #48bb78 !important;
 }
+.bg-red-500 {
+	background-color: #e53e3e !important;
+}
 
 .bg-yellow-500 {
 	background-color: #f6e05e !important;

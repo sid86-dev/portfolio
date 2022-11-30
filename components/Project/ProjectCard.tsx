@@ -93,7 +93,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 						<span
 							key={index}
 							style={{ marginRight: '8px' }}
-							className={`badge py-1 fs-7 text-dark border-dark border-0 ${
+							className={`badge py-1 fs-7 mb-1 text-dark border-dark border-0 ${
 								tagColors.find((data) => data.tag === tag)?.class
 							}`}
 						>
