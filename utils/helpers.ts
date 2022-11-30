@@ -52,6 +52,9 @@ export const tagColors: ITagColors[] = [
 	{ tag: 'bootstrap', class: 'bg-purple-500' },
 	{ tag: 'javascript', class: 'bg-yellow' },
 	{ tag: 'material-ui', class: 'bg-blue-100' },
+	{ tag: 'graphql', class: 'bg-purple' },
+	{ tag: 'google-cloud', class: 'bg-blue-300' },
+	{ tag: 'AI', class: 'bg-red-500' },
 ];
 
 export const projectCollectionRef = collection(db, 'projects');
