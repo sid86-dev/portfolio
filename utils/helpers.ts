@@ -71,7 +71,7 @@ export const getdbData = new Promise<Project[]>((resolve) => {
 		.catch((err) => console.log(err));
 });
 
-const POSTS_PATH = path.join(process.cwd(), 'content/projects');
+const POSTS_PATH = path.join(process.cwd(), 'content/Projects');
 
 export const getAllProjects = async () => {
 	const posts = getSlugs()
