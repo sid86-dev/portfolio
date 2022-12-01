@@ -5,7 +5,7 @@ const SEO = {
 	openGraph: {
 		type: 'website',
 		locale: 'en_IE',
-		url: 'https://www.sid86.xyz/',
+		url: 'https://sid86.me/',
 		site_name: 'Sid86',
 		profile: {
 			firstName: 'Siddhartha',

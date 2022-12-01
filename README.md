@@ -9,8 +9,8 @@
 
 <br>
 
-| Route | Description |
-| ----------- | ----------- |
-| /search | Search and filter through multiple projects |
-| /project/[id] | Detail page of any single project |
-| /meet | Contact and fix meeting |
+| Route         | Description                                 |
+| ------------- | ------------------------------------------- |
+| /search       | Search and filter through multiple projects |
+| /project/[id] | Detail page of any single project           |
+| /meet         | Contact and fix meeting                     |
