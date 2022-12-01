@@ -22,12 +22,12 @@ interface IMDXPost {
 const ProjectView = ({ project }: { project: IMDXPost }) => {
 	const SEO = {
 		type: 'website',
-		title: `Sid86 | ${project.meta.title}`,
+		title: `${project.meta.title} | Sid86`,
 		description: project.meta.excerpt,
 		openGraph: {
-			title: `Sid86 | ${project.meta.title}`,
+			title: `${project.meta.title} | Sid86`,
 			description: project.meta.excerpt,
-			url: `https://www.sid86.xyz/project/${project.meta.slug}`,
+			url: `https://sid86.me/project/${project.meta.slug}`,
 			images: [
 				{
 					url: project.meta.image,
@@ -37,7 +37,7 @@ const ProjectView = ({ project }: { project: IMDXPost }) => {
 					type: 'image/jpeg',
 				},
 			],
-			siteName: `Sid86`,
+			siteName: `sid86`,
 		},
 	};
 	return (

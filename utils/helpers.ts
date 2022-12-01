@@ -1,9 +1,9 @@
 import { collection, getDocs } from 'firebase/firestore';
-import path from 'path';
 import { ISkillCard, ITagColors, Post, Project } from '../types';
 import { db } from './firebase-config';
 import { sync } from 'glob';
 import matter from 'gray-matter';
+import path from 'path';
 import fs from 'fs';
 
 export const cardVarient: ISkillCard[] = [
@@ -71,7 +71,7 @@ export const getdbData = new Promise<Project[]>((resolve) => {
 		.catch((err) => console.log(err));
 });
 
-const POSTS_PATH = path.join(process.cwd(), 'Projects');
+const POSTS_PATH = path.join(process.cwd(), 'content/projects');
 
 export const getAllProjects = async () => {
 	const posts = getSlugs()
@@ -87,6 +87,18 @@ export const getAllProjects = async () => {
 		})
 		.reverse();
 	return posts;
+};
+
+export const getMdxContent = async (slug: string) => {
+	const POSTS_PATH = path.join(process.cwd(), 'content');
+	const postPath = path.join(POSTS_PATH, `${slug}.mdx`);
+	const source = fs.readFileSync(postPath);
+	const { content, data } = matter(source);
+
+	return {
+		content,
+		meta: data,
+	};
 };
 
 export const getPostsFromSlug = (slug: string): Post => {

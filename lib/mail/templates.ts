@@ -10,6 +10,6 @@ export const MeetingConfirmationEmail = (
 		start_time
 	).toUTCString()}<p>
 <p style="padding-bottom: 100px">Join Url : ${start_url}</p>
-<p>sid86.xyz<p>
+<p>sid86.me<p>
 `;
 };

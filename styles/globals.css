@@ -34,6 +34,10 @@
 	color: var(--foreground);
 }
 
+.text {
+	color: var(--text-color);
+}
+
 [data-theme='dark'] {
 	--navbar-bg: rgb(42, 46, 52);
 	--navlink-text: #b1becd;
@@ -244,12 +248,18 @@ hr {
 }
 
 .mdx-content h2 {
-	padding-top: 15px;
+	padding-top: 40px;
 	padding-bottom: 15px;
+}
+.mdx-content h3 {
+	padding-top: 40px;
+	padding-bottom: 10px;
 }
 .mdx-content p {
 	padding-top: 15px;
-	padding-bottom: 15px;
+}
+.mdx-content a {
+	color: var(--foreground);
 }
 
 .mdx-content li {
