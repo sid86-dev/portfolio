@@ -1,0 +1,50 @@
+---
+title: Uniswap Clone
+tags:
+  - web3
+  - tailwind
+  - nextjs
+  - solidity
+  - etherium
+  - typescript
+date: 2022-12-2
+excerpt: Uniswap clone made using React.js and Next.js build on top of rinkby etherium test network.
+link: https://uniswap-weld.vercel.app/
+image: https://sid86-dashboard.s3-ap-south-1.amazonaws.com/project-ss/5wdP8Gq9PKavtTmyGRgU2q.png
+---
+
+<p className=''>
+	This project was developed with ReactJS, being a Dapp application (decentralized application) that replicates the Uniswap web application interface. With this interface it is possible to perform the real login connection with your MetaMask digital wallet previously installed in your browser.
+
+After the connection is established with your MetaMask wallet, you will be able to read the address and, consequently, the ETH balance.
+</p>
+
+<div className="py-5">
+
+## :rocket: Test drive
+
+Visit the demo app and give it a test drive.
+
+<div>
+<a target="_blank" href="https://uniswap-weld.vercel.app/" className="btn btn-green">Uniswap Clone Live Demo</a>
+</div>
+</div>
+
+<div className="py-5">
+
+## :paperclip: Topics
+
+The web3 backend (smart contracts) are deployed on rinkby etherium test network.
+
+- 👨‍🎤 Solidity web3 deployment
+- ⚛  Interactive UI components with Tailwind Css
+- 💪 Type-safe queries with TypeScript
+- 👨‍🚀 Testing on Rinkby test net
+- 📊 Data management with Sanity CMS
+- 🚀 Full-stack deployment breakdown
+
+</div>
+
+> Last Updated Fri Dec 02 2022
+
+  
