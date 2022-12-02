@@ -33,7 +33,7 @@ export const ProjectSkeleton: FC = () => {
 
 export const SearchResults: FC<ISearchResultsProps> = ({ projects }) => {
 	return (
-		<div className='container mt-2 mb-3 pb-5'>
+		<div className='container-fluid mt-2 mb-3 pb-5'>
 			<div className='row justify-content-center'>
 				{/* pre rendered projects */}
 				{projects.length === 0 ? (

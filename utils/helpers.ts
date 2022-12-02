@@ -37,7 +37,7 @@ export const tagColors: ITagColors[] = [
 	{ tag: 'react', class: 'bg-light-200' },
 	{ tag: 'nextjs', class: 'bg-black' },
 	{ tag: 'nodejs', class: 'bg-green-500' },
-	{ tag: 'ethereum', class: 'bg-gray-600' },
+	{ tag: 'ethereum', class: 'bg-orange-200' },
 	{ tag: 'python', class: 'bg-yellow-500' },
 	{ tag: 'typescript', class: 'bg-blue-500' },
 	{ tag: 'web3', class: 'bg-gray-500' },
@@ -52,7 +52,7 @@ export const tagColors: ITagColors[] = [
 	{ tag: 'bootstrap', class: 'bg-purple-500' },
 	{ tag: 'javascript', class: 'bg-yellow' },
 	{ tag: 'material-ui', class: 'bg-blue-100' },
-	{ tag: 'graphql', class: 'bg-purple' },
+	{ tag: 'graphql', class: 'bg-pink-300' },
 	{ tag: 'google-cloud', class: 'bg-blue-300' },
 	{ tag: 'AI', class: 'bg-red-500' },
 ];

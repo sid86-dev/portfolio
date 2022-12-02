@@ -19,7 +19,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 
 	return data.map((item) => (
 		<div
-			className='col-md-5 col-xl-4 my-4 px-lg-3 mx-lg-4 pt-lg-4 card-wrapper mx-3 rounded-3'
+			className='col-md-5 col-xl-3 my-4 px-md-3 mx-md-3 pt-lg-4 card-wrapper rounded-3'
 			key={item.slug}
 		>
 			<div className='card border-0 rounded-0 rounded-top'>
@@ -32,7 +32,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 						type='text'
 						name={item.slug}
 						id={item.slug}
-						className='border-0 fs-7 form-control w-75 py-0 mx-lg-4 mx-2 text-muted text-center'
+						className='border-0 fs-9 form-control w-75 py-0 mx-lg-4 mx-2 text-muted text-center'
 						value={item.link.replace('https://', '').slice(0, -1)}
 						disabled
 					/>
@@ -75,7 +75,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 
 					{/* Project description */}
 					<div className='col-12'>
-						<p className='card-text mb-5'>
+						<p className='card-text mt-1 mb-5'>
 							<Highlighter
 								highlightClassName='search-highlight'
 								searchWords={[query.q as string]}
