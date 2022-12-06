@@ -10,7 +10,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/atom-one-dark.css';
-import { Main } from '../../components/MDX/Main';
+import { Main } from '../../components/Project/Details/Main';
 import remarkGfm from 'remark-gfm';
 import emoji from 'remark-emoji';
 
