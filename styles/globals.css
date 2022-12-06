@@ -279,6 +279,9 @@ hr {
 	font-size: 17.5px !important;
 }
 
+.fs-9 {
+	font-size: 11px !important;
+}
 .bg-dark-sm {
 	background-color: rgb(42, 46, 52) !important;
 	-webkit-transition: background-color 250ms linear;
@@ -361,6 +364,14 @@ hr {
 }
 .bg-yellow {
 	background-color: #f6e05e !important;
+}
+
+.bg-orange-200 {
+	background-color: rgb(254, 235, 200) !important;
+}
+
+.bg-pink-300 {
+	background-color: rgb(255, 192, 203) !important;
 }
 
 .bg-blue-100 {

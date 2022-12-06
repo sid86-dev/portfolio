@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Project, ProjectMeta } from '../../types';
+import { Project, ProjectMeta } from '../../../types';
 
 interface IProps {
 	project: ProjectMeta;
