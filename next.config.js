@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
-	swcMinify: true,
+	swcMinify: false,
 	images: {
 		domains: ['sid86-dashboard.s3-ap-south-1.amazonaws.com'],
 	},
