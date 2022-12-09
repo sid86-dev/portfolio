@@ -127,3 +127,43 @@ export const getSlugs = (): string[] => {
 		path.replace(`${POSTS_PATH}/`, '').replace('.mdx', '')
 	);
 };
+
+export const sortGithubData = (data: any[]) => {
+	const month = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+	];
+
+	let dates: string[] = [];
+	data.map((item: any) => {
+		let date = new Date(item.commit.committer.date);
+		dates.push(date.getDate() + ' ' + month[date.getMonth()]);
+	});
+
+	let dataLabels: string[] = [];
+
+	const occurance = dates.reduce(function (acc, curr) {
+		// @ts-ignore
+		return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
+	}, {});
+
+	let commitData: number[] = [];
+
+	for (const [key, value] of Object.entries(occurance)) {
+		dataLabels.push(key);
+		// @ts-ignore
+		commitData.push(value);
+	}
+
+	return { commitData, dataLabels };
+};
