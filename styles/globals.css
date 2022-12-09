@@ -207,7 +207,8 @@ button:disabled {
 .btn-dark {
 	background-color: black;
 	color: white;
-	border-radius: 3px;
+	border: 0px;
+	border-radius: 0px;
 }
 
 .btn-green {
@@ -222,6 +223,29 @@ button:disabled {
 	background-color: #20b456;
 	color: white;
 	border: 0px;
+}
+
+.btn-warning:hover {
+	background-color: #f0ad4e;
+	color: white;
+	border: 0px;
+}
+
+.btn-dark:hover {
+	border: 0.8px !important;
+	border-radius: 0px;
+}
+
+.btn:hover {
+	border: 0px !important;
+}
+
+.btn-warning {
+	color: white;
+	border: 0px;
+	color: black;
+	border-radius: 0px;
+	font-weight: bolder;
 }
 
 .btn-light {

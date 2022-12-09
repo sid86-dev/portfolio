@@ -13,6 +13,7 @@ import 'highlight.js/styles/atom-one-dark.css';
 import { Main } from '../../components/Project/Details/Main';
 import remarkGfm from 'remark-gfm';
 import emoji from 'remark-emoji';
+import Insight from '../../components/Project/Details/Insight';
 
 interface IMDXPost {
 	Source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -49,7 +50,9 @@ const ProjectView = ({ project }: { project: IMDXPost }) => {
 					<MDXRemote {...project.Source} components={{ Image }} />
 				</Main>
 			</div>
-			<hr className=' mt-5' />
+			<hr className='mt-5' />
+			<Insight project={project.meta} />
+			<hr className='mt-5' />
 			<Footer />
 		</Wrapper>
 	);
