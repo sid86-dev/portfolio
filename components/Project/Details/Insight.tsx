@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { DiGithubFull } from 'react-icons/di';
 import {
 	Chart as ChartJS,
@@ -28,9 +27,13 @@ ChartJS.register(
 
 interface IProps {
 	project: ProjectMeta;
+	graphData: {
+		dataLabels: string[];
+		commitData: number[];
+	};
 }
 
-const Insight: FC<IProps> = ({ project }) => {
+const Insight: FC<IProps> = ({ project, graphData }) => {
 	const options = {
 		responsive: true,
 		plugins: {
@@ -43,71 +46,13 @@ const Insight: FC<IProps> = ({ project }) => {
 			},
 		},
 	};
-	const [data, setData] = useState<number[]>([]);
-	const [labels, setLabels] = useState<string[]>([]);
-
-	const sortGithubData = (data: any[]) => {
-		const month = [
-			'January',
-			'February',
-			'March',
-			'April',
-			'May',
-			'June',
-			'July',
-			'August',
-			'September',
-			'October',
-			'November',
-			'December',
-		];
-
-		let dates: string[] = [];
-		data.map((item: any) => {
-			let date = new Date(item.commit.committer.date);
-			dates.push(date.getDate() + ' ' + month[date.getMonth()]);
-		});
-
-		let dataLabels: string[] = [];
-
-		const occurance = dates.reduce(function (acc, curr) {
-			// @ts-ignore
-			return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
-		}, {});
-
-		let commitData: number[] = [];
-
-		for (const [key, value] of Object.entries(occurance)) {
-			dataLabels.push(key);
-			// @ts-ignore
-			commitData.push(value);
-		}
-
-		return { commitData, dataLabels };
-	};
-
-	useEffect(() => {
-		const getRepoData = async () => {
-			const { data } = await axios.get(
-				`https://api.github.com/repos/sid86-dev/${project.slug}/commits?per_page=100&page=1`
-			);
-
-			const { commitData, dataLabels } = sortGithubData(data);
-
-			setData(commitData);
-			setLabels(dataLabels);
-		};
-		if (!data?.length) {
-			getRepoData();
-		}
-	}, [data, project.slug]);
 
 	const GraphData = {
-		labels: labels,
+		labels: graphData.dataLabels,
 		datasets: [
 			{
 				label: 'Commits',
-				data: data,
+				data: graphData.commitData,
 				borderColor: 'rgb(250, 126, 68)',
 				backgroundColor: 'rgb(255, 255, 255, 0.8)',
 			},
@@ -123,7 +68,8 @@ const Insight: FC<IProps> = ({ project }) => {
 				<p className='fw-bold pt-4 pb-2'>
 					Viewing commit history of{' '}
 					<strong>
-						{project.title} between {labels[0]} - {labels[labels.length - 1]}
+						{project.title} between {graphData.dataLabels[0]} -{' '}
+						{graphData.dataLabels[graphData.dataLabels.length - 1]}
 					</strong>
 				</p>
 				<a
