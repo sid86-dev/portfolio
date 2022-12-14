@@ -158,9 +158,11 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 						)}
 					</motion.div>
 				</button>
-				<button className='btn btn-dark mx-2' type='submit'>
-					<TerminalIcon />
-				</button>
+				<Link className='navbar-brand' href='https://xth86.sid86.me/'>
+					<button className='btn btn-dark mx-2' type='submit'>
+						<TerminalIcon />
+					</button>
+				</Link>
 			</div>
 		</>
 	);
