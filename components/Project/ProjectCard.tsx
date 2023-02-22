@@ -51,7 +51,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 								src={item.image}
 								className='card-img-top pointer rounded shadow'
 								alt='...'
-								height='550px'
+								height='578px'
 								width='900px'
 								priority
 							/>

@@ -35,8 +35,9 @@ export const stackIcons = [
 
 export const tagColors: ITagColors[] = [
 	{ tag: 'react', class: 'bg-light-200' },
+	{ tag: 'react-native', class: 'bg-red-500' },
 	{ tag: 'nextjs', class: 'bg-black' },
-	{ tag: 'nodejs', class: 'bg-green-500' },
+	{ tag: 'nodejs', class: 'bg-purple-300' },
 	{ tag: 'ethereum', class: 'bg-orange-200' },
 	{ tag: 'python', class: 'bg-yellow-500' },
 	{ tag: 'typescript', class: 'bg-blue-500' },
@@ -54,7 +55,7 @@ export const tagColors: ITagColors[] = [
 	{ tag: 'material-ui', class: 'bg-blue-100' },
 	{ tag: 'graphql', class: 'bg-pink-300' },
 	{ tag: 'google-cloud', class: 'bg-blue-300' },
-	{ tag: 'AI', class: 'bg-red-500' },
+	{ tag: 'AI', class: 'bg-brown-200' },
 ];
 
 export const projectCollectionRef = collection(db, 'projects');
