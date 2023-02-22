@@ -8,6 +8,7 @@ import { ThemeProvider } from 'next-themes';
 import { DefaultSeo } from 'next-seo';
 import { SEO } from '../next-seo.config';
 import Head from 'next/head';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	NProgress.configure({ showSpinner: false });
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 	});
 	return (
 		<>
+			<GoogleAnalytics trackPageViews />
 			<Head>
 				<meta
 					name='viewport'

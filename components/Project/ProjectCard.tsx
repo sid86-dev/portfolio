@@ -19,12 +19,12 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 
 	return data.map((item) => (
 		<div
-			className='col-md-5 col-xl-3 my-4 px-md-3 mx-md-3 pt-lg-4 card-wrapper rounded-3'
+			className='col-md-5 col-xl-3 my-4 px-md-3 mx-md-3 pt-lg-3 card-wrapper rounded-3'
 			key={item.slug}
 		>
 			<div className='card border-0 rounded-0 rounded-top'>
 				{/* card navbar */}
-				<div className='card-header d-flex align-items-center border-0'>
+				{/* <div className='card-header d-flex align-items-center border-0'>
 					<BsCircleFill className='circle text-danger' size={10} />
 					<BsCircleFill className='circle text-warning mx-1' size={10} />
 					<BsCircleFill className='circle text-success' size={10} />
@@ -37,7 +37,7 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 						disabled
 					/>
 					<label htmlFor={item.slug}></label>
-				</div>
+				</div> */}
 			</div>
 			<div className='card-body w-100'>
 				{/* main image */}
@@ -49,9 +49,9 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 						<a className='h-100 w-100'>
 							<Image
 								src={item.image}
-								className='card-img-top pointer rounded-0 rounded-bottom shadow'
+								className='card-img-top pointer rounded shadow'
 								alt='...'
-								height='500px'
+								height='550px'
 								width='900px'
 								priority
 							/>
