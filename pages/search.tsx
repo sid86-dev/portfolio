@@ -24,7 +24,9 @@ const Search: NextPage = () => {
 	const [state, setState] = useContext(Context);
 
 	const router = useRouter();
+	const queryString = router.query.q;
 
+	// Get all project data
 	const getProjects = async () => {
 		const data: IProjectApiResponse = (await axios.get('/api/projects')).data;
 		setprojects(data.projects);
@@ -34,9 +36,11 @@ const Search: NextPage = () => {
 	useEffect(() => {
 		if (projects.length === 0) {
 			getProjects();
+			// console.log('get');
 		}
 	}, [projects, state, setState, filteredProjects]);
 
+	// Filter project function
 	const filterProjects = (keyword: string) => {
 		if (keyword === '') setFilteredprojects(projects);
 		const filtered = projects.filter((project: ProjectMeta) =>
@@ -49,6 +53,7 @@ const Search: NextPage = () => {
 		setFilteredprojects(projects);
 	};
 
+	// handle filter with tags
 	const tagFilterHandler = async (tag: string) => {
 		const filtered = projects.filter((project: ProjectMeta) =>
 			checkTag(tag, project)
@@ -56,6 +61,7 @@ const Search: NextPage = () => {
 		setFilteredprojects(filtered);
 	};
 
+	// handle filter with search string
 	const stringFilterHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		startTransition(() => {
 			router.push(`/search?q=${e.target.value}`);

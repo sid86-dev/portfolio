@@ -18,9 +18,8 @@ export const Main: FC<IProps> = ({ project, children }) => {
 					<Image
 						priority
 						src={project?.image}
-						height='450px'
+						height='500px'
 						width={'800px'}
-						layout='responsive'
 						className='w-50 rounded shadow'
 						alt={project.title}
 					/>
