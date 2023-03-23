@@ -3,7 +3,13 @@ import Head from 'next/head';
 import Script from 'next/script';
 import Main from '../components/Main';
 import Navbar from '../components/Navbar';
-import { ProjectSection } from '../components/Project/ProjectSection';
+import dynamic from 'next/dynamic';
+const ProjectSection = dynamic(
+	() => import('../components/Project/ProjectSection'),
+	{
+		loading: () => <div>Loading...</div>,
+	}
+);
 import { Footer } from '../components/Footer';
 import SkillSection from '../components/Skills/SkillSection';
 import { Wrapper } from '../components/Wrapper';

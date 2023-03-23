@@ -32,5 +32,6 @@ export default async function handler(
 	// Run the middleware
 	await runMiddleware(req, res, cors);
 
+	res.setHeader('Cache-Control', 's-maxage=86400');
 	res.status(200).json({ projects });
 }
