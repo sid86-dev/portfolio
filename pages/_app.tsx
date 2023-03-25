@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				/>
 			</Head>
 			<DefaultSeo {...SEO} />
-			<ThemeProvider>
+			<ThemeProvider defaultTheme='dark'>
 				<Store>
 					<Component {...pageProps} />
 				</Store>
