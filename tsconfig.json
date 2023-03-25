@@ -23,7 +23,8 @@
 		"components/AnimatedText.jsx",
 		"lib/mail/index.ts",
 		"next-seo.config.js",
-		"components/Search/Hits.jsx"
+		"components/Search/Hits.jsx",
+		"components/Main.tsx"
 	],
 	"exclude": ["node_modules"]
 }
