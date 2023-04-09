@@ -27,8 +27,6 @@ function Navbar() {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	console.log(navClass);
-
 	//   Handle navbar visibility
 	const controlNavbar = () => {
 		if (window.scrollY > 350) {
