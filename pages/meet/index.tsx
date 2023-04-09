@@ -68,9 +68,8 @@ const Meet: FC<IProps> = ({ token }) => {
 	};
 
 	return (
-		<Wrapper>
+		<>
 			<NextSeo {...MeetSEO} />
-			<Navbar />
 			<Backdrop
 				sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
 				open={IsLoading}
@@ -190,8 +189,7 @@ const Meet: FC<IProps> = ({ token }) => {
 				</div>
 			</div>
 			<hr className='' />
-			<Footer />
-		</Wrapper>
+		</>
 	);
 };
 

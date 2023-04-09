@@ -29,16 +29,14 @@ const Privacy: NextPage<IPageProps> = ({ Source, meta }) => {
 		},
 	};
 	return (
-		<Wrapper>
+		<>
 			<NextSeo {...SEO} />
-			<Navbar />
 			<div className='mdx-content container mb-5'>
 				<MDXRemote {...Source} components={{ Image }} />
 			</div>
 
 			<hr className=' mt-5' />
-			<Footer />
-		</Wrapper>
+		</>
 	);
 };
 

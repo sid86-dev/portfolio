@@ -12,6 +12,7 @@ import { useTheme } from 'next-themes';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import styles from '../styles/Navbar.module.scss';
 
 function Navbar() {
 	const style = {
@@ -20,9 +21,34 @@ function Navbar() {
 	};
 
 	const [show, setShow] = useState(false);
+	const [navClass, setNavClass] = useState<string>(styles.translate);
+	const [lastScrollY, setLastScrollY] = useState(0);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+
+	console.log(navClass);
+
+	//   Handle navbar visibility
+	const controlNavbar = () => {
+		if (window.scrollY > 350) {
+			if (window.scrollY > lastScrollY) {
+				setNavClass(styles.translateY);
+			} else {
+				setNavClass('shadow-sm');
+			}
+		} else {
+			setNavClass(styles.translate);
+		}
+		setLastScrollY(window.scrollY);
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', controlNavbar);
+		return () => {
+			window.removeEventListener('scroll', controlNavbar);
+		};
+	}, [lastScrollY]);
 
 	const OffCanvasRender = () => (
 		<Offcanvas className='w-75' show={show} onHide={handleClose}>
@@ -53,8 +79,12 @@ function Navbar() {
 		</Offcanvas>
 	);
 
+	console.log(navClass);
+
 	return (
-		<nav className={style.navbar}>
+		<nav
+			className={`${styles.navbar} navbar navbar-expand-lg py-3 ${navClass}`}
+		>
 			{/* Mobile Offcanvas */}
 			<OffCanvasRender />
 

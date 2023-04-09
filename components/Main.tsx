@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Tilt from 'react-parallax-tilt';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import { Backdrop, CircularProgress } from '@mui/material';
+import styles from '../styles/Main.module.scss';
 
 function Main() {
 	const [isLoading, setisLoading] = useState<boolean>(false);
@@ -38,14 +39,17 @@ function Main() {
 						{/* heading */}
 						<h2>
 							Hello! I am Siddharth, a{' '}
-							<span className='highlight-text'>developer</span> based in India.
+							<span className={styles.highlightText}>developer</span> based in
+							India.
 						</h2>
 
 						{/* body */}
 						<span className='fw-bolder fs-4 my-4'>
 							I am an enthusiastic programmer eager to contribute to team
 							success through hard work, attention to detail and excellent{' '}
-							<span className='highlight-box px-1'>organizational skills.</span>
+							<span className={`${styles.highlightBox} px-1`}>
+								organizational skills.
+							</span>
 						</span>
 
 						{/* Link buttons */}
