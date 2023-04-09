@@ -4,10 +4,22 @@ export interface Project {
 	image: string;
 	github: ?string;
 	link: string;
+	rank: number;
 	description: string;
 	longDescription: string;
 	tags: ?string[];
 	topics: ?string[];
+}
+export interface ProjectMeta {
+	title: string;
+	excerpt: string;
+	slug: string;
+	date: string;
+	tags: string[];
+	link: string;
+	githubUrl: string;
+	image: string;
+	rank: number;
 }
 
 export type ProjectContextType = {
@@ -99,17 +111,6 @@ export type TMeetingForm = {
 export interface Post {
 	content: string;
 	meta: ProjectMeta;
-}
-
-export interface ProjectMeta {
-	title: string;
-	excerpt: string;
-	slug: string;
-	date: string;
-	tags: string[];
-	link: string;
-	githubUrl: string;
-	image: string;
 }
 
 export interface IProjectApiResponse {

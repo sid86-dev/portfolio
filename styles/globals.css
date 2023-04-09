@@ -405,6 +405,12 @@ hr {
 .bg-purple-500 {
 	background-color: #805ad5 !important;
 }
+.bg-purple-400 {
+	background-color: rgb(103, 114, 229) !important;
+}
+.bg-purple-600 {
+	background-color: rgb(118, 74, 188);
+}
 .bg-purple-300 {
 	color: beige !important;
 	background-color: #ba3e5c !important;
