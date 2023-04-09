@@ -2,7 +2,6 @@ import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Script from 'next/script';
 import Main from '../components/Main';
-import Navbar from '../components/Navbar';
 import dynamic from 'next/dynamic';
 const ProjectSection = dynamic(
 	() => import('../components/Project/ProjectSection'),
@@ -10,9 +9,7 @@ const ProjectSection = dynamic(
 		loading: () => <div>Loading...</div>,
 	}
 );
-import { Footer } from '../components/Footer';
 import SkillSection from '../components/Skills/SkillSection';
-import { Wrapper } from '../components/Wrapper';
 import { ProjectMeta } from '../types';
 import { getAllProjects } from '../utils/helpers';
 
@@ -22,7 +19,7 @@ interface IProps {
 
 const Home: NextPage<IProps> = ({ projects }) => {
 	return (
-		<Wrapper>
+		<>
 			<Head>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 			</Head>
@@ -32,8 +29,6 @@ const Home: NextPage<IProps> = ({ projects }) => {
 				integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p'
 				crossOrigin='anonymous'
 			></Script>
-
-			<Navbar />
 
 			{/* landing intro section */}
 			<Main />
@@ -49,9 +44,7 @@ const Home: NextPage<IProps> = ({ projects }) => {
 			<ProjectSection projects={projects} />
 
 			<hr className=' mt-5' />
-
-			<Footer />
-		</Wrapper>
+		</>
 	);
 };
 

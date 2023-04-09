@@ -1,5 +1,5 @@
 import { collection, getDocs } from 'firebase/firestore';
-import { ISkillCard, ITagColors, Post, Project } from '../types';
+import { ISkillCard, ITagColors, Post, Project, ProjectMeta } from '../types';
 import { db } from './firebase-config';
 import { sync } from 'glob';
 import matter from 'gray-matter';
@@ -35,6 +35,7 @@ export const stackIcons = [
 
 export const tagColors: ITagColors[] = [
 	{ tag: 'react', class: 'bg-light-200' },
+	{ tag: 'redux', class: 'bg-purple-600' },
 	{ tag: 'react-native', class: 'bg-red-500' },
 	{ tag: 'nextjs', class: 'bg-black' },
 	{ tag: 'nodejs', class: 'bg-purple-300' },
@@ -56,6 +57,7 @@ export const tagColors: ITagColors[] = [
 	{ tag: 'graphql', class: 'bg-pink-300' },
 	{ tag: 'google-cloud', class: 'bg-blue-300' },
 	{ tag: 'AI', class: 'bg-brown-200' },
+	{ tag: 'stripe', class: 'bg-purple-400' },
 ];
 
 export const projectCollectionRef = collection(db, 'projects');
@@ -90,6 +92,7 @@ export const getAllProjects = async () => {
 	return posts;
 };
 
+// process mdx content
 export const getMdxContent = async (slug: string) => {
 	const POSTS_PATH = path.join(process.cwd(), 'content');
 	const postPath = path.join(POSTS_PATH, `${slug}.mdx`);
@@ -118,10 +121,12 @@ export const getPostsFromSlug = (slug: string): Post => {
 			link: data.link ?? '',
 			image: data.image ?? '',
 			githubUrl: data.githubUrl ?? '',
+			rank: data.rank ?? '',
 		},
 	};
 };
 
+// get all project mdx slugs
 export const getSlugs = (): string[] => {
 	const paths = sync(`${POSTS_PATH}/*.mdx`);
 	return paths.map((path) =>
@@ -129,6 +134,7 @@ export const getSlugs = (): string[] => {
 	);
 };
 
+// sort github data from Api
 export const sortGithubData = (data: any[]) => {
 	const month = [
 		'January',
@@ -167,4 +173,31 @@ export const sortGithubData = (data: any[]) => {
 	}
 
 	return { commitData, dataLabels };
+};
+
+// List of projects in order of rank
+let projectRankList = [
+	'shoe-store',
+	'deliveroo-clone-rn',
+	'dall-e',
+	'google-docs-clone',
+	'offerwall',
+	'uniswap-clone',
+	'tiktok-clone',
+	'doggybot',
+	'shwt',
+];
+
+// Sort projects based on rank
+export const sortProjectArray = (projects: ProjectMeta[]) => {
+	let sortedProjects: ProjectMeta[] = [];
+	projectRankList.map((title) => {
+		projects.filter((project) => {
+			if (project.slug === title) {
+				sortedProjects.push(project);
+			}
+		});
+	});
+
+	return sortedProjects;
 };

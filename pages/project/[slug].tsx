@@ -53,9 +53,8 @@ const ProjectView = ({
 		},
 	};
 	return (
-		<Wrapper>
+		<>
 			<NextSeo {...SEO} />
-			<Navbar />
 			<div className='m-lg-5 pt-5 pt-md-2 px-3 px-lg-4'>
 				<Main project={project.meta}>
 					<MDXRemote {...project.Source} components={{ Image }} />
@@ -64,8 +63,7 @@ const ProjectView = ({
 			<hr className='mt-5' />
 			<Insight graphData={graphData} project={project.meta} />
 			<hr className='mt-5' />
-			<Footer />
-		</Wrapper>
+		</>
 	);
 };
 

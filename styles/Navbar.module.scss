@@ -1,0 +1,19 @@
+.navbar {
+	width: 100%;
+	z-index: 500;
+}
+.translateY {
+	transform: translateY(-85px);
+}
+.translate {
+	transform: translate(0px);
+}
+@media only screen and (min-width: 1025px) {
+	.navbar {
+		position: fixed;
+		top: 0;
+		transition-property: transform;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 500ms;
+	}
+}

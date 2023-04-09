@@ -70,8 +70,7 @@ const Search: NextPage = () => {
 	};
 
 	return (
-		<Wrapper>
-			<Navbar />
+		<>
 			<div className='container-fluid px-3'>
 				{/* Search Tags */}
 				<TagBar
@@ -105,8 +104,7 @@ const Search: NextPage = () => {
 			</div>
 
 			<hr className='' />
-			<Footer />
-		</Wrapper>
+		</>
 	);
 };
 

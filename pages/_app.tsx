@@ -10,6 +10,9 @@ import { SEO } from '../next-seo.config';
 import Head from 'next/head';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { Analytics } from '@vercel/analytics/react';
+import Navbar from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import { Wrapper } from '../components/Wrapper';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	NProgress.configure({ showSpinner: false });
@@ -32,7 +35,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<DefaultSeo {...SEO} />
 			<ThemeProvider defaultTheme='dark'>
 				<Store>
-					<Component {...pageProps} />
+					<Wrapper>
+						<Navbar />
+						<div className='mt-md-5 pt-md-5'>
+							<Component {...pageProps} />
+						</div>
+						<Footer />
+					</Wrapper>
 				</Store>
 			</ThemeProvider>
 		</>

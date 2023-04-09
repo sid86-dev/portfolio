@@ -1,0 +1,17 @@
+$color_1: transparent;
+$font-family_1: 'Cubano', sans-serif;
+
+.highlightText {
+	font-family: $font-family_1;
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	background-image: linear-gradient(90deg, var(--orange), var(--pink));
+	color: $color_1;
+}
+.highlightBox {
+	font-family: $font-family_1;
+	-webkit-text-fill-color: black;
+	background-image: linear-gradient(90deg, var(--orange), var(--pink));
+	color: $color_1;
+}

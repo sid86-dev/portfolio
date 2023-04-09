@@ -33,9 +33,10 @@ const withPWA = require('next-pwa')({
 	skipWaiting: true,
 });
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true',
-	openAnalyzer: false,
-});
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+// 	enabled: process.env.ANALYZE === 'true',
+// 	openAnalyzer: false,
+// });
 
-module.exports = withBundleAnalyzer(withPWA(nextConfig));
+// module.exports = withBundleAnalyzer(withPWA(nextConfig));
+module.exports = withPWA(nextConfig);
