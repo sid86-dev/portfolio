@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAllProjects } from '../../utils/helpers';
-import { IProjectApiResponse } from '../../types';
+import { getAllProjects } from '../../../utils/helpers';
+import { IProjectApiResponse } from '../../../types';
 import Cors from 'cors';
 
 const cors = Cors({

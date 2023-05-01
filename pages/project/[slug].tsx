@@ -1,7 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Footer } from '../../components/Footer';
-import Navbar from '../../components/Navbar';
-import { Wrapper } from '../../components/Wrapper';
 import {
 	getPostsFromSlug,
 	getSlugs,
@@ -61,7 +58,7 @@ const ProjectView = ({
 				</Main>
 			</div>
 			<hr className='mt-5' />
-			<Insight graphData={graphData} project={project.meta} />
+			{/* <Insight graphData={graphData} project={project.meta} /> */}
 			<hr className='mt-5' />
 		</>
 	);
@@ -73,11 +70,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { slug } = params as { slug: string };
 	const { content, meta } = getPostsFromSlug(slug);
 
-	const { data } = await axios.get(
-		`https://api.github.com/repos/sid86-dev/${meta.slug}/commits?per_page=100&page=1`
-	);
+	// GET REPO DATA FROM GITHUB API
 
-	const { commitData, dataLabels } = sortGithubData(data);
+	// const { data } = await axios.get(
+	// 	`${process.env.NEXT_SITE_URL}/api/project/commits/${meta.slug}`
+	// );
+
+	// const { commitData, dataLabels } = sortGithubData(data.commits);
 
 	const mdxSource = await serialize(content, {
 		mdxOptions: {
@@ -89,7 +88,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	return {
 		props: {
 			project: { Source: mdxSource, meta },
-			graphData: { commitData, dataLabels },
+			// graphData: { commitData, dataLabels },
 		},
 	};
 };
