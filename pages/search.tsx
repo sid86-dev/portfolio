@@ -36,7 +36,6 @@ const Search: NextPage = () => {
 	useEffect(() => {
 		if (projects.length === 0) {
 			getProjects();
-			// console.log('get');
 		}
 	}, [projects, state, setState, filteredProjects]);
 

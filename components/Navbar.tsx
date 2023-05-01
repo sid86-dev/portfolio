@@ -77,8 +77,6 @@ function Navbar() {
 		</Offcanvas>
 	);
 
-	console.log(navClass);
-
 	return (
 		<nav
 			className={`${styles.navbar} navbar navbar-expand-lg py-3 ${navClass}`}
