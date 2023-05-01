@@ -71,7 +71,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { content, meta } = getPostsFromSlug(slug);
 
 	// GET REPO DATA FROM GITHUB API
-
 	const { data } = await axios.get(
 		`${process.env.NEXT_SITE_URL}/api/project/commits/${meta.slug}`
 	);
