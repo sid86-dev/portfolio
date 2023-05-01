@@ -1,7 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { Footer } from '../../components/Footer';
-import Navbar from '../../components/Navbar';
-import { Wrapper } from '../../components/Wrapper';
 import {
 	getPostsFromSlug,
 	getSlugs,
@@ -73,11 +70,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { slug } = params as { slug: string };
 	const { content, meta } = getPostsFromSlug(slug);
 
+	// GET REPO DATA FROM GITHUB API
+
 	const { data } = await axios.get(
-		`https://api.github.com/repos/sid86-dev/${meta.slug}/commits?per_page=100&page=1`
+		`${process.env.NEXT_SITE_URL}/api/project/commits/${meta.slug}`
 	);
 
-	const { commitData, dataLabels } = sortGithubData(data);
+	const { commitData, dataLabels } = sortGithubData(data.commits);
 
 	const mdxSource = await serialize(content, {
 		mdxOptions: {

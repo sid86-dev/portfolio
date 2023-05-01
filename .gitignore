@@ -45,3 +45,8 @@ next-env.d.ts
 **/public/sw.js.map
 **/public/workbox-*.js
 **/public/worker-*.js.map
+
+# next-sitemap
+# /public/robots.txt
+# /public/sitemap.xml
+# /public/sitemap-0.xml
