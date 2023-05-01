@@ -58,7 +58,7 @@ const ProjectView = ({
 				</Main>
 			</div>
 			<hr className='mt-5' />
-			<Insight graphData={graphData} project={project.meta} />
+			{/* <Insight graphData={graphData} project={project.meta} /> */}
 			<hr className='mt-5' />
 		</>
 	);
@@ -72,11 +72,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	// GET REPO DATA FROM GITHUB API
 
-	const { data } = await axios.get(
-		`${process.env.NEXT_SITE_URL}/api/project/commits/${meta.slug}`
-	);
+	// const { data } = await axios.get(
+	// 	`${process.env.NEXT_SITE_URL}/api/project/commits/${meta.slug}`
+	// );
 
-	const { commitData, dataLabels } = sortGithubData(data.commits);
+	// const { commitData, dataLabels } = sortGithubData(data.commits);
 
 	const mdxSource = await serialize(content, {
 		mdxOptions: {
@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	return {
 		props: {
 			project: { Source: mdxSource, meta },
-			graphData: { commitData, dataLabels },
+			// graphData: { commitData, dataLabels },
 		},
 	};
 };
