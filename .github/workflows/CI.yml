@@ -1,0 +1,5 @@
+jobs:
+  build-project:
+    steps:
+      - name: Build the project
+        run: yarn build
