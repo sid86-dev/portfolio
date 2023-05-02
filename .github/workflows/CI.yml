@@ -1,5 +1,10 @@
+name: Project build test
+on:
+  push:
+    branches:
+      - main
 jobs:
-  build-project:
+  build-test:
     steps:
       - name: Build the project
         run: yarn build
