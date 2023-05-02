@@ -5,9 +5,6 @@ import React, {
 	useState,
 	startTransition,
 } from 'react';
-import { Footer } from '../components/Footer';
-import Navbar from '../components/Navbar';
-import { Wrapper } from '../components/Wrapper';
 import { IProjectApiResponse, ProjectMeta } from '../types';
 import SearchIcon from '@mui/icons-material/Search';
 import { TagBar } from '../components/Search/TagBar';
@@ -28,7 +25,8 @@ const Search: NextPage = () => {
 
 	// Get all project data
 	const getProjects = async () => {
-		const data: IProjectApiResponse = (await axios.get('/api/projects')).data;
+		const data: IProjectApiResponse = (await axios.get('/api/project/data'))
+			.data;
 		setprojects(data.projects);
 		setFilteredprojects(data.projects);
 	};
@@ -36,6 +34,7 @@ const Search: NextPage = () => {
 	useEffect(() => {
 		if (projects.length === 0) {
 			getProjects();
+			// console.log('get');
 		}
 	}, [projects, state, setState, filteredProjects]);
 

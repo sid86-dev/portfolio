@@ -13,20 +13,27 @@ export const Main: FC<IProps> = ({ project, children }) => {
 	return (
 		<>
 			<Header project={project} />
-			<div className='container-table py-5'>
-				<div className='mb-5'>
-					<Image
-						priority
-						src={project?.image}
-						height='500px'
-						width={'800px'}
-						className='w-50 rounded shadow'
-						alt={project.title}
-					/>
-					<p className='text-muted fs-7 mt-3'>Screenshort from the demo app</p>
+			<div className='container-table py-5 d-flex row justify-content-center '>
+				{/* Image Container */}
+				<div className='mb-5 d-flex row justify-content-center'>
+					<div className='col-12'>
+						<Image
+							priority
+							src={project?.image}
+							height='640px'
+							width={'1050px'}
+							className='w-50 rounded shadow'
+							alt={project.title}
+						/>
+					</div>
+					<div className='col-12'>
+						<p className='text-muted fs-7 mt-3'>
+							Screenshort from the demo app
+						</p>
+					</div>
 				</div>
 
-				<div>
+				<div className='col-12'>
 					{/* Stacks */}
 					<h2 className='py-4'>🛠️ Stacks</h2>
 					<div
