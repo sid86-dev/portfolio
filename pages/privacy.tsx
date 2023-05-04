@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
-import { getMdxContent } from '../utils/helpers';
+import { getMdxContent } from '../lib/utils';
 
 interface IPageProps {
 	Source: MDXRemoteSerializeResult<Record<string, unknown>>;

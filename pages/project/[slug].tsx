@@ -1,9 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import {
-	getPostsFromSlug,
-	getSlugs,
-	sortGithubData,
-} from '../../utils/helpers';
+import { getPostsFromSlug, getSlugs, sortGithubData } from '../../lib/utils';
 import { ProjectMeta } from '../../types';
 import { NextSeo } from 'next-seo';
 import { serialize } from 'next-mdx-remote/serialize';

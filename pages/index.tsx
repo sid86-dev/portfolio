@@ -9,7 +9,7 @@ const ProjectSection = dynamic(
 );
 import SkillSection from '../components/Skills/SkillSection';
 import { ProjectMeta } from '../types';
-import { getAllProjects } from '../utils/helpers';
+import { getAllProjects } from '../lib/utils';
 
 interface IProps {
 	projects: ProjectMeta[];
