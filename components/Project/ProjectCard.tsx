@@ -52,7 +52,8 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 								alt='...'
 								height='578px'
 								width='900px'
-								priority
+								blurDataURL='data:...'
+								placeholder='blur'
 							/>
 						</a>
 					</Link>

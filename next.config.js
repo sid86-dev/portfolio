@@ -5,7 +5,6 @@ const nextConfig = {
 	images: {
 		domains: ['sid86-dashboard.s3-ap-south-1.amazonaws.com'],
 	},
-	webpack5: true,
 	webpack: (config) => {
 		config.resolve.fallback = { fs: false };
 

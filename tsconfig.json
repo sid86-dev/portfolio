@@ -24,7 +24,8 @@
 		"lib/mail/index.ts",
 		"next-seo.config.js",
 		"components/Search/Hits.jsx",
-		"components/Main.tsx"
+		"components/Main.tsx",
+		"lib/dbConnect.js"
 	],
 	"exclude": ["node_modules"]
 }
