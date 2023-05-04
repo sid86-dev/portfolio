@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>http://localhost:3000</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/meet</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/privacy</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/search</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/terms</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/dall-e</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/deliveroo-clone-rn</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/doggybot</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/google-docs-clone</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/offerwall</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/shoe-store</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/shwt</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/tiktok-clone</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/project/uniswap-clone</loc><lastmod>2023-05-04T21:42:29.850Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/meet</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/privacy</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/search</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/terms</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/dall-e</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/deliveroo-clone-rn</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/doggybot</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/google-docs-clone</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/offerwall</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/shoe-store</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/shwt</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/tiktok-clone</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/project/uniswap-clone</loc><lastmod>2023-05-04T23:20:31.184Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
