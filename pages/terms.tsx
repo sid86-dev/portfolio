@@ -25,18 +25,11 @@ const Terms: NextPage<IPageProps> = ({ Source, meta }) => {
 			siteName: `Sid86`,
 			images: [
 				{
-					url: '/images/logo/dark.png',
-					width: 800,
-					height: 600,
-					type: 'image/png',
+					url: 'https://sid86.me/_next/image?url=%2Fimages%2Flogo%2Fdark.png&w=128&q=75',
+					width: 128,
+					height: 128,
+					type: 'image/webp',
 					alt: 'Og Image dark',
-				},
-				{
-					url: '/images/logo/light.png',
-					width: 800,
-					height: 600,
-					type: 'image/png',
-					alt: 'Og Image Light',
 				},
 			],
 		},

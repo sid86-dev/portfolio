@@ -5,9 +5,7 @@ import Main from '../components/Main';
 import dynamic from 'next/dynamic';
 const ProjectSection = dynamic(
 	() => import('../components/Project/ProjectSection'),
-	{
-		loading: () => <div>Loading...</div>,
-	}
+	{ ssr: false, loading: () => <div>Loading...</div> }
 );
 import SkillSection from '../components/Skills/SkillSection';
 import { ProjectMeta } from '../types';

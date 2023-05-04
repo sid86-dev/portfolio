@@ -39,11 +39,11 @@ const ProjectView = ({
 			url: `https://sid86.me/project/${project.meta.slug}`,
 			images: [
 				{
-					url: project.meta.image,
-					width: 800,
-					height: 600,
-					alt: project.meta.title,
-					type: 'image/jpeg',
+					url: 'https://sid86.me/_next/image?url=%2Fimages%2Flogo%2Fdark.png&w=128&q=75',
+					width: 128,
+					height: 128,
+					type: 'image/webp',
+					alt: 'Og Image dark',
 				},
 			],
 			siteName: `sid86`,
