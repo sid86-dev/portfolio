@@ -13,7 +13,7 @@ import { NextPage } from 'next';
 import { Context } from '../contexts/store';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { checkString, checkTag } from '../lib/searchHandlers';
+import { checkString, checkTag } from '../lib/utils';
 
 const Search: NextPage = () => {
 	const [filteredProjects, setFilteredprojects] = useState<ProjectMeta[]>([]);
