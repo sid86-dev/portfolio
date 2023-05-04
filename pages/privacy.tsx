@@ -5,11 +5,8 @@ import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
-import { Wrapper } from '../components/Wrapper';
-import Navbar from '../components/Navbar';
-import { Footer } from '../components/Footer';
 import { NextSeo } from 'next-seo';
-import { getMdxContent } from '../utils/helpers';
+import { getMdxContent } from '../lib/utils';
 
 interface IPageProps {
 	Source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -26,6 +23,15 @@ const Privacy: NextPage<IPageProps> = ({ Source, meta }) => {
 			description: meta.excerpt,
 			url: `https://sid86.me/terms`,
 			siteName: `Sid86`,
+			images: [
+				{
+					url: 'https://sid86.me/_next/image?url=%2Fimages%2Flogo%2Fdark.png&w=128&q=75',
+					width: 128,
+					height: 128,
+					type: 'image/webp',
+					alt: 'Og Image dark',
+				},
+			],
 		},
 	};
 	return (

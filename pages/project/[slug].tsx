@@ -1,9 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import {
-	getPostsFromSlug,
-	getSlugs,
-	sortGithubData,
-} from '../../utils/helpers';
+import { getPostsFromSlug, getSlugs, sortGithubData } from '../../lib/utils';
 import { ProjectMeta } from '../../types';
 import { NextSeo } from 'next-seo';
 import { serialize } from 'next-mdx-remote/serialize';
@@ -39,11 +35,11 @@ const ProjectView = ({
 			url: `https://sid86.me/project/${project.meta.slug}`,
 			images: [
 				{
-					url: project.meta.image,
-					width: 800,
-					height: 600,
-					alt: project.meta.title,
-					type: 'image/jpeg',
+					url: 'https://sid86.me/_next/image?url=%2Fimages%2Flogo%2Fdark.png&w=128&q=75',
+					width: 128,
+					height: 128,
+					type: 'image/webp',
+					alt: 'Og Image dark',
 				},
 			],
 			siteName: `sid86`,

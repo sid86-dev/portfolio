@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ProjectMeta } from '../../types';
 import ProjectCard from './ProjectCard';
-import { sortProjectArray } from '../../utils/helpers';
+import { sortProjectArray } from '../../lib/utils';
 
 interface IProps {
 	projects: ProjectMeta[];

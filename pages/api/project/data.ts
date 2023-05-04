@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAllProjects } from '../../../utils/helpers';
+import { getAllProjects } from '../../../lib/utils';
 import { IProjectApiResponse } from '../../../types';
 import Cors from 'cors';
 

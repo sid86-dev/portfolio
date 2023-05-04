@@ -1,7 +1,4 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { Footer } from '../../components/Footer';
-import Navbar from '../../components/Navbar';
-import { Wrapper } from '../../components/Wrapper';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import emailjs from '@emailjs/browser';
 import SendIcon from '@mui/icons-material/Send';

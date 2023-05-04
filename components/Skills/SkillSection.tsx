@@ -1,7 +1,7 @@
 import React from 'react';
 import { SkillCard } from './SkillCard';
 import { motion } from 'framer-motion';
-import { cardVarient } from '../../utils/helpers';
+import { cardVarient } from '../../lib/constants';
 
 export default function App() {
 	return (

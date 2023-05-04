@@ -3,10 +3,9 @@ import { ProjectMeta } from '../../types';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { tagColors } from '../../utils/helpers';
+import { tagColors } from '../../lib/constants';
 import Highlighter from 'react-highlight-words';
 import { useRouter } from 'next/router';
-import { BsCircleFill } from 'react-icons/bs';
 
 interface IProps {
 	data: ProjectMeta[];
