@@ -67,6 +67,7 @@ function Navbar() {
 					className='btn p-0 px-1 wrapper text-default'
 					data-bs-dismiss='offcanvas'
 					aria-label='Close'
+					name='closeButton'
 				>
 					<CloseIcon fontSize='large' />
 				</button>
@@ -165,6 +166,7 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 				<button
 					className='btn btn-dark mx-lg-3'
 					type='submit'
+					name='themeButton'
 					onClick={() => {
 						setTheme(theme === 'dark' ? 'light' : 'dark');
 						setIsActive(!isActive);
@@ -185,7 +187,11 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 					</motion.div>
 				</button>
 				<Link className='navbar-brand' href='https://xth86.sid86.me/'>
-					<button className='btn btn-dark mx-2' type='submit'>
+					<button
+						className='btn btn-dark mx-2'
+						name='websiteLink'
+						type='submit'
+					>
 						<TerminalIcon />
 					</button>
 				</Link>
