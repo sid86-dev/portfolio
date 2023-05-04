@@ -5,9 +5,6 @@ import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Image from 'next/image';
-import { Wrapper } from '../components/Wrapper';
-import Navbar from '../components/Navbar';
-import { Footer } from '../components/Footer';
 import { NextSeo } from 'next-seo';
 import { getMdxContent } from '../utils/helpers';
 
@@ -26,6 +23,22 @@ const Terms: NextPage<IPageProps> = ({ Source, meta }) => {
 			description: meta.excerpt,
 			url: `https://sid86.me/terms`,
 			siteName: `Sid86`,
+			images: [
+				{
+					url: '/images/logo/dark.png',
+					width: 800,
+					height: 600,
+					type: 'image/png',
+					alt: 'Og Image dark',
+				},
+				{
+					url: '/images/logo/light.png',
+					width: 800,
+					height: 600,
+					type: 'image/png',
+					alt: 'Og Image Light',
+				},
+			],
 		},
 	};
 	return (

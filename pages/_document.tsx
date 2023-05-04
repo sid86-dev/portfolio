@@ -11,6 +11,9 @@ export default function Document() {
 				<meta name='msapplication-starturl' content='/' />
 				<link rel='icon' href='/images/favicon.ico' />
 				<link rel='manifest' href='/manifest.webmanifest' />
+
+				{/* open graph */}
+				<meta property='twitter:image' content='/images/logo/dark.png'></meta>
 				<link
 					rel='preload'
 					as='font'
