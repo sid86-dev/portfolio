@@ -18,7 +18,13 @@
 		"quotes": ["off"],
 		"semi": "off",
 		"import/no-anonymous-default-export": "off",
-		"react/no-unescaped-entities": "off"
+		"react/no-unescaped-entities": "off",
+		"no-restricted-imports": [
+			"error",
+			{
+				"patterns": ["@mui/*/*/*"]
+			}
+		]
 	},
 	"overrides": [
 		{

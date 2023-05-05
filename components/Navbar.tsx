@@ -166,8 +166,10 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 				<button
 					className='btn btn-dark mx-lg-3'
 					type='submit'
-					name='themeButton'
-					area-label='themeButton'
+					name='themeToggler'
+					id='themeToggler'
+					area-label='themeToggler'
+					role='button'
 					onClick={() => {
 						setTheme(theme === 'dark' ? 'light' : 'dark');
 						setIsActive(!isActive);
@@ -190,9 +192,11 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 				<Link className='navbar-brand' href='https://xth86.sid86.me/'>
 					<button
 						className='btn btn-dark mx-2'
-						name='websiteLink'
-						aria-label='websiteLink'
+						name='terminalButton'
+						id='terminalButton'
+						aria-label='terminalButton'
 						type='submit'
+						role='button'
 					>
 						<TerminalIcon />
 					</button>

@@ -1,15 +1,19 @@
 import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
-import Script from 'next/script';
 import Main from '../components/Main';
 import dynamic from 'next/dynamic';
 const ProjectSection = dynamic(
 	() => import('../components/Project/ProjectSection'),
-	{ ssr: false, loading: () => <div>Loading...</div> }
+	{ ssr: false, loading: () => <Loader /> }
 );
-import SkillSection from '../components/Skills/SkillSection';
+const SkillSection = dynamic(
+	() => import('../components/Skills/SkillSection'),
+	{ ssr: false, loading: () => <Loader /> }
+);
+
 import { ProjectMeta } from '../types';
 import { getAllProjects } from '../lib/utils';
+import Loader from '../components/Loader';
 
 interface IProps {
 	projects: ProjectMeta[];
@@ -21,13 +25,6 @@ const Home: NextPage<IProps> = ({ projects }) => {
 			<Head>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 			</Head>
-
-			<Script
-				strategy='worker'
-				src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
-				integrity='sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p'
-				crossOrigin='anonymous'
-			></Script>
 
 			{/* landing intro section */}
 			<Main />

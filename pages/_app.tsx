@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.scss';
-import type { AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import Store from '../contexts/store';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
@@ -13,6 +13,7 @@ import { GoogleAnalytics } from 'nextjs-google-analytics';
 import Navbar from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Wrapper } from '../components/Wrapper';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	NProgress.configure({ showSpinner: false });
@@ -22,6 +23,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 	Router.events.on('routeChangeComplete', (url) => {
 		NProgress.done();
 	});
+
+	useEffect(() => {
+		require('bootstrap/dist/js/bootstrap.bundle.min.js');
+	}, []);
+
 	return (
 		<>
 			<GoogleAnalytics trackPageViews />
