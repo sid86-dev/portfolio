@@ -10,7 +10,7 @@ export default function Document() {
 				<meta name='apple-mobile-web-app-status-bar-style' content='default' />
 				<meta name='format-detection' content='telephone=no' />
 				<meta name='msapplication-starturl' content='/' />
-				<link rel='icon' href='/images/favicon.ico' />
+				<link rel='icon' href='/images/favicon/favicon.ico' />
 				<link rel='manifest' href='/manifest.webmanifest' />
 				<meta name='theme-color' content='#fa7e44' />
 

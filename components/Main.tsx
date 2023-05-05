@@ -83,7 +83,7 @@ function Main() {
 							src='/images/character.png'
 							alt='portrait'
 							height='400px'
-							width='385px'
+							width='414px'
 							priority
 						/>
 					</Tilt>

@@ -167,6 +167,7 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 					className='btn btn-dark mx-lg-3'
 					type='submit'
 					name='themeButton'
+					area-label='themeButton'
 					onClick={() => {
 						setTheme(theme === 'dark' ? 'light' : 'dark');
 						setIsActive(!isActive);
@@ -190,6 +191,7 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 					<button
 						className='btn btn-dark mx-2'
 						name='websiteLink'
+						aria-label='websiteLink'
 						type='submit'
 					>
 						<TerminalIcon />
