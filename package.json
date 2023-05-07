@@ -9,7 +9,7 @@
 		"lint": "next lint",
 		"prepare": "husky install",
 		"postbuild": "next-sitemap",
-		"test": "cypress run",
+		"test": "start-server-and-test dev 3000 cypress:open",
 		"cypress:open": "cypress open"
 	},
 	"dependencies": {

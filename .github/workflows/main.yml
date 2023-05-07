@@ -37,28 +37,9 @@ jobs:
           if-no-files-found: error
           path: .next
 
-  # Run cypress test
-  cypress-run:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: .next
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm start
-
   # production deployment on vercel
   deploy:
-    needs: [build, cypress-run]
+    needs: build
     name: Deploy-Production
     runs-on: ubuntu-latest
     steps:
@@ -77,11 +58,31 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
+  # Run cypress test
+  cypress-run:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folder
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: Cypress run with env
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm run test
+          browser: chrome
+
   # run lighthouse audit
   lighthouse:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: [build, deploy]
+    needs: deploy
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
