@@ -17,7 +17,7 @@ on:
 
 jobs:
   build:
-    name: Build-Test
+    name: Build-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -50,8 +50,41 @@ jobs:
         with:
           cmd: build # will run `yarn build` command
 
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: .next
+
+  # e2e app testing
+  cypress-test:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folder
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: Install cypress
+      - uses: borales/actions-yarn@v4
+        with:
+          cmd: install cypress # will run `yarn install` command
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          start: yarn test
+          browser: chrome
+
+  # production deployment on vercel
   deploy:
-    needs: build
+    needs: [build, cypress-test]
     name: Deploy-Production
     runs-on: ubuntu-latest
     steps:
@@ -70,6 +103,7 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
+  # run lighthouse audit
   lighthouse:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
@@ -84,3 +118,4 @@ jobs:
           budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+
