@@ -1,25 +1,9 @@
-import { collection, getDocs } from 'firebase/firestore';
-import { Post, Project, ProjectMeta } from '../types';
-import { db } from './firebase-config';
+import { Post, ProjectMeta } from '../types';
 import { sync } from 'glob';
 import matter from 'gray-matter';
 import path from 'path';
 import fs from 'fs';
 import { projectRankList } from './constants';
-
-export const projectCollectionRef = collection(db, 'projects');
-
-export const getdbData = new Promise<Project[]>((resolve) => {
-	getDocs(projectCollectionRef)
-		.then((dbData) => {
-			const data = dbData.docs.map((doc) => ({
-				...(doc.data() as Project),
-				id: doc.id,
-			}));
-			if (data) resolve(data);
-		})
-		.catch((err) => console.log(err));
-});
 
 const POSTS_PATH = path.join(process.cwd(), 'content/Projects');
 

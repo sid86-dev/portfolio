@@ -10,8 +10,13 @@ import 'highlight.js/styles/atom-one-dark.css';
 import { Main } from '../../components/Project/Details/Main';
 import remarkGfm from 'remark-gfm';
 import emoji from 'remark-emoji';
-import Insight from '../../components/Project/Details/Insight';
 import axios from 'axios';
+import dynamic from 'next/dynamic';
+import Loader from '../../components/Loader';
+const Insight = dynamic(
+	() => import('../../components/Project/Details/Insight'),
+	{ ssr: false, loading: () => <Loader /> }
+);
 
 interface IMDXPost {
 	Source: MDXRemoteSerializeResult<Record<string, unknown>>;

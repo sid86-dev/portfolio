@@ -10,6 +10,9 @@ const nextConfig = {
 
 		return config;
 	},
+	compiler: {
+		removeConsole: process.env.NODE_ENV === 'production',
+	},
 };
 
 const express = require('express');
@@ -34,7 +37,7 @@ const withPWA = require('next-pwa')({
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // 	enabled: process.env.ANALYZE === 'true',
-// 	openAnalyzer: false,
+// 	openAnalyzer: process.env.NODE_ENV === 'development' && false,
 // });
 
 // module.exports = withBundleAnalyzer(withPWA(nextConfig));

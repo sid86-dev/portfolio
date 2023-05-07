@@ -8,7 +8,9 @@
 		"start": "next start",
 		"lint": "next lint",
 		"prepare": "husky install",
-		"postbuild": "next-sitemap"
+		"postbuild": "next-sitemap",
+		"test": "start-server-and-test dev 3000 cypress:open",
+		"cypress:open": "cypress open"
 	},
 	"dependencies": {
 		"@emailjs/browser": "^3.9.0",
@@ -17,7 +19,7 @@
 		"@mui/icons-material": "^5.10.3",
 		"@mui/material": "^5.10.4",
 		"@mui/x-date-pickers": "^5.0.8",
-		"@next/bundle-analyzer": "^13.2.4",
+		"@next/bundle-analyzer": "^13.4.1",
 		"@sendgrid/mail": "^7.7.0",
 		"@types/cors": "^2.8.12",
 		"@vercel/analytics": "^0.1.11",
@@ -28,7 +30,6 @@
 		"cors": "^2.8.5",
 		"dayjs": "^1.11.6",
 		"express": "^4.18.2",
-		"firebase": "^9.13.0",
 		"framer-motion": "^7.6.1",
 		"gapi-script": "^1.2.0",
 		"glob": "^8.0.3",
@@ -59,7 +60,7 @@
 		"remark-emoji": "^3.0.2",
 		"remark-gfm": "^3.0.1",
 		"remove": "^0.1.5",
-		"sass": "^1.61.0",
+		"sass": "^1.62.1",
 		"sharp": "^0.31.1",
 		"zustand": "^4.1.4"
 	},
@@ -71,11 +72,14 @@
 		"@types/react-calendar": "^3.5.3",
 		"@types/react-dom": "18.0.6",
 		"@types/react-highlight-words": "^0.16.4",
+		"babel-plugin-direct-import": "^1.0.0",
 		"cross-env": "^7.0.3",
+		"cypress": "^12.11.0",
 		"eslint": "8.23.0",
 		"eslint-config-next": "^13.4.0",
 		"husky": "^8.0.2",
 		"lint-staged": "^13.0.3",
+		"start-server-and-test": "^2.0.0",
 		"typescript": "4.8.2"
 	},
 	"husky": {
