@@ -131,7 +131,7 @@ jobs:
   lighthouse-audit:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: deploy
+    needs: [deploy, ui-chrome-tests]
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
