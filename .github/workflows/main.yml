@@ -146,7 +146,7 @@ jobs:
   # merge main branch into prod after successfull deployment and test
   merge-branch:
     name: Merge-branch
-    needs: [deploy, lighthouse-audit]
+    needs: [deploy, lighthouse-audit, ui-chrome-tests, ui-chrome-mobile-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
