@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Cypress install
+      - name: Cypress install and build
         uses: cypress-io/github-action@v5
         with:
           # Disable running of tests within install job
@@ -35,7 +35,7 @@ jobs:
         with:
           name: build
           if-no-files-found: error
-          path: build
+          path: .next
 
   # Run cypress test
   cypress-run:
@@ -49,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build
-          path: build
+          path: .next
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
@@ -82,7 +82,7 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: [build, deploy, cypress-run]
+    needs: [build, deploy]
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
