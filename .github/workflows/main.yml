@@ -1,4 +1,4 @@
-name: Project build CI
+name: CI-Production
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_USER_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -18,29 +18,42 @@ on:
 jobs:
   # Caching Dependencies and Build Artifacts
   build:
+    name: Build-Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Cypress install and build
-        uses: cypress-io/github-action@v5
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
         with:
-          # Disable running of tests within install job
-          runTests: false
-          build: npm run build
+          node-version: 16.x
 
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
+      - name: Restoring and saving build cache
+        uses: actions/cache@v3
         with:
-          name: build
-          if-no-files-found: error
-          path: .next
+          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build # will run `yarn build` command
 
   # production deployment on vercel
   deploy:
     needs: build
-    name: Deploy-Production
+    name: Deploy-production
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -58,28 +71,64 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-  # Run cypress test
-  cypress-run:
+  # Run cypress test on chrome
+  ui-chrome-tests:
+    needs: [deploy, build]
     runs-on: ubuntu-latest
-    needs: deploy
+    name: E2E on Chrome
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
         with:
-          name: build
-          path: .next
-
-      - name: Cypress run with env
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm run test
           browser: chrome
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  ui-chrome-mobile-tests:
+    needs: [deploy, build]
+    runs-on: ubuntu-latest
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          config: 'viewportWidth=375,viewportHeight=667'
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Run cypress test on firefox
+  ui-firefox-mobile-tests:
+    needs: [deploy, build]
+    runs-on: ubuntu-latest
+    name: UI Tests - Firefox - Desktop
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          config: 'viewportWidth=375,viewportHeight=667'
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  ui-firefox-tests:
+    needs: [deploy, build]
+    runs-on: ubuntu-latest
+    name: UI Tests - Firefox - Desktop
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # run lighthouse audit
-  lighthouse:
+  lighthouse-audit:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
     needs: deploy
@@ -94,3 +143,19 @@ jobs:
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
 
+  # merge main branch into prod after successfull deployment and test
+  merge-branch:
+    name: Merge-branch
+    needs: [deploy, lighthouse-audit]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge into prod
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: main
+          target_branch: prod
+          message: Merge main into prod
+          github_token: ${{ secrets.GITHUB_TOKEN }}
