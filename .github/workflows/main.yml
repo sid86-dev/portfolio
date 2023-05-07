@@ -73,7 +73,7 @@ jobs:
 
   # Run cypress test on chrome
   ui-chrome-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
     name: E2E on Chrome
     steps:
@@ -86,7 +86,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ui-chrome-mobile-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
     name: E2E on Chrome
     steps:
@@ -101,7 +101,7 @@ jobs:
 
   # Run cypress test on firefox
   ui-firefox-mobile-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
     name: UI Tests - Firefox - Desktop
     steps:
@@ -115,7 +115,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ui-firefox-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
     name: UI Tests - Firefox - Desktop
     steps:

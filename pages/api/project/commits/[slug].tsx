@@ -6,7 +6,7 @@ export default async function handler(
 	res: NextApiResponse
 ) {
 	const octokit = new Octokit({
-		auth: process.env.GITHUB_PERSONAL_TOKEN,
+		auth: process.env.PERSONAL_TOKEN_GITHUB,
 	});
 
 	const slug = req.query.slug as string;
