@@ -50,7 +50,7 @@ jobs:
         with:
           cmd: build # will run `yarn build` command
 
-  # # production deployment on vercel
+  # production deployment on vercel
   deploy:
     needs: build
     name: Deploy-production
