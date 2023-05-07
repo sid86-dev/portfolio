@@ -1,4 +1,4 @@
-name: Project build CI
+name: CI-Production
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_USER_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -72,7 +72,7 @@ jobs:
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
   # Run cypress test
-  cypress-run:
+  cypress-test:
     needs: [deploy, build]
     runs-on: ubuntu-latest
     name: E2E on Chrome
@@ -83,7 +83,7 @@ jobs:
           browser: chrome
 
   # run lighthouse audit
-  lighthouse:
+  lighthouse-audit:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
     needs: deploy
@@ -98,3 +98,19 @@ jobs:
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
 
+  # merge main branch into prod after successfull deployment and test
+  merge-branch:
+    name: Merge-branch
+    needs: [deploy, cypress-test, lighthouse-audit]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge into prod
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: main
+          target_branch: prod
+          message: Merge main into prod
+          github_token: ${{ secrets.GITHUB_TOKEN }}
