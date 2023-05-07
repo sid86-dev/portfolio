@@ -103,7 +103,7 @@ jobs:
   ui-firefox-mobile-tests:
     needs: deploy
     runs-on: ubuntu-latest
-    name: E2E Tests - Firefox - Desktop
+    name: E2E Tests - Firefox - Mobile
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -117,7 +117,7 @@ jobs:
   ui-firefox-tests:
     needs: deploy
     runs-on: ubuntu-latest
-    name: E2E Tests - Firefox - Mobile
+    name: E2E Tests - Firefox - Desktop
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -146,7 +146,7 @@ jobs:
   # merge main branch into prod after successfull deployment and test
   merge-branch:
     name: Merge-branch
-    needs: [deploy, lighthouse-audit, ui-chrome-tests, ui-chrome-mobile-tests]
+    needs: [deploy, lighthouse-audit, ui-chrome-tests, ui-firefox-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
