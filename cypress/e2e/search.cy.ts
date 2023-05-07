@@ -1,7 +1,7 @@
 describe('Navigation', () => {
 	it('should navigate to the search page', () => {
 		// Start from the index page
-		cy.visit('http://localhost:3000');
+		cy.visit('https://sid86.me');
 
 		// Find a link with an href attribute containing "search" and click it
 		cy.get('a[href*="search"]').click();
@@ -16,3 +16,5 @@ describe('Navigation', () => {
 		cy.get('p').contains('Now complete task an earn money while having fun');
 	});
 });
+
+export {};
