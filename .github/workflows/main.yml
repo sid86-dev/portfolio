@@ -18,43 +18,46 @@ on:
 jobs:
   # Caching Dependencies and Build Artifacts
   build:
+    name: Build-Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Cypress install and build
-        uses: cypress-io/github-action@v5
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
         with:
-          # Disable running of tests within install job
-          runTests: false
-          build: npm run build
+          node-version: 16.x
 
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
+      - name: Restoring and saving build cache
+        uses: actions/cache@v3
         with:
-          name: build
-          if-no-files-found: error
-          path: .next
+          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
 
-  # Run cypress test
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build # will run `yarn build` command
+
+  # End-to-End cypress Testing
   cypress-run:
     runs-on: ubuntu-latest
-    needs: build
+    name: E2E on Chrome
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download the build folder
-        uses: actions/download-artifact@v3
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
         with:
-          name: build
-          path: .next
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm run test
           browser: chrome
 
   # production deployment on vercel
