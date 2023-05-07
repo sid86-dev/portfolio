@@ -71,8 +71,8 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-  # Run cypress test
-  cypress-test:
+  # Run cypress test on chrome
+  ui-chrome-tests:
     needs: [deploy, build]
     runs-on: ubuntu-latest
     name: E2E on Chrome
@@ -81,6 +81,51 @@ jobs:
       - uses: cypress-io/github-action@v5
         with:
           browser: chrome
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  ui-chrome-mobile-tests:
+    needs: [deploy, build]
+    runs-on: ubuntu-latest
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          config: 'viewportWidth=375,viewportHeight=667'
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Run cypress test on firefox
+  ui-firefox-mobile-tests:
+    needs: [deploy, build]
+    runs-on: ubuntu-latest
+    name: UI Tests - Firefox - Desktop
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          config: 'viewportWidth=375,viewportHeight=667'
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  ui-firefox-tests:
+    needs: [deploy, build]
+    runs-on: ubuntu-latest
+    name: UI Tests - Firefox - Desktop
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # run lighthouse audit
   lighthouse-audit:
@@ -101,7 +146,7 @@ jobs:
   # merge main branch into prod after successfull deployment and test
   merge-branch:
     name: Merge-branch
-    needs: [deploy, cypress-test, lighthouse-audit]
+    needs: [deploy, lighthouse-audit]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
