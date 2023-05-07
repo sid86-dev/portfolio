@@ -8,6 +8,7 @@ env:
   NEXT_PUBLIC_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_SERVICE_ID }}
   NEXT_PUBLIC_ZOOM_PUBLISH_URL: ${{ secrets.NEXT_PUBLIC_ZOOM_PUBLISH_URL }}
   NEXT_PUBLIC_ZOOM_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_ZOOM_CLIENT_ID }}
+  PERSONAL_TOKEN_GITHUB: ${{ secrets.PERSONAL_TOKEN_GITHUB }}
 
 on:
   push:
@@ -16,7 +17,7 @@ on:
     branches: [main]
 
 jobs:
-  # Caching Dependencies and Build Artifacts
+  # caching Dependencies and Build Artifacts
   build:
     name: Build-Test
     runs-on: ubuntu-latest
@@ -71,11 +72,11 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-  # Run cypress test on chrome
+  # run cypress test on chrome
   ui-chrome-tests:
     needs: deploy
     runs-on: ubuntu-latest
-    name: E2E on Chrome
+    name: E2E Tests - Chrome - Desktop
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -88,7 +89,7 @@ jobs:
   ui-chrome-mobile-tests:
     needs: deploy
     runs-on: ubuntu-latest
-    name: E2E on Chrome
+    name: E2E Tests - Chrome - Mobile
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -99,11 +100,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # Run cypress test on firefox
+  # run cypress test on firefox
   ui-firefox-mobile-tests:
     needs: deploy
     runs-on: ubuntu-latest
-    name: UI Tests - Firefox - Desktop
+    name: E2E Tests - Firefox - Desktop
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -117,7 +118,7 @@ jobs:
   ui-firefox-tests:
     needs: deploy
     runs-on: ubuntu-latest
-    name: UI Tests - Firefox - Desktop
+    name: E2E Tests - Firefox - Mobile
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
