@@ -13,3 +13,5 @@ describe('Navigation', () => {
 		cy.get('h1').contains("Let's Connect !");
 	});
 });
+
+export {};

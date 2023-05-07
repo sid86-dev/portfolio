@@ -16,3 +16,5 @@ describe('Navigation', () => {
 		cy.get('p').contains('Now complete task an earn money while having fun');
 	});
 });
+
+export {};

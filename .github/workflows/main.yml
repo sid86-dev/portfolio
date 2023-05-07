@@ -82,7 +82,7 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: [build, deploy]
+    needs: [build, deploy, cypress-run]
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
