@@ -59,6 +59,7 @@ jobs:
 
   # e2e app testing
   cypress-test:
+    name: Run Test
     runs-on: ubuntu-latest
     needs: [build]
     steps:
