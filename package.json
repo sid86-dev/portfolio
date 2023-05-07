@@ -10,7 +10,8 @@
 		"prepare": "husky install",
 		"postbuild": "next-sitemap",
 		"test": "start-server-and-test dev 3000 cypress:open",
-		"cypress:open": "cypress open"
+		"cypress:open": "cypress open",
+		"cypress:run": "cypress run"
 	},
 	"dependencies": {
 		"@emailjs/browser": "^3.9.0",
