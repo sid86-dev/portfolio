@@ -16,7 +16,7 @@ on:
     branches: [main]
 
 jobs:
-  # Caching Dependencies and Build Artifacts
+  # caching Dependencies and Build Artifacts
   build:
     name: Build-Test
     runs-on: ubuntu-latest
@@ -71,59 +71,55 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-  # Run cypress test on chrome
+  # run cypress test on chrome
   ui-chrome-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
-    name: E2E on Chrome
+    name: E2E Tests - Chrome - Desktop
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          parallel: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ui-chrome-mobile-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
-    name: E2E on Chrome
+    name: E2E Tests - Chrome - Mobile
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
         with:
           browser: chrome
           config: 'viewportWidth=375,viewportHeight=667'
-          parallel: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # Run cypress test on firefox
+  # run cypress test on firefox
   ui-firefox-mobile-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
-    name: UI Tests - Firefox - Desktop
+    name: E2E Tests - Firefox - Mobile
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
         with:
           browser: firefox
           config: 'viewportWidth=375,viewportHeight=667'
-          parallel: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ui-firefox-tests:
-    needs: [deploy, build]
+    needs: deploy
     runs-on: ubuntu-latest
-    name: UI Tests - Firefox - Desktop
+    name: E2E Tests - Firefox - Desktop
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
         with:
           browser: firefox
-          parallel: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -131,7 +127,7 @@ jobs:
   lighthouse-audit:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: deploy
+    needs: [deploy, ui-chrome-tests]
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
@@ -146,7 +142,7 @@ jobs:
   # merge main branch into prod after successfull deployment and test
   merge-branch:
     name: Merge-branch
-    needs: [deploy, lighthouse-audit]
+    needs: [deploy, lighthouse-audit, ui-chrome-tests, ui-firefox-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master

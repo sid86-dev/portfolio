@@ -13,10 +13,10 @@ import emoji from 'remark-emoji';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 import Loader from '../../components/Loader';
-const Insight = dynamic(
-	() => import('../../components/Project/Details/Insight'),
-	{ ssr: false, loading: () => <Loader /> }
-);
+// const Insight = dynamic(
+// 	() => import('../../components/Project/Details/Insight'),
+// 	{ ssr: false, loading: () => <Loader /> }
+// );
 
 interface IMDXPost {
 	Source: MDXRemoteSerializeResult<Record<string, unknown>>;
@@ -59,7 +59,7 @@ const ProjectView = ({
 				</Main>
 			</div>
 			<hr className='mt-5' />
-			<Insight graphData={graphData} project={project.meta} />
+			{/* <Insight graphData={graphData} project={project.meta} /> */}
 			<hr className='mt-5' />
 		</>
 	);
@@ -72,11 +72,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { content, meta } = getPostsFromSlug(slug);
 
 	// GET REPO DATA FROM GITHUB API
-	const { data } = await axios.get(
-		`${process.env.NEXT_PUBLIC_SITE_URL}/api/project/commits/${meta.slug}`
-	);
+	// const { data } = await axios.get(
+	// 	`${process.env.NEXT_PUBLIC_SITE_URL}/api/project/commits/${meta.slug}`
+	// );
 
-	const { commitData, dataLabels } = sortGithubData(data.commits);
+	// const { commitData, dataLabels } = sortGithubData(data.commits);
 
 	const mdxSource = await serialize(content, {
 		mdxOptions: {
@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	return {
 		props: {
 			project: { Source: mdxSource, meta },
-			graphData: { commitData, dataLabels },
+			// graphData: { commitData, dataLabels },
 		},
 	};
 };
