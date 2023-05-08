@@ -3,6 +3,8 @@ describe('Navigation', () => {
 		// Start from the index page
 		cy.visit('/');
 
+		cy.wait(2000);
+
 		// Find a link with an href attribute containing "search" and click it
 		cy.get('a[href*="search"]').click();
 
