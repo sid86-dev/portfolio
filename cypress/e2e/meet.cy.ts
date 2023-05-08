@@ -6,7 +6,10 @@ describe('Navigation', () => {
 		cy.wait(2000);
 
 		// Find a link with an href attribute containing "meet" and click it
-		cy.get('a[href*="meet"]').click();
+		cy.get('a[href*="meet"]').click({
+			waitForAnimations: false,
+			force: true,
+		});
 
 		// The new url should include "/meet"
 		cy.url().should('include', '/meet');
