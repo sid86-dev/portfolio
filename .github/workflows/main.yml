@@ -34,7 +34,6 @@ jobs:
       - run: yarn cypress info
       - run: node --version
       - run: node -p 'os.cpus()'
-      - run: yarn types
       - run: yarn lint
       - run: yarn build:ci
 
@@ -66,7 +65,7 @@ jobs:
       - run: yarn cypress info
       - run: node -p 'os.cpus()'
       - run: yarn lint
-      - run: yarn build
+      - run: yarn build:ci
 
       - name: Save build folder
         uses: actions/upload-artifact@v3
