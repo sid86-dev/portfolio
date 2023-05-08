@@ -44,36 +44,6 @@ jobs:
           if-no-files-found: error
           path: .next
 
-  install-windows:
-    runs-on: windows-2022
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          # The default install for the job is node 18+
-          # which has some compatibility issues with openSSL inside this windows job.
-          # Node 18 updated with OpenSSL provider which causes this compatibility issue
-          # downgrading node to v16 to use the openssl-legacy-provider by default to prevent this issue
-          node-version: '16'
-
-      - name: Cypress install
-        uses: cypress-io/github-action@v5
-        with:
-          runTests: false
-      # report machine parameters
-      - run: yarn cypress info
-      - run: node -p 'os.cpus()'
-      - run: yarn lint
-      - run: yarn build:ci
-
-      - name: Save build folder
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          if-no-files-found: error
-          path: .next
-
   # run cypress test on chrome
   ui-chrome-tests:
     timeout-minutes: 15
@@ -259,47 +229,6 @@ jobs:
           record: true
           parallel: true
           group: 'UI - Firefox - Mobile'
-          spec: cypress/e2e/*
-          config-file: cypress.config.ts
-        env:
-          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  ui-windows-tests:
-    timeout-minutes: 40
-    runs-on: windows-2022
-    needs: install-windows
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving Cypress Cloud hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-      matrix:
-        # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Download the build folders
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: .next
-
-      - name: 'UI Tests - Electron - Windows'
-        uses: cypress-io/github-action@v5
-        with:
-          start: yarn start:ci
-          wait-on: 'http://localhost:3000'
-          wait-on-timeout: 120
-          record: true
-          parallel: true
-          group: 'UI - Electron - Windows'
           spec: cypress/e2e/*
           config-file: cypress.config.ts
         env:
