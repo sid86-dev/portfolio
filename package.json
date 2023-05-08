@@ -5,13 +5,15 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
+		"build:ci": "next build",
 		"start": "next start",
 		"lint": "next lint",
 		"prepare": "husky install",
 		"postbuild": "next-sitemap",
 		"test": "start-server-and-test dev 3000 cypress:open",
 		"cypress:open": "cypress open",
-		"cypress:run": "cypress run"
+		"cypress:run": "cypress run",
+		"start:ci": "cross-env NODE_ENV=test yarn start"
 	},
 	"dependencies": {
 		"@emailjs/browser": "^3.9.0",
