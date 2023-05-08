@@ -247,7 +247,6 @@ jobs:
         ui-firefox-tests,
         ui-chrome-mobile-tests,
         ui-firefox-mobile-tests,
-        merge-branch,
       ]
     name: Deploy-production
     runs-on: ubuntu-latest
@@ -286,7 +285,7 @@ jobs:
   # merge main branch into prod after successfull deployment and test
   merge-branch:
     name: Merge-branch
-    # needs: []
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
