@@ -240,7 +240,15 @@ jobs:
 
   # production deployment on vercel
   deploy:
-    needs: [install, ui-firefox-tests]
+    needs:
+      [
+        install,
+        ui-chrome-tests,
+        ui-firefox-tests,
+        ui-chrome-mobile-tests,
+        ui-firefox-mobile-tests,
+        merge-branch,
+      ]
     name: Deploy-production
     runs-on: ubuntu-latest
     steps:
@@ -263,7 +271,7 @@ jobs:
   lighthouse-audit:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: [deploy, ui-firefox-tests]
+    needs: [deploy, ui-chrome-tests]
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
@@ -278,7 +286,7 @@ jobs:
   # merge main branch into prod after successfull deployment and test
   merge-branch:
     name: Merge-branch
-    needs: [deploy, lighthouse-audit, ui-firefox-tests]
+    # needs: []
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master

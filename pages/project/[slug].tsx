@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 	// GET REPO DATA FROM GITHUB API
 	const { data } = await axios.get(
-		`${process.env.NEXT_PUBLIC_SITE_URL}/api/project/commits/${meta.slug}`
+		`https://sid86.me/api/project/commits/${meta.slug}`
 	);
 
 	const { commitData, dataLabels } = sortGithubData(data.commits);
