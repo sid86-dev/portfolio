@@ -17,42 +17,301 @@ on:
 
 jobs:
   # caching Dependencies and Build Artifacts
-  build:
-    name: Build-Test
+  install:
     runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome105-ff104-edge
+      options: --user 1001
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Set Node.js 16.x
-        uses: actions/setup-node@v3
+      - name: Cypress install
+        uses: cypress-io/github-action@v5
         with:
-          node-version: 16.x
+          runTests: false
+      # report machine parameters
+      - run: yarn cypress info
+      - run: node --version
+      - run: node -p 'os.cpus()'
+      - run: yarn lint
+      - run: yarn build:ci
 
-      - name: Restoring and saving build cache
-        uses: actions/cache@v3
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
         with:
-          # See here for caching with `yarn` https://github.com/actions/cache/blob/main/examples#node---yarn or you can leverage caching with actions/setup-node https://github.com/actions/setup-node
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          # Generate a new cache whenever packages or source files change.
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
-          # If source files changed but packages didn't, rebuild from a prior cache.
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
+          name: build
+          if-no-files-found: error
+          path: .next
 
-      - name: Build production bundle
-        uses: borales/actions-yarn@v4
+  install-windows:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          cmd: build # will run `yarn build` command
+          # The default install for the job is node 18+
+          # which has some compatibility issues with openSSL inside this windows job.
+          # Node 18 updated with OpenSSL provider which causes this compatibility issue
+          # downgrading node to v16 to use the openssl-legacy-provider by default to prevent this issue
+          node-version: '16'
+
+      - name: Cypress install
+        uses: cypress-io/github-action@v5
+        with:
+          runTests: false
+      # report machine parameters
+      - run: yarn cypress info
+      - run: node -p 'os.cpus()'
+      - run: yarn lint
+      - run: yarn build:ci
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: .next
+
+  # run cypress test on chrome
+  ui-chrome-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome105-ff104-edge
+      options: --user 1001
+    needs: install
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving Cypress Cloud hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: Cypress info
+        run: npx cypress info
+
+      - name: Node info
+        run: node -v
+
+      - name: __e Dir
+        run: ls /__e
+
+      - name: 'UI Tests - Chrome'
+        uses: cypress-io/github-action@v5
+        with:
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: 'UI - Chrome'
+          spec: cypress/e2e/*
+          config-file: cypress.config.ts
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: 'cypress:server:args'
+
+  ui-chrome-mobile-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome105-ff104-edge
+      options: --user 1001
+    needs: install
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving Cypress Cloud hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: 'UI Tests - Chrome - Mobile'
+        uses: cypress-io/github-action@v5
+        with:
+          config: 'viewportWidth=375,viewportHeight=667'
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: 'UI - Chrome - Mobile'
+          spec: cypress/e2e/*
+          config-file: cypress.config.ts
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # run cypress test on firefox
+  ui-firefox-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome105-ff104-edge
+      options: --user 1001
+    needs: install
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving Cypress Cloud hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: 'UI Tests - Firefox'
+        uses: cypress-io/github-action@v5
+        with:
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: firefox
+          record: true
+          parallel: true
+          group: 'UI - Firefox'
+          spec: cypress/e2e/*
+          config-file: cypress.config.ts
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  ui-firefox-mobile-tests:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/browsers:node16.16.0-chrome105-ff104-edge
+      options: --user 1001
+    needs: install
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving Cypress Cloud hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: 'UI Tests - Firefox - Mobile'
+        uses: cypress-io/github-action@v5
+        with:
+          config: 'viewportWidth=375,viewportHeight=667'
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: firefox
+          record: true
+          parallel: true
+          group: 'UI - Firefox - Mobile'
+          spec: cypress/e2e/*
+          config-file: cypress.config.ts
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  ui-windows-tests:
+    timeout-minutes: 40
+    runs-on: windows-2022
+    needs: install-windows
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving Cypress Cloud hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: .next
+
+      - name: 'UI Tests - Electron - Windows'
+        uses: cypress-io/github-action@v5
+        with:
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          record: true
+          parallel: true
+          group: 'UI - Electron - Windows'
+          spec: cypress/e2e/*
+          config-file: cypress.config.ts
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # production deployment on vercel
   deploy:
-    needs: build
+    needs: [install, ui-firefox-tests]
     name: Deploy-production
     runs-on: ubuntu-latest
     steps:
@@ -71,63 +330,11 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-  # run cypress test on chrome
-  ui-chrome-tests:
-    needs: deploy
-    runs-on: ubuntu-latest
-    name: E2E Tests - Chrome - Desktop
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
-        with:
-          browser: chrome
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  ui-chrome-mobile-tests:
-    needs: deploy
-    runs-on: ubuntu-latest
-    name: E2E Tests - Chrome - Mobile
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
-        with:
-          browser: chrome
-          config: 'viewportWidth=375,viewportHeight=667'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # run cypress test on firefox
-  ui-firefox-mobile-tests:
-    needs: deploy
-    runs-on: ubuntu-latest
-    name: E2E Tests - Firefox - Mobile
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
-        with:
-          browser: firefox
-          config: 'viewportWidth=375,viewportHeight=667'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  ui-firefox-tests:
-    needs: deploy
-    runs-on: ubuntu-latest
-    name: E2E Tests - Firefox - Desktop
-    steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
-        with:
-          browser: firefox
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   # run lighthouse audit
   lighthouse-audit:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: [deploy, ui-chrome-tests]
+    needs: [deploy, ui-firefox-tests]
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
@@ -142,7 +349,7 @@ jobs:
   # merge main branch into prod after successfull deployment and test
   merge-branch:
     name: Merge-branch
-    needs: [deploy, lighthouse-audit, ui-chrome-tests, ui-firefox-tests]
+    needs: [deploy, lighthouse-audit, ui-firefox-tests]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
