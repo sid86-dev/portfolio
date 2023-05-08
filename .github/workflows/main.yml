@@ -247,6 +247,7 @@ jobs:
         ui-firefox-tests,
         ui-chrome-mobile-tests,
         ui-firefox-mobile-tests,
+        merge-branch,
       ]
     name: Deploy-production
     runs-on: ubuntu-latest
