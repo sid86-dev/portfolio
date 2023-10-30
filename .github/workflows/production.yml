@@ -241,7 +241,6 @@ jobs:
 
   # production deployment on vercel
   deploy:
-    if: always()
     needs:
       [
         ui-chrome-tests,

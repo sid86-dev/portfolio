@@ -1,0 +1,41 @@
+name: CI-Preview
+env:
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_USER_ID }}
+    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_preview:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Extract Deployed URL
+        id: extract-url
+        run: |
+          # Use the Vercel API to get the deployment URL for the development environment
+          DEPLOYMENT_URL=$(vercel ls --prod=false --token ${{ secrets.VERCEL_TOKEN }} --json | jq -r '.[0].url')
+          echo "Deployed URL: $DEPLOYMENT_URL"
+          echo "::set-output name=url::$DEPLOYMENT_URL"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+      - name: Save URL as Repo Variable
+        run: |
+          echo "DEPLOYED_URL=${{ steps.extract-url.outputs.url }}" >> $GITHUB_ENV
+
+      - name: Display Deployed URL
+        run: echo "Deployed URL is $DEPLOYED_URL"
