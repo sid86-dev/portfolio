@@ -52,19 +52,30 @@ const ProjectView = ({
 	};
 	return (
 		<>
-			<NextSeo {...SEO} />
-			<div className='m-lg-5 pt-5 pt-md-2 px-3 px-lg-4'>
-				<Main project={project.meta}>
-					<MDXRemote {...project.Source} components={{ Image }} />
-				</Main>
-			</div>
-			<hr className='mt-5' />
-			{project.meta.type === 'freelance' ? (
-				''
+			{process.env.NEXT_PUBLIC_SSG === 'false' ? (
+				<div className='alert alert-warning my-5 py-5' role='alert'>
+					<div className='my-5 py-5'>
+						<strong>Warning!</strong> You are viewing a static version of this
+						page.{' '}
+					</div>
+				</div>
 			) : (
 				<>
-					<Insight graphData={graphData} project={project.meta} />
-					<hr className='mt-5' />{' '}
+					<NextSeo {...SEO} />
+					<div className='m-lg-5 pt-5 pt-md-2 px-3 px-lg-4'>
+						<Main project={project.meta}>
+							<MDXRemote {...project.Source} components={{ Image }} />
+						</Main>
+					</div>
+					<hr className='mt-5' />
+					{project?.meta?.type === 'freelance' ? (
+						''
+					) : (
+						<>
+							<Insight graphData={graphData} project={project.meta} />
+							<hr className='mt-5' />{' '}
+						</>
+					)}
 				</>
 			)}
 		</>
@@ -77,33 +88,41 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { slug } = params as { slug: string };
 	const { content, meta } = getPostsFromSlug(slug);
 
-	const mdxSource = await serialize(content, {
-		mdxOptions: {
-			rehypePlugins: [rehypeHighlight],
-			remarkPlugins: [remarkGfm, emoji],
-		},
-	});
-
-	// GET REPO DATA FROM GITHUB API
-	if (meta.type !== 'freelance') {
-		const { data } = await axios.get(
-			`${process.env.NEXT_PUBLIC_SITE_URL}/api/project/commits/${meta.slug}`
-		);
-
-		const { commitData, dataLabels } = sortGithubData(data.commits);
-
+	if (process.env.NEXT_PUBLIC_SSG === 'false') {
 		return {
 			props: {
-				project: { Source: mdxSource, meta },
-				graphData: { commitData, dataLabels },
+				project: { Source: '', meta },
 			},
 		};
 	} else {
-		return {
-			props: {
-				project: { Source: mdxSource, meta },
+		const mdxSource = await serialize(content, {
+			mdxOptions: {
+				rehypePlugins: [rehypeHighlight],
+				remarkPlugins: [remarkGfm, emoji],
 			},
-		};
+		});
+
+		// GET REPO DATA FROM GITHUB API
+		if (meta.type !== 'freelance') {
+			const { data } = await axios.get(
+				`${process.env.NEXT_PUBLIC_SITE_URL}/api/project/commits/${meta.slug}`
+			);
+
+			const { commitData, dataLabels } = sortGithubData(data.commits);
+
+			return {
+				props: {
+					project: { Source: mdxSource, meta },
+					graphData: { commitData, dataLabels },
+				},
+			};
+		} else {
+			return {
+				props: {
+					project: { Source: mdxSource, meta },
+				},
+			};
+		}
 	}
 };
 
