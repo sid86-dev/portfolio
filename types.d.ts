@@ -5,6 +5,7 @@ export interface Project {
 	github: ?string;
 	link: string;
 	rank: number;
+	type: string?;
 	description: string;
 	longDescription: string;
 	tags: ?string[];
@@ -14,6 +15,7 @@ export interface ProjectMeta {
 	title: string;
 	excerpt: string;
 	slug: string;
+	type: string?;
 	date: string;
 	tags: string[];
 	link: string;
@@ -33,7 +35,7 @@ export type AppStore = {
 
 export type AppStoreContext = [
 	state: AppStore,
-	setState: (state: AppStore) => void
+	setState: (state: AppStore) => void,
 ];
 
 export type ISkillCard = { id: number; title: string; description: string };

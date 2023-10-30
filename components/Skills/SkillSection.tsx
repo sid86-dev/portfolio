@@ -9,6 +9,11 @@ export default function App() {
 			{/* header */}
 			<h2 className='text-center'>Tech Stack</h2>
 
+			<span className='fw-bolder fs-5 my-3'>
+				I love building tools that are user-friendly, simple user-friendly,
+				simple and delightful.
+			</span>
+
 			{/* display cards */}
 			<div className='card-group my-1 my-md-5 py-5'>
 				{cardVarient.map((card, index) => (
@@ -25,11 +30,6 @@ export default function App() {
 					</motion.div>
 				))}
 			</div>
-
-			<span className='fw-bolder fs-5 py-5'>
-				I love building tools that are user-friendly, simple user-friendly,
-				simple and delightful.
-			</span>
 		</div>
 	);
 }
