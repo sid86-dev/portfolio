@@ -244,7 +244,6 @@ jobs:
     if: always()
     needs:
       [
-        install,
         ui-chrome-tests,
         ui-firefox-tests,
         ui-chrome-mobile-tests,
@@ -272,7 +271,7 @@ jobs:
   lighthouse-audit:
     runs-on: ubuntu-latest
     name: Lighthouse-audit
-    needs: [deploy, ui-chrome-tests]
+    needs: deploy
     steps:
       - uses: actions/checkout@v3
       - name: Audit URLs using Lighthouse
