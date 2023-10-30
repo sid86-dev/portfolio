@@ -20,8 +20,8 @@ export const Main: FC<IProps> = ({ project, children }) => {
 						<Image
 							priority
 							src={project?.image}
-							height='640px'
-							width={'1050px'}
+							height='800px'
+							width={'1280px'}
 							className='w-50 rounded shadow'
 							alt={project.title}
 							blurDataURL='data:...'

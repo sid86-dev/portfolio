@@ -59,8 +59,14 @@ const ProjectView = ({
 				</Main>
 			</div>
 			<hr className='mt-5' />
-			<Insight graphData={graphData} project={project.meta} />
-			<hr className='mt-5' />
+			{project.meta.type === 'freelance' ? (
+				''
+			) : (
+				<>
+					<Insight graphData={graphData} project={project.meta} />
+					<hr className='mt-5' />{' '}
+				</>
+			)}
 		</>
 	);
 };
@@ -71,13 +77,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	const { slug } = params as { slug: string };
 	const { content, meta } = getPostsFromSlug(slug);
 
-	// GET REPO DATA FROM GITHUB API
-	const { data } = await axios.get(
-		`https://sid86.me/api/project/commits/${meta.slug}`
-	);
-
-	const { commitData, dataLabels } = sortGithubData(data.commits);
-
 	const mdxSource = await serialize(content, {
 		mdxOptions: {
 			rehypePlugins: [rehypeHighlight],
@@ -85,12 +84,27 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		},
 	});
 
-	return {
-		props: {
-			project: { Source: mdxSource, meta },
-			graphData: { commitData, dataLabels },
-		},
-	};
+	// GET REPO DATA FROM GITHUB API
+	if (meta.type !== 'freelance') {
+		const { data } = await axios.get(
+			`${process.env.NEXT_PUBLIC_SITE_URL}/api/project/commits/${meta.slug}`
+		);
+
+		const { commitData, dataLabels } = sortGithubData(data.commits);
+
+		return {
+			props: {
+				project: { Source: mdxSource, meta },
+				graphData: { commitData, dataLabels },
+			},
+		};
+	} else {
+		return {
+			props: {
+				project: { Source: mdxSource, meta },
+			},
+		};
+	}
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

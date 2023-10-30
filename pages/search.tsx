@@ -1,69 +1,39 @@
-import React, {
-	ChangeEvent,
-	useContext,
-	useEffect,
-	useState,
-	startTransition,
-} from 'react';
-import { IProjectApiResponse, ProjectMeta } from '../types';
+import React, { ChangeEvent, startTransition } from 'react';
+import { ProjectMeta } from '../types';
 import SearchIcon from '@mui/icons-material/Search';
 import { TagBar } from '../components/Search/TagBar';
 import { SearchResults } from '../components/Search/SearchResults';
-import { NextPage } from 'next';
-import { Context } from '../contexts/store';
+import { GetServerSideProps, NextPage } from 'next';
+import Fuse from 'fuse.js';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { checkString, checkTag } from '../lib/utils';
+import { checkTag } from '../lib/utils';
 
-const Search: NextPage = () => {
-	const [filteredProjects, setFilteredprojects] = useState<ProjectMeta[]>([]);
-	const [projects, setprojects] = useState<ProjectMeta[]>([]);
-	const [state, setState] = useContext(Context);
+interface IProps {
+	projects: ProjectMeta[];
+	queryText: string;
+}
 
+const Search: NextPage<IProps> = ({ queryText, projects }) => {
 	const router = useRouter();
-	const queryString = router.query.q;
 
-	// Get all project data
-	const getProjects = async () => {
-		const data: IProjectApiResponse = (await axios.get('/api/project/data'))
-			.data;
-		setprojects(data.projects);
-		setFilteredprojects(data.projects);
-	};
-
-	useEffect(() => {
-		if (projects.length === 0) {
-			getProjects();
-			// console.log('get');
-		}
-	}, [projects, state, setState, filteredProjects]);
-
-	// Filter project function
-	const filterProjects = (keyword: string) => {
-		if (keyword === '') setFilteredprojects(projects);
-		const filtered = projects.filter((project: ProjectMeta) =>
-			checkString(keyword, project)
-		);
-		setFilteredprojects(filtered);
-	};
-
-	const handleResetData = () => {
-		setFilteredprojects(projects);
-	};
-
-	// handle filter with tags
-	const tagFilterHandler = async (tag: string) => {
-		const filtered = projects.filter((project: ProjectMeta) =>
-			checkTag(tag, project)
-		);
-		setFilteredprojects(filtered);
-	};
-
-	// handle filter with search string
-	const stringFilterHandler = (e: ChangeEvent<HTMLInputElement>) => {
+	// handle search with query
+	const searchQueryhandler = async (e: ChangeEvent<HTMLInputElement>) => {
 		startTransition(() => {
-			router.push(`/search?q=${e.target.value}`);
-			filterProjects(e.target.value);
+			router.push({
+				pathname: '/search',
+				query: { q: e.target.value },
+			});
+		});
+	};
+
+	// handle search with tag
+	const tagFilterHandler = async (tag: string) => {
+		startTransition(() => {
+			router.push({
+				pathname: '/search',
+				query: { tag: tag },
+			});
 		});
 	};
 
@@ -72,7 +42,7 @@ const Search: NextPage = () => {
 			<div className='container-fluid px-3'>
 				{/* Search Tags */}
 				<TagBar
-					handleResetData={handleResetData}
+					handleResetData={() => router.push('/search')}
 					handleSearchByTag={tagFilterHandler}
 				/>
 				{/* Search Box */}
@@ -84,7 +54,8 @@ const Search: NextPage = () => {
 								type='search'
 								placeholder='Search'
 								aria-label='Search'
-								onChange={(e) => stringFilterHandler(e)}
+								value={queryText}
+								onChange={(e) => searchQueryhandler(e)}
 							/>
 							<span className='input-group-text px-4 search-icon border-0 pointer'>
 								<SearchIcon />
@@ -98,7 +69,7 @@ const Search: NextPage = () => {
 				<hr className='' />
 
 				{/* Search Results */}
-				{projects && <SearchResults projects={filteredProjects} />}
+				{projects && <SearchResults projects={projects} />}
 			</div>
 
 			<hr className='' />
@@ -107,3 +78,52 @@ const Search: NextPage = () => {
 };
 
 export default Search;
+
+export const getServerSideProps: GetServerSideProps<IProps> = async ({
+	query,
+}) => {
+	let filteredprojects = [];
+	let queryText = query.q as string;
+	let tagText = query.tag as string;
+
+	// Get all project data
+	const projects: ProjectMeta[] = (
+		await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/project/data`)
+	).data.projects;
+
+	const options = {
+		includeScore: true,
+		keys: [
+			{
+				name: 'title',
+				weight: 0.7,
+			},
+			{
+				name: 'excerpt',
+				weight: 0.3,
+			},
+		],
+	};
+
+	const fuse = new Fuse(projects, options);
+
+	// Filter project function
+	if (queryText) {
+		filteredprojects = fuse.search(queryText).map((project) => project.item);
+		console.log(filteredprojects);
+	}
+	if (tagText) {
+		filteredprojects = projects.filter((project: ProjectMeta) =>
+			checkTag(tagText, project)
+		);
+	} else {
+		filteredprojects = projects;
+	}
+
+	return {
+		props: {
+			projects: filteredprojects,
+			queryText: queryText ? queryText : '',
+		},
+	};
+};
