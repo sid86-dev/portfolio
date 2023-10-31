@@ -1,7 +1,7 @@
 
 ### This is [sid86](https://sid86.me) portfolio project build using next.js framework.
 
-#### Latest version of this project is deployed on [Vercel](https://vercel.com) and can be accessed [here](https://c8d8be3.sid86.me).
+#### Latest version of this project is deployed on [Vercel](https://vercel.com) and can be accessed [here](https://81b0531.sid86.me).
 
 <br>
 
