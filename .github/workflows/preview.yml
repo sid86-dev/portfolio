@@ -20,10 +20,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.17.0'
-      - name: Install dependencies
-        run: npm install --force
       - name: Install Yarn
         run: npm install -g yarn
+      - name: Install dependencies
+        run: yarn --force
+      - name: Prepare husky
+        run: yarn husky install
       - name: Generate README
         run: npm run generate:readme
       - uses: actions/checkout@v2
