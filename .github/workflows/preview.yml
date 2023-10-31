@@ -1,4 +1,4 @@
-name: Vercel Preview Deployment
+name: CI-Preview
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_USER_ID }}
