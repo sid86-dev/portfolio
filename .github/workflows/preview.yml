@@ -24,3 +24,20 @@ jobs:
         run: |
           url="$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
           vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "$url" ${{ steps.commit.outputs.short }}.sid86.me
+
+  Update-Readme:
+    name: Update Readme
+    runs-on: ubuntu-latest
+    steps:
+      - name: '📥  Fetching Repository Contents'
+        uses: actions/checkout@main
+      - id: commit
+        uses: prompt/actions-commit-hash@v3
+      # Runs a set of commands using the runners shell
+      - name: Update README.md
+        run: |
+          sed -i 's/<commithash>/'${{ steps.commit.outputs.short }} }}'/' README.md
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git commit -am "Automated report"
+          git push
