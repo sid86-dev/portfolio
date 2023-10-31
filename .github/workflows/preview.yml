@@ -1,4 +1,5 @@
 name: Vercel Preview Deployment
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_USER_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -8,27 +9,10 @@ on:
       - main
 
 jobs:
-  Deploy-Preview:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      - id: commit
-        uses: prompt/actions-commit-hash@v3
-      - name: Deploy Project Artifacts to Vercel
-        run: |
-          url="$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
-          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "$url" ${{ steps.commit.outputs.short }}.sid86.me
-
   Update-Readme:
     name: Update Readme
     runs-on: ubuntu-latest
-    needs: Deploy-Preview
+    # needs: Deploy-Preview
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -36,21 +20,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.17.0'
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm install
+        run: npm install --force
       - name: Generate README
         run: npm run generate:readme
       - name: Commit and push if changed
-        run: |
-          git config --global user.name 'sid86-dev'
-          git config --global user.email '
-          git add README.md
-          git commit -m "Update README.md"
-          git push
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'main' #optional defaults to master
