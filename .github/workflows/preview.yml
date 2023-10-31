@@ -1,4 +1,4 @@
-name: Vercel Preview Deployment
+name: CI-Preview
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_USER_ID }}
@@ -9,13 +9,25 @@ on:
       - main
 
 jobs:
-  Update-Readme:
-    name: Update Readme
+  Deploy-Preview:
     runs-on: ubuntu-latest
-    # needs: Deploy-Preview
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - id: commit
+        uses: prompt/actions-commit-hash@v3
+      - name: Deploy Project Artifacts to Vercel
+        run: |
+          url="$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
+          vercel alias --token=${{ secrets.VERCEL_TOKEN }} set "$url" ${{ steps.commit.outputs.short }}.sid86.me
+          - name: Checkout
+          uses: actions/checkout@v2
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
