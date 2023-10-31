@@ -25,9 +25,7 @@ jobs:
       - name: Generate README
         run: npm run generate:readme
       - name: Commit and push if changed
-        run: |
-          git config --global user.name 'sid86-dev'
-          git config --global user.email '
-          git add README.md
-          git commit -m "Update README.md"
-          git push
+        uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: 'main' #optional defaults to master
