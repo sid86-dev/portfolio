@@ -34,6 +34,8 @@ jobs:
           fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
       - name: Commit files
         run: |
+          git config --global user.email "sid86harth@gmail.com"
+          git config --global user.name "sid86-dev"
           git commit -a -m "Update README.md"
       - name: Push changes
         uses: ad-m/github-push-action@master
