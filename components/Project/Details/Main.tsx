@@ -24,8 +24,6 @@ export const Main: FC<IProps> = ({ project, children }) => {
 							width={'1280px'}
 							className='w-50 rounded shadow'
 							alt={project.title}
-							blurDataURL='data:...'
-							placeholder='blur'
 						/>
 					</div>
 					<div className='col-12'>

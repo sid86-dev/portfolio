@@ -16,6 +16,8 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 
 	const { query } = router;
 
+	const lightTextTags = ['redux', 'nextjs', 'web3', 'typescript'];
+
 	return data.map((item) => (
 		<div
 			className='col-md-5 col-xl-3 my-4 px-md-3 mx-md-3 pt-lg-3 card-wrapper rounded-3'
@@ -46,15 +48,15 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 				>
 					<Link href={`/project/${item.slug}`}>
 						<a className='h-100 w-100'>
-							<Image
-								src={item.image}
-								className='card-img-top pointer rounded shadow'
-								alt='...'
-								height='578px'
-								width='900px'
-								blurDataURL='data:...'
-								placeholder='blur'
-							/>
+							<div style={{ position: 'relative', height: '200px' }}>
+								<Image
+									src={item.image}
+									className='card-img-top pointer rounded shadow'
+									alt={item.title}
+									layout='fill'
+									objectFit='contain'
+								/>
+							</div>
 						</a>
 					</Link>
 				</motion.div>
@@ -63,14 +65,14 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 				<div className='row align-items-center mt-3'>
 					{/* Project Title */}
 					<div className='col-md-12 mb-3'>
-						<h5 className='card-title col-12'>
+						<p className='card-title col-12 fs-4'>
 							<Highlighter
 								highlightClassName='search-highlight'
 								searchWords={[query.q as string]}
 								autoEscape={true}
 								textToHighlight={item.title}
 							/>
-						</h5>
+						</p>
 					</div>
 
 					{/* Project description */}
@@ -101,6 +103,8 @@ const ProjectCard: Function = ({ data }: IProps): ReactNode[] => {
 								highlightClassName='search-highlight'
 								searchWords={[query.q as string]}
 								autoEscape={true}
+								className={`
+								${lightTextTags.includes(tag) ? 'text-white' : 'text-dark'}`}
 								textToHighlight={`#${tag}`}
 							/>
 						</span>
