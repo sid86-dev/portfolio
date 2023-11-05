@@ -27,7 +27,7 @@ export const Footer = () => {
 		];
 		return (
 			<div className='flex flex-col text my-4 space-y-2'>
-				<h6 className='text'>Helpfull Links</h6>
+				<p className='text fs-5 fw-bold'>Helpfull Links</p>
 				{links.map((link, index) => {
 					return (
 						<a
@@ -53,12 +53,19 @@ export const Footer = () => {
 	return (
 		<div className={'container py-5 text-center justify-content-center'}>
 			{' '}
-			<p>
+			<p
+				style={{
+					color: '#B7C4D1',
+				}}
+			>
 				Find an issue with this page?{' '}
 				<a
 					href='https://github.com/sid86-dev/portfolio'
 					target='_blank'
-					className='text-primary text-decoration-none'
+					className='text-decoration-underline'
+					style={{
+						color: '#cbdef8',
+					}}
 					rel='noreferrer'
 				>
 					Fix it on Github

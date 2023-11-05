@@ -162,13 +162,13 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 					</a>
 				</li>
 			</ul>
-			<div className='d-flex'>
+			<div id='rightDiv' className='d-flex'>
 				<button
 					className='btn btn-dark mx-lg-3'
 					type='submit'
 					name='themeToggler'
 					id='themeToggler'
-					area-label='themeToggler'
+					area-label='toogle the theme'
 					role='button'
 					onClick={() => {
 						setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -194,7 +194,7 @@ export const MenuItems: FC<{ style: StyleProps }> = ({ style }) => {
 						className='btn btn-dark mx-2'
 						name='terminalButton'
 						id='terminalButton'
-						aria-label='terminalButton'
+						aria-label='Open xth86'
 						type='submit'
 						role='button'
 					>

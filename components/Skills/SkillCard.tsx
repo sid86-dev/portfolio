@@ -36,7 +36,7 @@ export const SkillCard = ({ display }: IProps) => {
           flicker={true}
         />
       </div>
-      <h5 className="card-title text-dark">{display.title}</h5>
+      <p className="card-title text-dark fs-4 fw-bold">{display.title}</p>
       <p className="card-text text-mid-dark">{display.description} </p>
       <p className="card-text fs-3">
         {display.id === 1 && (
