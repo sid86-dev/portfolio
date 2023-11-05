@@ -4,15 +4,15 @@ import { ISkillCard, ITagColors } from '../types';
 export const cardVarient: ISkillCard[] = [
 	{
 		id: 1,
-		title: 'Software Development',
+		title: 'Full Stack Dev',
 		description:
-			'Experienced in both functional and OOP: Python, JavaScript, Typescript, Solidity. MongoDB, GraphQL, SQL.',
+			'Encompass both the frontend (user interface) and backend (server, database, and business logic) components.',
 	},
 	{
 		id: 2,
-		title: 'Frontenv Dev',
+		title: 'Front End Dev',
 		description:
-			'Over three years of frontend development experience in React, Next.js framework. Bootstrap, Tailwind CSS, Firebase, HTML5.',
+			'Focusing on creating the user interface and user experience of websites using technologies like Tailwind CSS, and React',
 	},
 
 	{

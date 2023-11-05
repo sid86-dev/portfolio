@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { DiGithubFull } from 'react-icons/di';
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -12,8 +11,9 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ProjectMeta } from '../../../types';
-import { SlGraph } from 'react-icons/sl';
-import { VscGithubAction } from 'react-icons/vsc';
+import InsightsIcon from '@mui/icons-material/Insights';
+import DynamicFormIcon from '@mui/icons-material/DynamicForm';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 ChartJS.register(
 	CategoryScale,
@@ -63,7 +63,7 @@ const Insight: FC<IProps> = ({ project, graphData }) => {
 		<div className='m-lg-5 pt-5 pt-md-2 px-3 px-lg-5'>
 			<div className='container-table'>
 				<h2 className='pb-1'>
-					<SlGraph color='pink' /> Insights
+					<InsightsIcon fontSize='large' color='error' /> Insights
 				</h2>
 				<p className='fw-bold pt-4 pb-2'>
 					Viewing commit history of{' '}
@@ -86,11 +86,11 @@ const Insight: FC<IProps> = ({ project, graphData }) => {
 					href={`https://github.dev/sid86-dev/${project.slug}`}
 					className='mx-4 btn btn-dark py-1'
 				>
-					<VscGithubAction size={25} /> Edit Project
+					<DynamicFormIcon fontSize='medium' /> Edit Project
 				</a>
 				<Line className='mt-5' options={options} data={GraphData} />
 				<div className='text-end'>
-					<DiGithubFull size={45} />
+					<GitHubIcon fontSize='medium' />{' '}
 				</div>
 			</div>
 		</div>
