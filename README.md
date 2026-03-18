@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  This is my personal portfolio 🚀 website built using React, Next.js, and Bootstrap5. It serves as a showcase of my work, skills, and experiences. 
+  This is my personal portfolio 🚀 website built using React, Next.js, and Tailwindcss. It serves as a showcase of my work, skills, and experiences. 
 </p>
 
 
